@@ -9,4 +9,11 @@ let main argv =
 
     let mario = {First="Mario"; Last="Rossi"}
     mario.Last |> printfn "His lasst name is %s"
+
+    let person1 = {First = "Foo"; Last = "Bar"}
+    let person2 = {First = "Foo"; Last = "Bar"}
+
+    printfn "is person1 == person2 ? %A" ( person1 = person2 )
+    printfn "does person1.Equals(person2) ? %A" ( person1.Equals(person2) )
+    
     0
