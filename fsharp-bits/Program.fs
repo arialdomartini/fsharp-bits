@@ -15,5 +15,7 @@ let main argv =
 
     printfn "is person1 == person2 ? %A" ( person1 = person2 )
     printfn "does person1.Equals(person2) ? %A" ( person1.Equals(person2) )
+    printfn "is mario > person1 ? %A" (mario > person1)
     
+
     0
