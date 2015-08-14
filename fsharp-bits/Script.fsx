@@ -23,8 +23,12 @@ let evens list =
 let numbers = [1;2;3;4;5;6;7;8;9;10]
 printfn "Extracting even numbers from %A gets %A" numbers (evens numbers)
 
-let sumOfSquaresToN(n) =
+let sumOfSquaresToN n =
     [1..n] |> List.map (fun x -> x * x) |> List.sum
 
+let sumOfSquaresToNUsingArgs n =
+    List.sum ( List.map (fun x -> x*x) [1..n])
+
 printfn "The sum of the squares of the first 100 numbers is %d" (sumOfSquaresToN(100))
+printfn "The sum of the squares of the first 100 numbers is %d" (sumOfSquaresToNUsingArgs(100))
 
