@@ -55,3 +55,8 @@ let optionPatternMatching value =
 //printfn "11 => %A" (optionPatternMatching (11)) // <=== this produces a compile error: value must be an option
 printfn "Some(11) => %A" (optionPatternMatching (Some(11)))
 printfn "None => %A" (optionPatternMatching (None))
+
+
+type Person = {FirstName:string; SecondName:string}
+let john = {FirstName="John"; SecondName="Carioca"}
+printfn "%s's second name is %s" john.FirstName john.SecondName
