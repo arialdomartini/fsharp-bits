@@ -60,3 +60,12 @@ printfn "None => %A" (optionPatternMatching (None))
 type Person = {FirstName:string; SecondName:string}
 let john = {FirstName="John"; SecondName="Carioca"}
 printfn "%s's second name is %s" john.FirstName john.SecondName
+
+type AnotherType = {FirstName:string; SecondName:string}
+let maria:Person = {FirstName="Maria";SecondName="Impagliazzo"}
+let mario = {FirstName="Mario";SecondName="Morini"}
+
+
+printfn "john is of type %s" (john.GetType().Name)
+printfn "maria is of type %s" (maria.GetType().Name)
+printfn "mario is of type %s" (mario.GetType().Name)
