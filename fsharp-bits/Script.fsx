@@ -45,3 +45,13 @@ printfn "Do you want it? %s" (doYouWantIt "yes")
 printfn "Do you want it? %s" (doYouWantIt "no")
 printfn "Do you want it? %s" (doYouWantIt "jain")
 printfn "Do you want it? %s" (doYouWantIt "foobar")
+
+let optionPatternMatching value =
+    match value with
+        | Some number -> (sprintf "number is %d" number)
+        | None        -> "value is None"
+        | _           -> "otherwise"
+
+//printfn "11 => %A" (optionPatternMatching (11)) // <=== this produces a compile error: value must be an option
+printfn "Some(11) => %A" (optionPatternMatching (Some(11)))
+printfn "None => %A" (optionPatternMatching (None))
