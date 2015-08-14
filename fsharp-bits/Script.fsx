@@ -32,3 +32,16 @@ let sumOfSquaresToNUsingArgs n =
 printfn "The sum of the squares of the first 100 numbers is %d" (sumOfSquaresToN(100))
 printfn "The sum of the squares of the first 100 numbers is %d" (sumOfSquaresToNUsingArgs(100))
 
+
+
+let doYouWantIt value =
+    match value with
+        | "yes"  -> "you said you want it"
+        | "no"   -> "oh, you don't want it"
+        | "jain" -> "undecided?"
+        | _      -> "whatever"  // this is mandatory, or a warning is emitted
+
+printfn "Do you want it? %s" (doYouWantIt "yes")
+printfn "Do you want it? %s" (doYouWantIt "no")
+printfn "Do you want it? %s" (doYouWantIt "jain")
+printfn "Do you want it? %s" (doYouWantIt "foobar")
