@@ -69,3 +69,23 @@ let mario = {FirstName="Mario";SecondName="Morini"}
 printfn "john is of type %s" (john.GetType().Name)
 printfn "maria is of type %s" (maria.GetType().Name)
 printfn "mario is of type %s" (mario.GetType().Name)
+
+
+// Playing with type inference
+
+let foo (s:string) = 
+    s.Length
+ 
+let bar(x, y) = foo(x) + y
+let baz(a, b) = a(b) :: b
+
+
+let lengths (elements: _ [] []) = 
+    elements |> Array.map (fun element -> element.Length)
+
+//let lengths_fails (elements: _ [] []) = 
+//    Array.map (fun xs -> xs.Length) elements    // this breaks the type inference
+
+let values = [|[|1;2;3|];[|1;2;3|]|]
+let result = lengths values
+printfn "%A"  result
