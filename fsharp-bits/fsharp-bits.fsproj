@@ -44,5 +44,6 @@
     <None Include="Script.fsx" />
     <None Include="Recursion.fsx" />
     <None Include="UnionTypes.fsx" />
+    <None Include="CommonFunctionalities.fsx" />
   </ItemGroup>
 </Project>
