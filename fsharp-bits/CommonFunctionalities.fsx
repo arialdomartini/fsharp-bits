@@ -26,3 +26,19 @@ let sumOfNumbersUpTo n =
     filterAndFold n isOdd sumFold
 
 printfn "%d" (sumOfNumbersUpTo 10)
+
+
+// The alternating sum of the numbers up to N
+
+let rec sumAlternating list =
+    match list with
+        | []    ->     0
+        | [a]   ->     a 
+        | a :: [b] ->    a + b
+        | a :: b :: rest -> a - b + sumAlternating rest
+
+let alternatingSumUpToN n =
+    [1..n]
+    |> sumAlternating
+
+printf "%d" (alternatingSumUpToN 4)
