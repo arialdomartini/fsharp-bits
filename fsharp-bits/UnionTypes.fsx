@@ -1,8 +1,8 @@
 ﻿type Shape =
-    | Circle of int
-    | Rectangle of int * int
-    | Polygon of (int * int) list
-    | Point of (int * int)
+    | Circle of radius:int
+    | Rectangle of width:int * height:int
+    | Polygon of point:(int * int) list
+    | Point of position:(int * int)
 
 let draw shape =
     match shape with
