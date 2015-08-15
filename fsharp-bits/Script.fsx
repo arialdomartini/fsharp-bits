@@ -50,7 +50,6 @@ let optionPatternMatching value =
     match value with
         | Some number -> (sprintf "number is %d" number)
         | None        -> "value is None"
-        | _           -> "otherwise"
 
 //printfn "11 => %A" (optionPatternMatching (11)) // <=== this produces a compile error: value must be an option
 printfn "Some(11) => %A" (optionPatternMatching (Some(11)))
