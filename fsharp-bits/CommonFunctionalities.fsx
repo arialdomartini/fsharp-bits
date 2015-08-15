@@ -2,16 +2,21 @@
 
 type Fold = {funct:int-> int -> int ; initialValue:int }
 
-let filterAndFold n filter foldFunction =
+let filterAndFold n manipulateFunction filter foldFunction =
     [1..n] 
+    |> manipulateFunction
     |> List.filter filter 
     |> List.fold foldFunction.funct foldFunction.initialValue
 
+
+let leaveAsIs list =
+    list
+
 let product a b = a * b
 let productFold = { funct=product; initialValue= 1}
-let all n = true
+let takeAll n = true
 let productOfNumbersUpTo n =
-    filterAndFold n all productFold
+    filterAndFold n leaveAsIs takeAll productFold
 
 printfn "%d" (productOfNumbersUpTo 10)
 
@@ -23,7 +28,7 @@ let sumFold = {funct=sum; initialValue=0}
 let isOdd n = not (n % 2 = 0)
 
 let sumOfNumbersUpTo n =
-    filterAndFold n isOdd sumFold
+    filterAndFold n leaveAsIs isOdd sumFold
 
 printfn "%d" (sumOfNumbersUpTo 10)
 
@@ -61,13 +66,17 @@ let rec alternateIfOdd listWithPosition=
     | [] -> []
     | (item, position) :: rest -> (invertIfOddPosition item position) :: (alternateIfOdd rest)
 
-let alternate list:int list =
-    alternateIfOdd (withPosition list)
+let alternate list =
+     withPosition list |> alternateIfOdd
 
 let sumAlternatingUpToN n =
     [1..n]
-    |> withPosition
-    |> alternateIfOdd
+    |> alternate
+    |> List.filter takeAll
     |> List.fold sum 0
 
-printfn "%A" (sumAlternatingUpToN 6)
+let sumAlternatingUpToNUsing n =
+    filterAndFold n alternate takeAll sumFold
+
+printfn "%A" (sumAlternatingUpToN 16)
+printfn "%A" (sumAlternatingUpToNUsing 16)
