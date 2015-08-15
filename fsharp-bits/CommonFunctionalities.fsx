@@ -42,3 +42,32 @@ let alternatingSumUpToN n =
     |> sumAlternating
 
 printf "%d" (alternatingSumUpToN 4)
+
+let rec withPositionAcc list position =
+    match list with
+        | [] -> []
+        | element :: rest -> (element, position) :: (withPositionAcc rest (position + 1))
+
+let withPosition list=
+    withPositionAcc list 0
+
+printfn "%A" (withPosition [1; 2; 3; 4; 5; 6; 7; 8; 9; 10])
+
+let invertIfOddPosition element position =
+    if isOdd position then -element else element
+
+let rec alternateIfOdd listWithPosition=
+    match listWithPosition with
+    | [] -> []
+    | (item, position) :: rest -> (invertIfOddPosition item position) :: (alternateIfOdd rest)
+
+let alternate list:int list =
+    alternateIfOdd (withPosition list)
+
+let sumAlternatingUpToN n =
+    [1..n]
+    |> withPosition
+    |> alternateIfOdd
+    |> List.fold sum 0
+
+printfn "%A" (sumAlternatingUpToN 6)
