@@ -108,3 +108,9 @@ type Temperature =
 let temparature  = Celsius 36.6
 let temperature = Fahrenheit 40.0
 printfn "The temperature right now is %A" temparature
+
+
+//let sumLengths (listOfStrings:string list) =
+let sumLengths listOfStrings =
+    listOfStrings |> List.map String.length |> List.sum
+printfn "Total length = %d" (sumLengths [ "foo"; "bar"; "foobar"])
