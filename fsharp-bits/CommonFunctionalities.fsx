@@ -9,10 +9,8 @@ let manipulateFilterAndFold n manipulateFunction filter foldFunction =
 
 
 // Calculating the product of all the numbers up to N
-let leaveAsIs list =
-    list
-let product a b = a * b
-let productFold = { funct=product; initialValue= 1}
+let leaveAsIs list = list
+let productFold = { funct= (fun a b -> a * b); initialValue= 1}
 let takeAll n = true
 
 let productOfNumbersUpTo n =
@@ -20,11 +18,10 @@ let productOfNumbersUpTo n =
 
 printfn "%d" (productOfNumbersUpTo 10)
 
-
-// Counting the sum of odd numbers up to N
-
 let sum a b = a + b
-let sumFold = {funct=sum; initialValue=0}
+
+// Calculating the sum of odd numbers up to N
+let sumFold = {funct= sum; initialValue=0}
 let isOdd n = not (n % 2 = 0)
 
 let sumOfNumbersUpTo n =
@@ -35,26 +32,12 @@ printfn "%d" (sumOfNumbersUpTo 10)
 
 // The alternating sum of the numbers up to N
 
-let rec sumAlternating list =
-    match list with
-        | []    ->     0
-        | [a]   ->     a 
-        | a :: [b] ->    a + b
-        | a :: b :: rest -> a - b + sumAlternating rest
-
-let alternatingSumUpToN n =
-    [1..n]
-    |> sumAlternating
-
-printf "%d" (alternatingSumUpToN 4)
-
 let rec withPositionAcc list position =
     match list with
         | [] -> []
         | element :: rest -> (element, position) :: (withPositionAcc rest (position + 1))
 
-let withPosition list=
-    withPositionAcc list 0
+let withPosition list= withPositionAcc list 0
 
 printfn "%A" (withPosition [1; 2; 3; 4; 5; 6; 7; 8; 9; 10])
 
@@ -84,3 +67,17 @@ let sumAlternatingUpToN n =
     |> List.fold sum 0
 
 printfn "%A" (sumAlternatingUpToN 16)
+
+
+let rec sumAlternating list =
+    match list with
+        | []    ->     0
+        | [a]   ->     a 
+        | a :: [b] ->    a + b
+        | a :: b :: rest -> a - b + sumAlternating rest
+
+let alternatingSumUpToN n =
+    [1..n]
+    |> sumAlternating
+
+printf "%d" (alternatingSumUpToN 4)
