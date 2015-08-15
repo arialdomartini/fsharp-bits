@@ -89,3 +89,12 @@ let lengths (elements: _ [] []) =
 let values = [|[|1;2;3|];[|1;2;3|]|]
 let result = lengths values
 printfn "%A"  result
+
+
+// tuples
+
+let twoTuple = 1,2
+let threeTuples = "a", 2, true
+
+let _, singleValue, _ = threeTuples
+printfn "I'm accessing one element of a tuple %d" singleValue
