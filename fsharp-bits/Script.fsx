@@ -97,3 +97,12 @@ let threeTuples = "a", 2, true
 
 let _, singleValue, _ = threeTuples
 printfn "I'm accessing one element of a tuple %d" singleValue
+
+// Union types
+
+type Temperature =
+    | Celsius of float
+    | Fahrenheit of float
+let temparature  = Celsius 36.6
+let temperature = Fahrenheit 40.0
+printfn "The temperature right now is %A" temparature
