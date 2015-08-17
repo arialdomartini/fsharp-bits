@@ -15,9 +15,15 @@ let maxNameAndSize list =
         match list with
         | [] -> acc
         | cad :: cdr -> maxNameAndSizeAcc cdr (max cad.Size acc)
-            
 
     maxNameAndSizeAcc list 0
 
-printfn "Lisst of NameAndSizes: %A" items
-printfn "The biggest MaxAndSize is %A" (maxNameAndSize items)
+printfn "List of NameAndSizes: %A" items
+printfn "The biggest size in the list of MaxAndSizes is %A" (maxNameAndSize items)
+
+
+let maxSize list initial =
+    let getMax item maxSoFar = if maxSoFar.Size < item.Size then item else maxSoFar
+    list |> List.fold getMax initial
+
+printfn "The biggest MaxAndSize is %A" (maxSize (List.tail(items)) (List.head(items)))
