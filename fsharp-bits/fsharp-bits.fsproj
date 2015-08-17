@@ -45,5 +45,6 @@
     <None Include="Recursion.fsx" />
     <None Include="UnionTypes.fsx" />
     <None Include="CommonFunctionalities.fsx" />
+    <None Include="BoilerPlate.fsx" />
   </ItemGroup>
 </Project>

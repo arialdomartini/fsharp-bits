@@ -10,15 +10,15 @@ let items = [
 ]
 
 
-let rec maxNameAndSizeAcc list acc =
-    match list with
-    | [] -> acc
-    | cad :: cdr -> 
-        if cad.Size > acc
-        then maxNameAndSizeAcc cdr cad.Size
-        else maxNameAndSizeAcc cdr acc
-
 let maxNameAndSize list =
+    let rec maxNameAndSizeAcc list acc =
+        match list with
+        | [] -> acc
+        | cad :: cdr -> 
+            if cad.Size > acc
+            then maxNameAndSizeAcc cdr cad.Size
+            else maxNameAndSizeAcc cdr acc
+
     maxNameAndSizeAcc list 0
 
 printfn "Lisst of NameAndSizes: %A" items
