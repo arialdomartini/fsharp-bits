@@ -27,3 +27,5 @@ let maxSize list initial =
     list |> List.fold getMax initial
 
 printfn "The biggest MaxAndSize is %A" (maxSize (List.tail(items)) (List.head(items)))
+
+printfn "The biggest MaxAndSize is %A" (items |> List.maxBy (fun item -> item.Size))
