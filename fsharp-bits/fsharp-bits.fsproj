@@ -46,5 +46,6 @@
     <None Include="UnionTypes.fsx" />
     <None Include="CommonFunctionalities.fsx" />
     <None Include="BoilerPlate.fsx" />
+    <None Include="FunctionsAsBuildingBlocks.fsx" />
   </ItemGroup>
 </Project>
