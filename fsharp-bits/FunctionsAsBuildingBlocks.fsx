@@ -15,5 +15,5 @@ let square x = x * x
 [1..10] |> List.map  square |> printfn "%A"
 
 
-let add2ThenMultBy3 x = multBy3(add2 x)
+let add2ThenMultBy3 = add2 >> multBy3
 add2ThenMultBy3 8 |> printfn "8 2 + 3 * ->%A"
