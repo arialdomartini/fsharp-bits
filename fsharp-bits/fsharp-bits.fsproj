@@ -47,5 +47,6 @@
     <None Include="CommonFunctionalities.fsx" />
     <None Include="BoilerPlate.fsx" />
     <None Include="FunctionsAsBuildingBlocks.fsx" />
+    <None Include="MiniDSL.fsx" />
   </ItemGroup>
 </Project>
