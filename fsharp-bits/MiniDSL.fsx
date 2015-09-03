@@ -16,3 +16,24 @@ let getDate interval scale direction =
 
 let fiveDaysAgo = getDate 5 Days Ago
 printfn "5 days ago = %A" fiveDaysAgo
+
+
+
+type FluentShape = {
+    label: string
+    color: string
+    onClick: FluentShape -> FluentShape
+}
+
+let setLabel label shape =
+    {shape with FluentShape.label = label}
+
+let setColor color shape = 
+    {shape with FluentShape.color = color}
+
+let setOnClick onCLick shape =
+    {shape with FluentShape.onClick = onCLick}
+
+let oneShape = {label = "myLabel"; color = "Red"; onClick = (fun s -> s)}
+
+let anotherShape = setLabel "another label" oneShape
