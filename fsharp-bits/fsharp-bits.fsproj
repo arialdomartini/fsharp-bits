@@ -48,5 +48,6 @@
     <None Include="BoilerPlate.fsx" />
     <None Include="FunctionsAsBuildingBlocks.fsx" />
     <None Include="MiniDSL.fsx" />
+    <None Include="PatternMatching.fsx" />
   </ItemGroup>
 </Project>
