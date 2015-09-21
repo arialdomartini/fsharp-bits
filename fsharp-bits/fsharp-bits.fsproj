@@ -49,5 +49,6 @@
     <None Include="FunctionsAsBuildingBlocks.fsx" />
     <None Include="MiniDSL.fsx" />
     <None Include="PatternMatching.fsx" />
+    <None Include="Decorator.fsx" />
   </ItemGroup>
 </Project>
