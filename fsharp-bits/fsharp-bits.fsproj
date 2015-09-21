@@ -7,6 +7,8 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>fsharpbits</RootNamespace>
     <AssemblyName>fsharp-bits</AssemblyName>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
@@ -50,5 +52,6 @@
     <None Include="MiniDSL.fsx" />
     <None Include="PatternMatching.fsx" />
     <None Include="Decorator.fsx" />
+    <None Include="Strategy.fsx" />
   </ItemGroup>
 </Project>
