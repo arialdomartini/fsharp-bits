@@ -54,5 +54,6 @@
     <None Include="Decorator.fsx" />
     <None Include="Strategy.fsx" />
     <None Include="PartialApplication.fsx" />
+    <None Include="ActivePatterns.fsx" />
   </ItemGroup>
 </Project>
