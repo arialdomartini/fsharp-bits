@@ -24,6 +24,10 @@ let notDecorated value =
     value + " yeah!"
 let logging value = 
     printfn "logging %A" value
-let decorated = genericLoggerDecorator logging logging notDecorated
+let decorated = 
+    genericLoggerDecorator 
+        (fun input -> printfn "before: %A" input)
+        (fun input -> printfn "after: %A" input)
+        (fun input -> input + 100)
 
-decorated "foo"
+decorated 10
