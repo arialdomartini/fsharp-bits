@@ -7,8 +7,6 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>fsharpbits</RootNamespace>
     <AssemblyName>fsharp-bits</AssemblyName>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
@@ -55,5 +53,6 @@
     <None Include="Strategy.fsx" />
     <None Include="PartialApplication.fsx" />
     <None Include="ActivePatterns.fsx" />
+    <None Include="FizzBuzz.fsx" />
   </ItemGroup>
 </Project>
