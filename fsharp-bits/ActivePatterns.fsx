@@ -1,4 +1,6 @@
-﻿let (|Int|_|) str = 
+﻿open System.Text.RegularExpressions
+
+let (|Int|_|) str = 
     match System.Int32.TryParse str with
     | (true, int) -> Some(int)
     | _ -> None
@@ -22,3 +24,20 @@ let testParse str =
 testParse validBool
 testParse invalid
 testParse validInteger
+
+
+let (|FirstRegexGroup|_|) pattern input =
+    let m = Regex.Match(input, pattern)
+    if m.Success then Some m.Groups.[1].Value else None
+
+let testRegex str = 
+    match str with
+    | FirstRegexGroup "http://(.*?)/(.*)" host -> 
+           printfn "The value is a url and the host is %s" host
+    | FirstRegexGroup ".*?@(.*)" host -> 
+           printfn "The value is an email and the host is %s" host
+    | _ -> printfn "The value '%s' is something else" str
+   
+// test
+testRegex "http://google.com/test"
+testRegex "alice@hotmail.com"
