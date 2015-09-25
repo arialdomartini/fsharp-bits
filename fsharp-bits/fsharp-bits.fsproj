@@ -55,5 +55,6 @@
     <None Include="ActivePatterns.fsx" />
     <None Include="FizzBuzz.fsx" />
     <None Include="Immutability.fsx" />
+    <None Include="ExhaustivePatternMatching.fsx" />
   </ItemGroup>
 </Project>
