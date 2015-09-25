@@ -13,3 +13,11 @@ let doSomethingWithOption(fileInfo:System.IO.FileInfo option) =
     | None       -> printfn "Missing fileinfo"
 
 doSomethingWithOption(getFileInfo "somefile")
+
+
+let rec movingAverages list =
+    match list with
+    | [] -> []
+    | x :: y :: rest -> [ (x+y)/2.0] :: movingAverages(y::rest)
+    | [_] -> []  // this can't be skipped: pattern matching is required to be exhaustive
+    
