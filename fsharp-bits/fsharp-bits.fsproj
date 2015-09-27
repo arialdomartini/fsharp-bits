@@ -56,5 +56,7 @@
     <None Include="FizzBuzz.fsx" />
     <None Include="Immutability.fsx" />
     <None Include="ExhaustivePatternMatching.fsx" />
+    <None Include="Correctness.fsx" />
+    <None Include="ShoppingCart.fsx" />
   </ItemGroup>
 </Project>
