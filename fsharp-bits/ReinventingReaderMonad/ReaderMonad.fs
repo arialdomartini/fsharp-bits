@@ -56,13 +56,18 @@ let onlySuccess r =
 
 let getPurchaseInfo (customerId : CustomerId) : Result<ProductInfo list> =
 
+    let getProductIds customerId (client : ApiClient) =
+        client.Get<ProductId list> customerId
+
+    let getProductInfo (ProductId id) (client : ApiClient) =
+        client.Get<ProductInfo> id
+
     let (CustomerId id) = customerId
 
     let toProductInfo (ids: ProductId list) (client : ApiClient) =
         let infos =
             ids
-            |> List.map (fun (ProductId id) -> id)
-            |> List.map client.Get<ProductInfo>
+            |> List.map (fun id -> getProductInfo id client)
 
         if infos |> Seq.exists isFailure
         then Failure []
@@ -70,7 +75,7 @@ let getPurchaseInfo (customerId : CustomerId) : Result<ProductInfo list> =
 
 
     let action customerId (client : ApiClient)  =
-        client.Get<ProductId list> customerId
+        getProductIds customerId client
         |> bind (fun ids -> toProductInfo ids client)
 
     let action = action id
