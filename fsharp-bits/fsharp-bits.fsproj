@@ -8,7 +8,6 @@
 
     </PropertyGroup>
     <ItemGroup>
-        <Compile Include="ReaderMonad.fs" />
         <None Include="101\Script.fsx" />
         <None Include="101\Recursion.fsx" />
         <None Include="101\UnionTypes.fsx" />
@@ -26,6 +25,9 @@
         <None Include="101\ExhaustivePatternMatching.fsx" />
         <None Include="101\Correctness.fsx" />
         <None Include="101\ShoppingCart.fsx" />
+        <Compile Include="ReinventingReaderMonad\Result.fs" />
+        <Compile Include="ReinventingReaderMonad\ApiClient.fs" />
+        <Compile Include="ReinventingReaderMonad\ReaderMonad.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>
     <ItemGroup>
