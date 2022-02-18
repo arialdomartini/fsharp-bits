@@ -8,24 +8,24 @@
 
     </PropertyGroup>
     <ItemGroup>
-        <None Include="Script.fsx" />
-        <None Include="Recursion.fsx" />
-        <None Include="UnionTypes.fsx" />
-        <None Include="CommonFunctionalities.fsx" />
-        <None Include="BoilerPlate.fsx" />
-        <None Include="FunctionsAsBuildingBlocks.fsx" />
-        <None Include="MiniDSL.fsx" />
-        <None Include="PatternMatching.fsx" />
-        <None Include="Decorator.fsx" />
-        <None Include="Strategy.fsx" />
-        <None Include="PartialApplication.fsx" />
-        <None Include="ActivePatterns.fsx" />
-        <None Include="FizzBuzz.fsx" />
-        <None Include="Immutability.fsx" />
-        <None Include="ExhaustivePatternMatching.fsx" />
-        <None Include="Correctness.fsx" />
-        <None Include="ShoppingCart.fsx" />
         <Compile Include="ReaderMonad.fs" />
+        <None Include="101\Script.fsx" />
+        <None Include="101\Recursion.fsx" />
+        <None Include="101\UnionTypes.fsx" />
+        <None Include="101\CommonFunctionalities.fsx" />
+        <None Include="101\BoilerPlate.fsx" />
+        <None Include="101\FunctionsAsBuildingBlocks.fsx" />
+        <None Include="101\MiniDSL.fsx" />
+        <None Include="101\PatternMatching.fsx" />
+        <None Include="101\Decorator.fsx" />
+        <None Include="101\Strategy.fsx" />
+        <None Include="101\PartialApplication.fsx" />
+        <None Include="101\ActivePatterns.fsx" />
+        <None Include="101\FizzBuzz.fsx" />
+        <None Include="101\Immutability.fsx" />
+        <None Include="101\ExhaustivePatternMatching.fsx" />
+        <None Include="101\Correctness.fsx" />
+        <None Include="101\ShoppingCart.fsx" />
         <Compile Include="Program.fs" />
     </ItemGroup>
     <ItemGroup>
