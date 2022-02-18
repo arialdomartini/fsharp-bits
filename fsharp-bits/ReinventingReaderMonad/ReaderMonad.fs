@@ -11,6 +11,16 @@ type ProductId = ProductId of string
 type ProductInfo = { Name : string }
 
 
+let map (f : 'a -> 'b) (r : Result<'a>) : Result<'b> =
+    match r with
+    | Failure f -> Failure f
+    | Success v -> Success (f v)
+
+let bind (f : 'a -> Result<'b>) (r : Result<'a>) : Result<'b> =
+    match r with
+    | Failure f -> Failure f
+    | Success v -> f v
+
 
 
 [<Fact>]
@@ -28,36 +38,44 @@ let ``api client can save and retrieve values``() =
 // Close API connection
 // Return the list of product infos
 
-let getPurchaseInfo (customerId : CustomerId) : Result<ProductInfo list> =
-    use client = ApiClient()
-    let (CustomerId id) = customerId
-    let productIds = client.Get<ProductId list> id
-
-
-    let getProductInfos (ids : ProductId list) =
-        let productInfos = ResizeArray<ProductInfo>()
-        let mutable anyError = false
-        for ProductId id in ids do
-            let productInfo = client.Get id
-
-            match productInfo with
-            | Failure _ ->
-                anyError = true
-                ()
-            | Success info ->
-                productInfos.Add info
-
-        if anyError = true
-        then Failure ["Some product info was not found"]
-        else Success (productInfos.ToArray() |> Array.toList)
-
-    let productInfos =
-        match productIds with
-        | Success ids -> (getProductInfos ids)
-        | Failure _ as failure -> (Failure ["Could not find some id"])
-
+let executeApiAction action =
+    let client = ApiClient()
+    let result = action client
     client.Close()
-    productInfos
+    result
+
+let isFailure r =
+    match r with
+    | Success _ -> false
+    | Failure _ -> true
+
+let onlySuccess r =
+    match r with
+    | Success s -> Some s
+    | Failure _ -> None
+
+let getPurchaseInfo (customerId : CustomerId) : Result<ProductInfo list> =
+
+    let (CustomerId id) = customerId
+
+    let toProductInfo (ids: ProductId list) (client : ApiClient) =
+        let infos =
+            ids
+            |> List.map (fun (ProductId id) -> id)
+            |> List.map client.Get<ProductInfo>
+
+        if infos |> Seq.exists isFailure
+        then Failure []
+        else Success (infos |> List.choose onlySuccess)
+
+
+    let action customerId (client : ApiClient)  =
+        client.Get<ProductId list> customerId
+        |> bind (fun ids -> toProductInfo ids client)
+
+    let action = action id
+
+    executeApiAction action
 
 
 
