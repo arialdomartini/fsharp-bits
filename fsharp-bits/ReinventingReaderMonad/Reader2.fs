@@ -33,11 +33,12 @@ let bind f reader =
         run env newReader
     |> Reader
 
-  
+let usingEnv env = $"Env is {env}"
+
+let reader = Reader usingEnv
+
 [<Fact>]
 let ``running a reader monad``() =
-    let usingEnv env = $"Env is {env}"
-    
-    let result = run "foo" (Reader usingEnv)
+    let result = run "foo" reader
 
     Assert.Equal("Env is foo", result)
