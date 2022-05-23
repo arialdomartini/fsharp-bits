@@ -38,16 +38,32 @@ let usingEnv env = $"Env is {env}"
 let reader = Reader usingEnv
 
 [<Fact>]
-let ``running a reader monad``() =
+let ``running a reader monad`` () =
     let result = run "foo" reader
 
     Assert.Equal("Env is foo", result)
 
 [<Fact>]
-let ``mapping a reader monad``() =
+let ``mapping a reader monad`` () =
     let toUpper (s: string) = s.ToUpper()
-    
+
     let mapped = map toUpper reader
     let result = run "foo" mapped
 
     Assert.Equal("ENV IS FOO", result)
+
+
+[<Fact>]
+let ``binding a reader monad`` () =
+    let toUpper (s: string) =
+        fun env ->
+            if env = "to upper please" then
+                s.ToUpper()
+            else
+                s
+        |> Reader
+     
+    let bound = bind toUpper reader
+     
+    Assert.Equal("Env is foo", run "foo" bound) 
+    Assert.Equal("ENV IS TO UPPER PLEASE", run "to upper please" bound)
