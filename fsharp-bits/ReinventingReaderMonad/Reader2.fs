@@ -42,3 +42,12 @@ let ``running a reader monad``() =
     let result = run "foo" reader
 
     Assert.Equal("Env is foo", result)
+
+[<Fact>]
+let ``mapping a reader monad``() =
+    let toUpper (s: string) = s.ToUpper()
+    
+    let mapped = map toUpper reader
+    let result = run "foo" mapped
+
+    Assert.Equal("ENV IS FOO", result)
