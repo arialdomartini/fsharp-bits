@@ -12,8 +12,8 @@ type ProductInfo = { Name : string }
 
 [<Fact>]
 let ``api client can save and retrieve values``() =
-    let api = ApiClient()
-    api.Set "K1" "value 1"
+    let api = new ApiClient()
+    api.Set "K1" "value 1" |> ignore
     api.Get<string> "K1" |> should equal (Success "value 1")
 
     api.Get "K2" |> should equal (Failure ["Key K2 is not found"])
@@ -26,7 +26,7 @@ let ``api client can save and retrieve values``() =
 // Return the list of product infos
 
 let executeApiAction action =
-    let client = ApiClient()
+    let client = new ApiClient()
     let result = action client
     client.Close()
     result
@@ -84,15 +84,15 @@ let ``get a list of products bought by a customer``() =
     let product2 = { Name = "second" }
     let product3 = { Name = "third" }
 
-    let apiClient = ApiClient()
+    let apiClient = new ApiClient()
 
     let someCustomer = CustomerId "john doe"
 
-    apiClient.Set "first" product1
-    apiClient.Set "second" product2
-    apiClient.Set "third" product3
+    apiClient.Set "first" product1 |> ignore
+    apiClient.Set "second" product2 |> ignore
+    apiClient.Set "third" product3 |> ignore
 
-    apiClient.Set "john doe" productIds
+    apiClient.Set "john doe" productIds |> ignore
 
 
     let purchasedProducts = getPurchaseInfo someCustomer
