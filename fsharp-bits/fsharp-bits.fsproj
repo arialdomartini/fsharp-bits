@@ -28,6 +28,7 @@
         <Compile Include="ReinventingReaderMonad\Result.fs" />
         <Compile Include="ReinventingReaderMonad\ApiClient.fs" />
         <Compile Include="ReinventingReaderMonad\ReaderMonad.fs" />
+        <Compile Include="ReinventingReaderMonad\Reader2.fs" />
     </ItemGroup>
     <ItemGroup>
       <PackageReference Include="FsUnit.xUnit" Version="4.2.0" />
