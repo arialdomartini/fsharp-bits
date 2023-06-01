@@ -85,8 +85,25 @@ let usingEnvWithComputation (s: string) : Reader<string, string>=
         return $"Input is {s}, Env is {env}"    
     }
     
-
 [<Fact>]
 let ``running, with Computation Expression``() =
     let result = usingEnvWithComputation "bar"
     Assert.Equal("Input is bar, Env is foo", run "foo" result)
+
+
+type Service = int -> string -> string
+let withSideEffects (n: int) (s: string)=
+    System.Console.WriteLine s
+    s + n.ToString()
+
+let x : Service = withSideEffects
+
+let functionUsingService (service: Service) =
+    service 120 "ciao"
+
+let usingService (s: string) =
+    fun (service: Service) ->
+        let result = functionUsingService service
+        
+        result + s
+    |> Reader
