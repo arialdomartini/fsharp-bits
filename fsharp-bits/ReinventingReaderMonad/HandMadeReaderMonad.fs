@@ -139,6 +139,7 @@ type Other() =
     interface IOther with
         member _.Function x = x
 
+let other: IOther = Other()
 
 let usesLogger (s: string) =
     reader {
@@ -236,3 +237,100 @@ let ``trick with inferred inheritance no proliferation of methods, direct instan
 
     let result' = Reader.run both reader
     Assert.Equal(3, result')
+
+let usesBothAsATuple x y =
+    reader {
+        let! (l: ILogger), (o: IOther) = Reader.ask
+        l.Information("this is the logger")
+        o.Function(42)
+        return x + y
+    }
+
+[<Fact>]
+let ``resolving a tuple``() =
+    let reader = usesBothAsATuple 2 3
+    let result = Reader.run (logger, other) reader
+    Assert.Equal(5, result)
+
+
+// Still they don't compose
+
+
+let usingBothAsATuple x y =
+    reader {
+        let! (l: ILogger), (o: IOther) = Reader.ask
+        l.Information("this is the logger")
+        o.Function(42)
+        return x + y
+    }
+
+let usingOne x =
+    reader {
+        let! (l: ILogger) = Reader.ask
+        l.Information("this is the logger")
+        return 2 * x
+    }
+     
+// [<Fact>]
+// let ``they don't compose``() =
+//     let reader = Reader.bind usingOne (usingBothAsATuple 2 3)
+//     let result = Reader.run (logger, other) reader
+//     Assert.Equal(5, result)
+
+// [<Fact>]
+// let ``they don't compose``() =
+//     reader {
+//         let! sum = usingBothAsATuple 2 3
+//         let! double = usingOne sum
+//         return double
+//     }
+
+type Dependencies = {
+    Logger: ILogger
+    Other: IOther
+}
+
+let mapBoth (dep: Dependencies) = (dep.Logger, dep.Other)
+let usingBothWithContraMap (x: int) (y: int): Reader<(ILogger * IOther),int> =
+    reader {
+        let! (l: ILogger), (o: IOther) = Reader.ask
+        l.Information("this is the logger")
+        o.Function(42)
+        return x + y
+    }
+
+let mapOne (dep : Dependencies): ILogger = dep.Logger 
+let usingOneWithContraMap (x: int): Reader<ILogger,int> =
+    reader {
+        let! (l: ILogger) = Reader.ask
+        l.Information("this is the logger")
+        return 2 * x
+    }
+
+let withEnv (map: 'superenv -> 'subenv) (reader: Reader<'subenv, 'out>)  : (Reader<'superenv, 'out>) =
+    Reader (fun (superEnv': 'superenv) ->
+        let subEnv': 'subenv = map superEnv'
+        let out = Reader.run subEnv' reader
+        out)
+
+[<Fact>]
+let ``combine using contra-map``() =
+    let readerBoth' = usingBothWithContraMap 2 3 |> withEnv mapBoth
+    
+    let readerOne' = fun x -> withEnv mapOne (usingOneWithContraMap x) 
+    
+    let reader = Reader.bind readerOne' readerBoth'
+    let result = Reader.run { Logger = logger; Other = other} reader
+    
+    Assert.Equal(10, result)
+
+
+[<Fact>]
+let ``combine using contra-map in a reader map``() =
+    reader {
+        let! sum = (usingBothWithContraMap 2 3) |> withEnv mapBoth
+        let! double = (usingOneWithContraMap sum) |> withEnv mapOne 
+        
+        Assert.Equal(10, double)
+        return ()
+    } |> Reader.run { Logger = logger; Other = other}
