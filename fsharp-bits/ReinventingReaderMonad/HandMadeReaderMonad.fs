@@ -143,13 +143,13 @@ let other: IOther = Other()
 
 let usesLogger (s: string) =
     reader {
-        let! (l: ILogger) = Reader.ask
+        let! (_: ILogger) = Reader.ask
         return s.Length
     }
 
 let usesOther (i: int) =
     reader {
-        let! (o: IOther) = Reader.ask
+        let! (_: IOther) = Reader.ask
         return i
     }
 
@@ -169,7 +169,7 @@ let usesLogger' (s: string) =
 let usesOther' (i: int) =
     reader {
         let! (o: #IOther) = Reader.ask
-        o.Function(42)
+        o.Function(42) |> ignore
         return i
     }
 
@@ -214,7 +214,7 @@ let usesLogger'' (s: string) =
 let usesOther'' (i: int) =
     reader {
         let! (o: #IOtherW) = Reader.ask
-        o.Other.Function(42)
+        o.Other.Function(42) |> ignore
         return i
     }
 
@@ -242,7 +242,7 @@ let usesBothAsATuple x y =
     reader {
         let! (l: ILogger), (o: IOther) = Reader.ask
         l.Information("this is the logger")
-        o.Function(42)
+        o.Function(42) |> ignore
         return x + y
     }
 
@@ -260,7 +260,7 @@ let usingBothAsATuple x y =
     reader {
         let! (l: ILogger), (o: IOther) = Reader.ask
         l.Information("this is the logger")
-        o.Function(42)
+        o.Function(42) |> ignore
         return x + y
     }
 
@@ -291,11 +291,11 @@ type Dependencies = {
 }
 
 let mapBoth (dep: Dependencies) = (dep.Logger, dep.Other)
-let usingBothWithContraMap (x: int) (y: int): Reader<(ILogger * IOther),int> =
+let usingBothWithContraMap (x: int) (y: int): Reader<ILogger * IOther,int> =
     reader {
         let! (l: ILogger), (o: IOther) = Reader.ask
         l.Information("this is the logger")
-        o.Function(42)
+        o.Function(42) |> ignore
         return x + y
     }
 
@@ -307,7 +307,7 @@ let usingOneWithContraMap (x: int): Reader<ILogger,int> =
         return 2 * x
     }
 
-let withEnv (map: 'superenv -> 'subenv) (reader: Reader<'subenv, 'out>)  : (Reader<'superenv, 'out>) =
+let withEnv (map: 'superenv -> 'subenv) (reader: Reader<'subenv, 'out>)  : Reader<'superenv, 'out> =
     Reader (fun (superEnv': 'superenv) ->
         let subEnv': 'subenv = map superEnv'
         let out = Reader.run subEnv' reader

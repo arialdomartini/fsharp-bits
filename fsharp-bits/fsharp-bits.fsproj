@@ -1,39 +1,46 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <TargetFramework>net5.0</TargetFramework>
-        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+                <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <Nullable>enable</Nullable>
         <AssemblyName>FSharpBits</AssemblyName>
         <RootNamespace>FSharpBits</RootNamespace>
+        <GenerateProgramFile>false</GenerateProgramFile>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net7.0</TargetFramework>
 
     </PropertyGroup>
     <ItemGroup>
-        <None Include="101\Script.fsx" />
-        <None Include="101\Recursion.fsx" />
-        <None Include="101\UnionTypes.fsx" />
-        <None Include="101\CommonFunctionalities.fsx" />
-        <None Include="101\BoilerPlate.fsx" />
-        <None Include="101\FunctionsAsBuildingBlocks.fsx" />
-        <None Include="101\MiniDSL.fsx" />
-        <None Include="101\PatternMatching.fsx" />
-        <None Include="101\Decorator.fsx" />
-        <None Include="101\Strategy.fsx" />
-        <None Include="101\PartialApplication.fsx" />
-        <None Include="101\ActivePatterns.fsx" />
-        <None Include="101\FizzBuzz.fsx" />
-        <None Include="101\Immutability.fsx" />
-        <None Include="101\ExhaustivePatternMatching.fsx" />
-        <None Include="101\Correctness.fsx" />
-        <None Include="101\ShoppingCart.fsx" />
-        <Compile Include="ReinventingReaderMonad\Result.fs" />
-        <Compile Include="ReinventingReaderMonad\ApiClient.fs" />
-        <Compile Include="ReinventingReaderMonad\ReaderMonad.fs" />
-        <Compile Include="ReinventingReaderMonad\Reader.fs" />
-        <Compile Include="ReinventingReaderMonad\HandMadeReaderMonad.fs" />
+                <None Include="101\Script.fsx" />
+        <None Include="101\Recursion.fsx"/>
+        <None Include="101\UnionTypes.fsx"/>
+        <None Include="101\CommonFunctionalities.fsx"/>
+        <None Include="101\BoilerPlate.fsx"/>
+        <None Include="101\FunctionsAsBuildingBlocks.fsx"/>
+        <None Include="101\MiniDSL.fsx"/>
+        <None Include="101\PatternMatching.fsx"/>
+        <None Include="101\Decorator.fsx"/>
+        <None Include="101\Strategy.fsx"/>
+        <None Include="101\PartialApplication.fsx"/>
+        <None Include="101\ActivePatterns.fsx"/>
+        <None Include="101\FizzBuzz.fsx"/>
+        <None Include="101\Immutability.fsx"/>
+        <None Include="101\ExhaustivePatternMatching.fsx"/>
+        <None Include="101\Correctness.fsx"/>
+        <None Include="101\ShoppingCart.fsx"/>
+        <Compile Include="ReinventingReaderMonad\Result.fs"/>
+        <Compile Include="ReinventingReaderMonad\ApiClient.fs"/>
+        <Compile Include="ReinventingReaderMonad\ReaderMonad.fs"/>
+        <Compile Include="ReinventingReaderMonad\Reader.fs"/>
+        <Compile Include="ReinventingReaderMonad\HandMadeReaderMonad.fs"/>
+        <Compile Include="PropertyBasedTesting\BasicHedgehogTest.fs" />
+        <Compile Include="Program.fs"/>
     </ItemGroup>
     <ItemGroup>
-      <PackageReference Include="FsUnit.xUnit" Version="4.2.0" />
-      <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
-      <PackageReference Include="xunit.extensibility.core" Version="2.4.1" />
+        <PackageReference Include="Expecto" Version="10.1.0"/>
+        <PackageReference Include="FsUnit.xUnit" Version="5.4.0"/>
+        <PackageReference Include="Hedgehog" Version="0.13.0"/>
+        <PackageReference Include="YoloDev.Expecto.TestSdk" Version="0.14.1"/>
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.7.0"/>
+        <PackageReference Include="xunit.extensibility.core" Version="2.5.0"/>
     </ItemGroup>
 </Project>
