@@ -8,6 +8,8 @@ let someProp x = x + 1 = x
 
 let gen = Gen.int32 (Range.linear 0 100)
 
+let lift f = fun x -> property.Return (f x)
+
 [<Expecto.Tests>]
 let treeTests =
     testList
@@ -23,6 +25,6 @@ let treeTests =
               
           testCase "x != x+1 without computation expression"
           <| fun _ ->
-              let prop = Property.forAll (fun x -> property.Return (someProp x)) gen  
-              Property.check prop
+              Property.forAll (lift someProp) gen  
+              |> Property.check
          ]
