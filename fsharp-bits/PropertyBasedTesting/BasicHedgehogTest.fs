@@ -3,6 +3,8 @@
 open Hedgehog
 open Expecto
 
+let someProperty xs = xs |> List.rev |> List.rev = xs
+
 [<Expecto.Tests>]
 let treeTests =
     testList
@@ -12,6 +14,6 @@ let treeTests =
           <| fun _ ->
               property {
                   let! xs = Gen.list (Range.linear 0 100) Gen.alpha
-                  return xs |> List.rev |> List.rev = xs
+                  return someProperty xs
               }
               |> Property.checkBool ]
