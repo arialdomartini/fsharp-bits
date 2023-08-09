@@ -8,7 +8,6 @@ let treeTests =
     testList
         "Tree tests"
         [
-
           testCase "classic rev.rev.list"
           <| fun _ ->
               property {
