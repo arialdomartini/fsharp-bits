@@ -32,8 +32,11 @@
         <Compile Include="ReinventingReaderMonad\ReaderMonad.fs"/>
         <Compile Include="ReinventingReaderMonad\Reader.fs"/>
         <Compile Include="ReinventingReaderMonad\HandMadeReaderMonad.fs"/>
-        <Compile Include="PropertyBasedTesting\BasicHedgehogTest.fs" />
-        <Compile Include="PropertyBasedTesting\BasicFsCheckTest.fs" />
+        <Compile Include="PropertyBasedTesting\WithFsCheck\BasicFsCheckTest.fs" />
+        <Compile Include="PropertyBasedTesting\WithFsCheck\PlayingWithGenerators.fs" />
+        <Compile Include="PropertyBasedTesting\WithFsCheck\FizzBuzzTests.fs" />
+        <Compile Include="PropertyBasedTesting\WithHedgehog\BasicHedgehogTest.fs" />
+        <Compile Include="PropertyBasedTesting\WithHedgehog\PlayingWithGenerators.fs" />
         <Compile Include="Program.fs"/>
     </ItemGroup>
     <ItemGroup>
