@@ -35,6 +35,7 @@
         <Compile Include="PropertyBasedTesting\WithFsCheck\BasicFsCheckTest.fs" />
         <Compile Include="PropertyBasedTesting\WithFsCheck\PlayingWithGenerators.fs" />
         <Compile Include="PropertyBasedTesting\WithFsCheck\FizzBuzzTests.fs" />
+        <Compile Include="PropertyBasedTesting\WithFsCheck\BirthdayGreetings.fs" />
         <Compile Include="PropertyBasedTesting\WithHedgehog\BasicHedgehogTest.fs" />
         <Compile Include="PropertyBasedTesting\WithHedgehog\PlayingWithGenerators.fs" />
         <Compile Include="Program.fs"/>
