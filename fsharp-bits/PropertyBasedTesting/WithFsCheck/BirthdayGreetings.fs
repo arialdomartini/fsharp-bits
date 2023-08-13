@@ -12,7 +12,7 @@ let greeter friends  = friends |> Seq.map toEmail
 let fizzBuzzTests =
     testProperty
         "sends the same email to each friend"
-        (let friends = Arb.generate<string> |> Gen.listOf |> Arb.fromGen
+        (let friends = Arb.generate<string list> |> Arb.fromGen
          
          let props f =
              let emails = greeter f
