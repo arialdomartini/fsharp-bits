@@ -22,7 +22,8 @@ let friends = Arb.from<string list>
 
 let randomDate = Arb.toGen Arb.from<DateTime>
 let randomAgeInDays: Gen<int> = Gen.choose (1, maxAge)
-
+let anyDateBut today = randomDate |> Gen.filter (fun d -> d <> today)
+                                                
 let randomFriendBornInDate birthday =
     gen {
         let! date = Gen.constant birthday
@@ -32,15 +33,11 @@ let randomFriendBornInDate birthday =
 let friendsBornOn birthday =
     (randomFriendBornInDate birthday) |> Gen.listOf
 
-let friendsNotBornToday =
-    gen {
-        let! randomDate = randomDate
-        let! friends = friendsBornOn randomDate
-        return friends
-    }
+let friendsBorn today =
+    today |> friendsBornOn
 
-let friendsNotBornToday2 =
-    randomDate >>= friendsBornOn
+let friendsNotBorn today =
+    anyDateBut today >>= friendsBornOn
 
 type RandomGen =
     { Today: DateTime
@@ -51,7 +48,8 @@ let myGroupOfFriends =
     gen {
         let! today = randomDate
         let! friendsBornToday = friendsBornOn today
-        let! friendsNotBornToday = friendsNotBornToday
+        let! friendsNotBornToday = friendsNotBorn today
+        
         let allOfThem = List.concat [ friendsBornToday; friendsNotBornToday ]
 
         return
