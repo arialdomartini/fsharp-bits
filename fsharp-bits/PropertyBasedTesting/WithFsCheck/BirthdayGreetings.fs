@@ -5,18 +5,16 @@ open FsCheck
 
 let toEmail _ = "Happy birthday!"
 
-let greeter friends  = friends |> Seq.map toEmail
+let greet friends = friends |> Seq.map toEmail
 
+let friends: Arbitrary<string list> = Arb.generate<string list> |> Arb.fromGen
+
+let theSameEmailWasSent friends: bool =
+   let emails = greet friends
+   Seq.length emails = Seq.length friends
+   && emails |> Seq.forall (fun e -> e = "Happy birthday!")
 
 [<Tests>]
-let fizzBuzzTests =
-    testProperty
-        "sends the same email to each friend"
-        (let friends = Arb.generate<string list> |> Arb.fromGen
-         
-         let props f =
-             let emails = greeter f
-             Seq.length emails = Seq.length f &&
-             emails |> Seq.forall (fun e -> e = "Happy birthday!")
-
-         Prop.forAll friends props)
+let birthdayGreetingsKataTests =
+    testList "Birthday Greetings Kata tests"
+        [ testProperty "sends the same email to each friend" (Prop.forAll friends theSameEmailWasSent) ]
