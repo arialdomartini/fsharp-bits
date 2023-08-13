@@ -11,44 +11,46 @@ let toEmail _ = "Happy birthday!"
 let toDays years = years * 365
 let maxAge = 120 |> toDays
 
-let born date (friend: Friend) = friend.BirthDate = date 
+let born date friend= friend.BirthDate = date 
 
 let greetFriends (friends: Friend list) today =
     friends
     |> Seq.filter (born today)
     |> Seq.map toEmail
 
-let friends: Arbitrary<string list> = Arb.from<string list>
+let friends = Arb.from<string list>
 
 let randomDate = Arb.toGen Arb.from<DateTime>
 let randomAgeInDays: Gen<int> = Gen.choose (1, maxAge)
 
-let randomFriendBornInDate (birthday: DateTime) : Gen<Friend> =
+let randomFriendBornInDate birthday =
     gen {
         let! date = Gen.constant birthday
         return { Friend.BirthDate = date }
     }
 
-let friendsBornToday (today: DateTime) : Gen<Friend list> =
-    (randomFriendBornInDate today) |> Gen.listOf
+let friendsBornOn birthday =
+    (randomFriendBornInDate birthday) |> Gen.listOf
 
-let friendsNotBornToday: Gen<Friend list> =
+let friendsNotBornToday =
     gen {
         let! randomDate = randomDate
-        let friend = randomFriendBornInDate randomDate
-        let! friends = Gen.listOf friend
+        let! friends = friendsBornOn randomDate
         return friends
     }
+
+let friendsNotBornToday2 =
+    randomDate >>= friendsBornOn
 
 type RandomGen =
     { Today: DateTime
       BornToday: Friend list
       AllFriends: Friend list }
 
-let myGroupOfFriends: Arbitrary<RandomGen> =
+let myGroupOfFriends =
     gen {
         let! today = randomDate
-        let! friendsBornToday = friendsBornToday today
+        let! friendsBornToday = friendsBornOn today
         let! friendsNotBornToday = friendsNotBornToday
         let allOfThem = List.concat [ friendsBornToday; friendsNotBornToday ]
 
@@ -59,7 +61,7 @@ let myGroupOfFriends: Arbitrary<RandomGen> =
     }
     |> Arb.fromGen
 
-let theSameEmailWasSentToTheOnesBornToday (randomGen: RandomGen) =
+let theSameEmailWasSentToTheOnesBornToday randomGen =
     let today = randomGen.Today
     let emails = greetFriends randomGen.AllFriends today
 
