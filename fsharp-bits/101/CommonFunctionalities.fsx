@@ -2,11 +2,11 @@
 type Fold = {funct:int-> int -> int ; initialValue:int }
 
 let manipulateFilterAndFold n manipulateFunction filter foldFunction =
+    List.fold foldFunction.funct foldFunction.initialValue
+    <|
     [1..n] 
     |> manipulateFunction
     |> List.filter filter 
-    |> List.fold foldFunction.funct foldFunction.initialValue
-
 
 // Calculating the product of all the numbers up to N
 let leaveAsIs list = list

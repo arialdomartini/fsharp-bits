@@ -10,6 +10,9 @@ let gen = Gen.int32 (Range.linear 0 100)
 
 let lift f = fun x -> f x |> Property.ofBool
 
+
+type Product = Product 
+
 [<Expecto.Tests>]
 let treeTests =
     testList
