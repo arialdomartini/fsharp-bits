@@ -38,7 +38,8 @@
         <Compile Include="PropertyBasedTesting\WithFsCheck\BirthdayGreetings.fs" />
         <Compile Include="PropertyBasedTesting\WithFsCheck\StringDeduplicatorTest.fs" />
         <Compile Include="PropertyBasedTesting\WithHedgehog\BasicHedgehogTest.fs" />
-        <Compile Include="Program.fs"/>
+        <Compile Include="StateMonad\StateMonadTest.fs" />
+        <Compile Include="Program.fs" />
     </ItemGroup>
     <ItemGroup>
         <PackageReference Include="Expecto" Version="10.1.0"/>
