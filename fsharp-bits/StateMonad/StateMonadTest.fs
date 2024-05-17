@@ -69,16 +69,22 @@ let (>>>) (f : WithCounter) (g : ITree -> WithCounter) : WithCounter =
 let pure' v =
     WithCounter (fun counter -> (v, counter))
 
+type IndexTreeComputation() =
+    member this.Bind(m, f) = (m >>> f)
+
+    member this.Return(v) = pure' v
+
+let keepTrack = IndexTreeComputation()
     
 let rec indexTree tree : WithCounter =
     match tree with
     | Leaf v -> WithCounter (fun counter -> (ILeaf(v, counter), counter + 1))
     | Node(l, r) ->
-        (indexTree l)
-        >>> (fun rl ->
-            let rr = indexTree r
-            rr
-            >>> fun rrr -> (pure' (INode (rl, rrr))))
+        keepTrack {
+            let! rl = indexTree l
+            let! rr = indexTree r
+            return (INode (rl, rr))
+        }
         
 [<Fact>]
 let ``indexes a tree`` () =
