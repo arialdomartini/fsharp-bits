@@ -47,6 +47,7 @@
         <PackageReference Include="FsCheck" Version="2.16.6" />
         <PackageReference Include="FsUnit.xUnit" Version="5.4.0"/>
         <PackageReference Include="Hedgehog" Version="0.13.0"/>
+        <PackageReference Include="Unquote" Version="7.0.0" />
         <PackageReference Include="YoloDev.Expecto.TestSdk" Version="0.14.1"/>
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.7.0"/>
         <PackageReference Include="xunit.extensibility.core" Version="2.5.0"/>
