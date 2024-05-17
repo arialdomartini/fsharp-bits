@@ -5,15 +5,21 @@ open Swensen.Unquote
 
 type GTree<'c> =
     | GLeaf of 'c
-    | GNode of (GTree<'c> * GTree<'c>)
+    | GNode of GNode<'c>
+
+and GNode<'c> = GTree<'c> * GTree<'c>
 
 type Tree =
     | Leaf of string
-    | Node of (Tree * Tree)
+    | Node of Node
 
-type ITree =
-    | ILeaf of (string * int)
-    | INode of (ITree * ITree)
+and Node = Tree * Tree
+
+type ITree<'v> =
+    | ILeaf of ('v * int)
+    | INode of INode<'v>
+
+and INode<'v> = ITree<'v> * ITree<'v>
 
 let rec countLeaves tree =
     match tree with
@@ -50,42 +56,49 @@ let ``mapping a tree`` () =
 
     test <@ mappedToIntegers = containingLengthOfWords @>
 
+type WithCounter<'v> = WithCounter of (int -> 'v * int)
 
-type WithCounter =
-    WithCounter of (int -> ITree * int)
+let (>>!) (WithCounter f) (counter: int) = f counter
 
-let (>>!) (WithCounter f) counter = f counter
-
-
-
-let (>>>) (f : WithCounter) (g : ITree -> WithCounter) : WithCounter =
-    WithCounter (
-        fun counter->
-            let rf, cf = f >>! counter
-            let rg, cg = g rf >>! cf
-            (rg, cg))
-
+let (>>=) (f: WithCounter<'v>) (g: 'v -> WithCounter<'w>) : WithCounter<'w> =
+    WithCounter(fun counter ->
+        let rf, cf = f >>! counter
+        let rg, cg = g rf >>! cf
+        (rg, cg))
 
 let pure' v =
-    WithCounter (fun counter -> (v, counter))
+    WithCounter(fun counter -> (v, counter))
 
 type IndexTreeComputation() =
-    member this.Bind(m, f) = (m >>> f)
+    member this.Bind(m, f) = (m >>= f)
 
     member this.Return(v) = pure' v
 
 let keepTrack = IndexTreeComputation()
-    
-let rec indexTree tree : WithCounter =
+//let keepTrack = StatefulBuilder()
+
+let mapState (from: WithCounter<'v>) (f: int -> int) : WithCounter<'v> =
+    WithCounter(fun counter -> from >>! (f counter))
+
+let getCounter = WithCounter(fun c -> (c, c))
+let incCounter = WithCounter(fun c -> ((), c + 1))
+let setCounter v = WithCounter(fun _ -> ((), v))
+
+let rec indexTree tree =
     match tree with
-    | Leaf v -> WithCounter (fun counter -> (ILeaf(v, counter), counter + 1))
+    | Leaf v ->
+        keepTrack {
+            let! counter = getCounter
+            do! setCounter (counter + 1)
+            return ILeaf(v, counter)
+        }
     | Node(l, r) ->
         keepTrack {
-            let! rl = indexTree l
-            let! rr = indexTree r
-            return (INode (rl, rr))
+            let! leftIndexed = indexTree l
+            let! rightIndexed = indexTree r
+            return INode(leftIndexed, rightIndexed)
         }
-        
+
 [<Fact>]
 let ``indexes a tree`` () =
     let tree = Node(Leaf "one", Node(Leaf "two", Leaf "three"))
