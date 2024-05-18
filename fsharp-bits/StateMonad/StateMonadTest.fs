@@ -21,15 +21,24 @@ type ITree<'v> =
 
 and INode<'v> = ITree<'v> * ITree<'v>
 
-let rec countLeaves tree =
+
+type MyGeneric<'a> = MyGeneric of 'a
+
+let x: MyGeneric<int> = MyGeneric 12
+
+let rec countLeaves (tree: Tree) : int =
     match tree with
     | Leaf l -> 1
     | Node(l, r) -> countLeaves l + countLeaves r
 
 
-type MyGeneric<'a> = MyGeneric of 'a
+let rec mapTree (f: 'a -> 'b) : GTree<'a> -> GTree<'b> =
+    fun tree ->
+        match tree with
+        | GLeaf v -> GLeaf(f v)
+        | GNode(l, r) -> GNode((mapTree f l), (mapTree f r))
 
-let x: MyGeneric<int> = MyGeneric 12
+
 
 [<Fact>]
 let ``counting tree leaves`` () =
@@ -39,12 +48,6 @@ let ``counting tree leaves`` () =
     let numberOfLeaves = countLeaves tree
 
     test <@ numberOfLeaves = 3 @>
-
-let rec mapTree (f: 'a -> 'b) : (GTree<'a> -> GTree<'b>) =
-    fun tree ->
-        match tree with
-        | GLeaf v -> GLeaf(f v)
-        | GNode(l, r) -> GNode((mapTree f l), (mapTree f r))
 
 
 [<Fact>]
