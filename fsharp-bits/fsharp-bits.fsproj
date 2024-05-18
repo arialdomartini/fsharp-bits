@@ -6,7 +6,7 @@
         <RootNamespace>FSharpBits</RootNamespace>
         <GenerateProgramFile>false</GenerateProgramFile>
         <OutputType>Exe</OutputType>
-        <TargetFramework>net7.0</TargetFramework>
+        <TargetFramework>net8.0</TargetFramework>
 
     </PropertyGroup>
     <ItemGroup>
