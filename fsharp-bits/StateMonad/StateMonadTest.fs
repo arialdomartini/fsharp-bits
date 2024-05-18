@@ -45,18 +45,48 @@ let ``changing tree leaves content`` () =
 
     test <@ containingLengths = treeOfLengths @>
 
-let rec index tree count =
+
+type State<'v> = State of (int -> 'v * int) 
+let (>!) (State f) index = f index 
+
+type ITree = Tree<string * int>
+type App = State<Tree<string * int>>
+
+let mapS (f: 'a -> 'b) (state: State<'a>) =
+    State (fun c -> state >! c)
+
+// applicative
+// State (a -> b) -> State a -> State b
+let (<*>) (f : State<'a -> 'b>) (a: State<'a>) : State<'b> =
+    State (fun counter ->
+        let vf, cf = f >! counter
+        let va, ca = a >! cf
+        let result = vf va
+        (result, ca))
+
+let pure' v = State (fun counter -> (v, counter))
+    
+    
+let rec index tree : State<ITree> = 
     match tree with
-    | Leaf v -> (Leaf (v, count), count + 1)
-    | Node (l, r) ->
-        let (vl, cl) = index l count
-        let (vr, cr) = index r cl
-        (Node (vl, vr), cr)
+    | Leaf v -> State (fun count -> (Leaf (v, count), count + 1))
+    | Node (l, r)  ->
+        let buildNode li ri = Node (li, ri)
+        (pure' buildNode) <*> index l <*> index r
+        
+        //     State (fun count ->
+        //         let vl, cl = sL >! count
+        //         let vr, cr = sR >! cl
+        //         Node (vl, vr), cr)
+        //     
+        //
+        // state stateLeft stateRight
+        
 
 [<Fact>]
 let ``indexes a tree``() =
     let tree = Node(Leaf "one", Node(Leaf "two", Leaf "three"))
-    let indexed = index tree 1
+    let indexed = (index tree) >! 1
     let withIndexes = Node(Leaf ("one", 1), Node(Leaf ("two", 2), Leaf ("three", 3)))
     
     test <@ fst indexed = withIndexes @>
