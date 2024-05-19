@@ -56,14 +56,17 @@ let (<*>) (f : WithCounter<'a -> 'b>) (a: WithCounter<'a>) : WithCounter<'b> =
 
 let getState = WithCounter (fun counter -> (counter, counter))
 let incState = WithCounter (fun counter -> ((), counter+1))
-let buildLeaf = pure' (fun v state _ -> Leaf (v, state))
+// let buildLeaf = pure' (fun v state _ -> Leaf (v, state))
 
 let rec index tree =
     match tree with
     | Leaf v ->
-        buildLeaf <*> (pure' v) <*> getState <*> incState
+        WithCounter (fun counter -> (Leaf (v, counter)), counter+1)
     | Node (l, r) ->
-        pure' buildNode <*> index l <*> index r
+        WithCounter (fun counter ->
+            let vl, cl = run (index l) counter
+            let vr, cr = run (index r) cl
+            (Node (vl, vr), cr))
 
 [<Fact>]
 let ``index tree`` () =
