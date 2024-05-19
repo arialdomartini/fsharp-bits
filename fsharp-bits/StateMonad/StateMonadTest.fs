@@ -64,16 +64,26 @@ let getState = WithCounter (fun counter -> (counter, counter))
 let incState = WithCounter (fun counter -> ((), counter+1))
 // let buildLeaf = pure' (fun v state _ -> Leaf (v, state))
 
+type WithCounter() =
+    member this.Bind(m, f) = m >>= f
+    member this.Return(v) = pure' v
+
+let withCounter = WithCounter()
+
 let rec index tree =
     match tree with
     | Leaf v ->
-        getState >>= (fun counter ->
-            incState >>= (fun _ ->
-                pure' (Leaf (v, counter))))
+        withCounter {
+            let! counter = getState
+            do! incState
+            return (Leaf (v, counter))
+        }
     | Node (l, r) ->
-       (index l) >>= (fun ll ->
-            index r >>= (fun rr ->
-                pure' (Node (ll, rr))))
+       withCounter {
+           let! indexedLeft = index l
+           let! indexedRight = index r
+           return (Node (indexedLeft, indexedRight))
+       }
        
 [<Fact>]
 let ``index tree`` () =
