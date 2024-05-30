@@ -30,6 +30,12 @@ let (>>=) m1 fm =
         (s2, v2))
 
 
+type StateComputation() =
+    member this.Return(v) = State (fun s ->(s, v))
+    member this.Bind(m, v) = m >>= v
+
+let state = StateComputation()
+
 //type Parser<'a> = State<string list, 'a>
 
 let sm = State(fun s -> (s + 1, s * 10))
@@ -57,9 +63,21 @@ let ``State has an instance of applicative`` () =
     let v, ns = runState (sf <*> sm) 42
     (v, ns) =! (42 + 1 + 1, (42 + 1) * 2 * 10)
 
-
 [<Fact>]
 let ``State has an instance of monad`` () =
     let f i = State (fun s -> s, s)
     let v, ns = runState (sm >>= f) 42
     (v, ns) =! (42 + 1, (42 + 1))
+
+[<Fact>]
+let ``computation expression for State`` () =
+    let sm = state { return 42 }
+    let f x = state { return x * 2 }
+    
+    let m = state {
+        let! m = sm
+        let! r = f m
+        return r
+    }
+    
+    runState m 42 =! (42,84)
