@@ -22,6 +22,14 @@ let (<*>) m1 m2 =
         let s2, v2 = runState m2 s1
         (s2, f v2))
 
+
+let (>>=) m1 fm =
+    State (fun s ->
+        let s1, v1 = runState m1 s
+        let s2, v2 = runState (fm v1) s1
+        (s2, v2))
+
+
 //type Parser<'a> = State<string list, 'a>
 
 let sm = State(fun s -> (s + 1, s * 10))
@@ -48,3 +56,10 @@ let ``State has an instance of applicative`` () =
     let sf = State (fun s -> s+1, twice)
     let v, ns = runState (sf <*> sm) 42
     (v, ns) =! (42 + 1 + 1, (42 + 1) * 2 * 10)
+
+
+[<Fact>]
+let ``State has an instance of monad`` () =
+    let f i = State (fun s -> s, s)
+    let v, ns = runState (sm >>= f) 42
+    (v, ns) =! (42 + 1, (42 + 1))
