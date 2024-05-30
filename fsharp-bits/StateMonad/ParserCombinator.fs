@@ -3,9 +3,11 @@
 open Swensen.Unquote
 open Xunit
 
+let twice n = n * 2
+let flip f a b = f b a
+
 type State<'s, 'v> = State of ('s -> 's * 'v)
 
-let flip f a b = f b a
 let runState (State f) s = f s
 let execState m = snd << (runState m)
 
@@ -14,6 +16,12 @@ let map f m  =
         let ns, v = runState m s
         (ns, f v))
 
+let (<*>) m1 m2 =
+    State (fun s ->
+        let s1, f = runState m1 s
+        let s2, v2 = runState m2 s1
+        (s2, f v2))
+
 //type Parser<'a> = State<string list, 'a>
 
 let sm = State(fun s -> (s + 1, s * 10))
@@ -21,16 +29,22 @@ let sm = State(fun s -> (s + 1, s * 10))
 [<Fact>]
 let ``runState State`` () =
     let v, ns = runState sm 42
-    (v, ns) =! (43, 420)
+    (v, ns) =! (42 + 1, 42 * 10)
 
 [<Fact>]
 let ``execState State`` () =
     let ns = execState sm 42
-    ns =! 420
+    ns =! 42 * 10
 
 [<Fact>]
 let ``State has an instance of functor`` () =
     let v, ns =
-        map (fun i -> i * 2) sm
+        map twice sm
         |> (flip runState) 42
-    (v, ns) =! (43, 840)
+    (v, ns) =! (42 + 1, 42 * 2 * 10)
+
+[<Fact>]
+let ``State has an instance of applicative`` () =
+    let sf = State (fun s -> s+1, twice)
+    let v, ns = runState (sf <*> sm) 42
+    (v, ns) =! (42 + 1 + 1, (42 + 1) * 2 * 10)
