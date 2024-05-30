@@ -1,102 +1,58 @@
 ﻿module FSharpBits.StateMonad.ParserCombinator
 
-open Swensen.Unquote
+open FSharpBits.StateMonad.StateMonadForParserCombinator
 open Xunit
+open Swensen.Unquote
 
-let twice n = n * 2
-let flip f a b = f b a
+module Li =
+    let (<**>) (fs : ('a -> 'b) list) (vs: 'a list) : 'b list =
+        seq {
+            for f in fs do
+            for v in vs do
+            yield f v
+        } |> Seq.toList
+    let ap = (<**>)
 
-type State<'s, 'v> = State of ('s -> 's * 'v)
-
-let runState (State f) s = f s
-let execState m = snd << (runState m)
-
-let map f m  =
-    State(fun s ->
-        let ns, v = runState m s
-        (ns, f v))
-
-let (<*>) m1 m2 =
-    State (fun s ->
-        let s1, f = runState m1 s
-        let s2, v2 = runState m2 s1
-        (s2, f v2))
-
-
-let (>>=) m1 fm =
-    State (fun s ->
-        let s1, v1 = runState m1 s
-        let s2, v2 = runState (fm v1) s1
-        (s2, v2))
-
-let get = State (fun s -> (s, s)) 
-let put s = State (fun _ -> (s, ())) 
-    
-    
-type StateComputation() =
-    member this.Return(v) = State (fun s ->(s, v))
-    member this.Bind(m, v) = m >>= v
+open Li
 
 let state = StateComputation()
 
-//type Parser<'a> = State<string list, 'a>
+type Parser<'a> = State<string, 'a list>
+let pur v = State (fun s -> s, [v])
 
-let sm = State(fun s -> (s + 1, s * 10))
+let runParser p v =
+    runState p v
 
-[<Fact>]
-let ``runState State`` () =
-    let v, ns = runState sm 42
-    (v, ns) =! (42 + 1, 42 * 10)
-
-[<Fact>]
-let ``execState State`` () =
-    let ns = execState sm 42
-    ns =! 42 * 10
-
-[<Fact>]
-let ``State has an instance of functor`` () =
-    let v, ns =
-        map twice sm
-        |> (flip runState) 42
-    (v, ns) =! (42 + 1, 42 * 2 * 10)
-
-[<Fact>]
-let ``State has an instance of applicative`` () =
-    let sf = State (fun s -> s+1, twice)
-    let v, ns = runState (sf <*> sm) 42
-    (v, ns) =! (42 + 1 + 1, (42 + 1) * 2 * 10)
-
-[<Fact>]
-let ``State has an instance of monad`` () =
-    let f _ = State (fun s -> s, s)
-    let v, ns = runState (sm >>= f) 42
-    (v, ns) =! (42 + 1, (42 + 1))
-
-[<Fact>]
-let ``computation expression for State`` () =
-    let sm = state { return 42 }
-    let f x = state { return x * 2 }
+let mapParser f p =
+    let flist = List.map f
+    map flist p
     
-    let m = state {
-        let! m = sm
-        let! r = f m
-        return r
-    }
+let (<**>) (f: Parser<'a -> 'b>) (m: Parser<'a>) : Parser<'b> =
+    State (fun (s : string) ->
+        let sf, vf = runParser f s
+        let sm, vm = runParser m sf
+        let vvf = ap vf vm
+        (sm, vvf))
     
-    runState m 42 =! (42,84)
+[<Fact>]
+let ``run parser`` () =
+    let parser = pur 42
+    let s, v = runParser parser "foobar"
+    (s, v) =! ("foobar", [42])
 
 [<Fact>]
-let ``get State`` () =
-    let sm = state {
-        let! s = get
-        return s * 10
-    }
-    (runState sm 42) =! (42, 420)
+let ``map parser`` () =
+    let parser = State (fun s -> (s + "parsed", [1;2;3]))
+    
+    let mapped = mapParser twice parser
+    let s, v = runParser mapped "original-"
+    (s, v) =! ("original-parsed", [2;4;6])
 
 [<Fact>]
-let ``put State`` () =
-    let sm = state {
-        do! put 101
-        return 8 
-    }
-    (runState sm 42) =! (101, 8)
+let ``applicative parser`` () =
+    let f: Parser<int -> int> = State (fun s -> (s + "func-", [twice; (fun i -> i*3) ]))
+    let parser: State<string, int list> = State (fun s -> (s + "parsed", [1;2;3]))
+    
+    let mapped = f <**> parser
+    let s, v = runParser mapped "original-"
+    (s, v) =! ("original-func-parsed", [2; 4; 6; 3; 6; 9])

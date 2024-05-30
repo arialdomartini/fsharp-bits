@@ -39,6 +39,7 @@
         <Compile Include="PropertyBasedTesting\WithFsCheck\StringDeduplicatorTest.fs" />
         <Compile Include="PropertyBasedTesting\WithHedgehog\BasicHedgehogTest.fs" />
         <Compile Include="StateMonad\StateMonadTest.fs" />
+        <Compile Include="StateMonad\StateMonadForParserCombinator.fs" />
         <Compile Include="StateMonad\ParserCombinator.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>
