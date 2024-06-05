@@ -3,108 +3,54 @@
 open Xunit
 open Swensen.Unquote
 
-type GTree<'c> =
-    | GLeaf of 'c
-    | GNode of GNode<'c>
+type Tree<'a> =
+    | Leaf of 'a
+    | Node of (Tree<'a> * Tree<'a>)
 
-and GNode<'c> = GTree<'c> * GTree<'c>
+type State<'a> = State of (int -> 'a * int)
 
-type Tree =
-    | Leaf of string
-    | Node of Node
+let run (State f) s = f s
 
-and Node = Tree * Tree
+let (<*>) f v =
+    State(fun s ->
+        let fv, fs = run f s
+        let vv, vs = run v fs
+        (fv vv, vs))
 
-type ITree<'v> =
-    | ILeaf of ('v * int)
-    | INode of INode<'v>
+let rec map f sm =
+    State(fun s ->
+        let v, s' = run sm s
+        f v, s')
 
-and INode<'v> = ITree<'v> * ITree<'v>
+let build l r = Node(l, r)
+let (^) = map
 
+let (<*) f v =
+    State(fun s ->
+        let fv, fs = run f s
+        let _, s' = run v fs
+        (fv, s'))
 
-type MyGeneric<'a> = MyGeneric of 'a
+let get = State(fun s -> (s, s))
+let put v = State(fun _ -> ((), v))
+let inc = State(fun s -> ((), s + 1))
+let pure' v = State(fun s -> (v, s))
+let buildLeaf v s = Leaf (v, s)
 
-let x: MyGeneric<int> = MyGeneric 12
-
-let rec countLeaves (tree: Tree) : int =
-    match tree with
-    | Leaf l -> 1
-    | Node(l, r) -> countLeaves l + countLeaves r
-
-
-let rec mapTree (f: 'a -> 'b) : GTree<'a> -> GTree<'b> =
-    fun tree ->
-        match tree with
-        | GLeaf v -> GLeaf(f v)
-        | GNode(l, r) -> GNode((mapTree f l), (mapTree f r))
-
-
-
-[<Fact>]
-let ``counting tree leaves`` () =
-
-    let tree: Tree = Node(Leaf "one", Node(Leaf "two", Leaf "three"))
-
-    let numberOfLeaves = countLeaves tree
-
-    test <@ numberOfLeaves = 3 @>
-
-
-[<Fact>]
-let ``mapping a tree`` () =
-    let tree = GNode(GLeaf "one", GNode(GLeaf "two", GLeaf "three"))
-
-    let mappedToIntegers = mapTree String.length tree
-    let containingLengthOfWords = GNode(GLeaf 3, GNode(GLeaf 3, GLeaf 5))
-
-    test <@ mappedToIntegers = containingLengthOfWords @>
-
-type WithCounter<'v> = WithCounter of (int -> 'v * int)
-
-let (>>!) (WithCounter f) (counter: int) = f counter
-
-let (>>=) (f: WithCounter<'v>) (g: 'v -> WithCounter<'w>) : WithCounter<'w> =
-    WithCounter(fun counter ->
-        let rf, cf = f >>! counter
-        let rg, cg = g rf >>! cf
-        (rg, cg))
-
-let pure' v =
-    WithCounter(fun counter -> (v, counter))
-
-type IndexTreeComputation() =
-    member this.Bind(m, f) = (m >>= f)
-
-    member this.Return(v) = pure' v
-
-let keepTrack = IndexTreeComputation()
-//let keepTrack = StatefulBuilder()
-
-let mapState (from: WithCounter<'v>) (f: int -> int) : WithCounter<'v> =
-    WithCounter(fun counter -> from >>! (f counter))
-
-let getCounter = WithCounter(fun c -> (c, c))
-let incCounter = WithCounter(fun c -> ((), c + 1))
-let setCounter v = WithCounter(fun _ -> ((), v))
-
-let rec indexTree tree =
-    match tree with
-    | Leaf v ->
-        keepTrack {
-            let! counter = getCounter
-            do! setCounter (counter + 1)
-            return ILeaf(v, counter)
-        }
+let rec index =
+    function
+    // | Leaf a -> State (fun s -> (Leaf (a, s), s + 1))
+    | Leaf a -> buildLeaf^ (pure' a) <*> get <* inc
     | Node(l, r) ->
-        keepTrack {
-            let! leftIndexed = indexTree l
-            let! rightIndexed = indexTree r
-            return INode(leftIndexed, rightIndexed)
-        }
+        let li = index l
+        let ri = index r
+        build ^ li <*> ri
 
 [<Fact>]
 let ``indexes a tree`` () =
     let tree = Node(Leaf "one", Node(Leaf "two", Leaf "three"))
-    let withIndexes = INode(ILeaf("one", 1), INode(ILeaf("two", 2), ILeaf("three", 3)))
+    let withIndexes = Node(Leaf("one", 1), Node(Leaf("two", 2), Leaf("three", 3)))
 
-    test <@ fst (indexTree tree >>! 1) = withIndexes @>
+    let indexed, _ = run (index tree) 1
+
+    test <@ indexed = withIndexes @>
