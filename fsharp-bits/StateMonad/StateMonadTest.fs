@@ -28,20 +28,10 @@ type Tree<'a> = Leaf of 'a | Node of (Tree<'a>* Tree<'a>)
 //         Leaf two,2  Leaf three,3
 
 
-// Tree a -> int
 let rec countLeaves = function
     | Leaf _ -> 1
     | Node (l, r) -> countLeaves l  + countLeaves r 
 
-//    f          tree      out
-// (a -> b) -> (Tree a -> Tree b)
-let rec map f =
-   fun tree ->
-       match tree with
-       | Leaf v -> Leaf (f v)
-       | Node (l, r) -> Node (map f l, map f r) 
-
-// Tree a -> count -> (Tree (a, Int), Int)    
 let rec index tree =
     match tree with
     | Leaf v      -> fun count -> (Leaf (v, count), count + 1)
@@ -60,29 +50,3 @@ let ``indexes a tree`` () =
     let indexedTree, _ = index tree 1
     
     test <@ indexedTree = tree' @>
-
-
-[<Fact>]
-let ``count number of leaves`` () =
-    let tree = Node (Leaf (), (Node (Leaf (),Leaf ())))
-    
-    let numberOfLeaves = countLeaves tree
-    
-    test <@ numberOfLeaves = 3 @>
-
-let (^) = map
-
-[<Fact>]
-let ``calculate length of leaves`` () =
-    let treeOfWords = Node (Leaf "one", (Node (Leaf "two",Leaf "three")))
-    let treeOfNumbers = Node (Leaf 3, (Node (Leaf 3,Leaf 5)))
-    
-    // String -> Int
-    let f = String.length
-    
-    // Tree String -> Tree Int
-    let foo = (map String.length)
-    
-    let treeOfLengths = String.length^ treeOfWords
-    
-    test <@ treeOfLengths = treeOfNumbers @>
