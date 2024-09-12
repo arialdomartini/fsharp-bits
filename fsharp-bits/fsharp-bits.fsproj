@@ -6,7 +6,7 @@
         <RootNamespace>FSharpBits</RootNamespace>
         <GenerateProgramFile>false</GenerateProgramFile>
         <OutputType>Exe</OutputType>
-        <TargetFramework>net7.0</TargetFramework>
+        <TargetFramework>net8.0</TargetFramework>
 
     </PropertyGroup>
     <ItemGroup>
@@ -40,6 +40,7 @@
         <Compile Include="PropertyBasedTesting\WithHedgehog\BasicHedgehogTest.fs" />
         <Compile Include="StateMonad\StateMonadTest.fs" />
         <Compile Include="StateMonad\StateMonadWithComputationExpressionTest.fs" />
+        <Compile Include="BowlingKata\BowlingKataTest.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>
     <ItemGroup>

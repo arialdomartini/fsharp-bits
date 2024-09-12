@@ -1,5 +1,7 @@
 ﻿module FSharpBits.StateMonad.StateMonadWithParserCombinatorTest
 
+open System.Collections.Generic
+open System.Runtime.CompilerServices
 open Xunit
 open Swensen.Unquote
 
@@ -104,3 +106,52 @@ let ``indexes a tree`` () =
     let withIndexes = INode(ILeaf("one", 1), INode(ILeaf("two", 2), ILeaf("three", 3)))
 
     test <@ fst (indexTree tree >>! 1) = withIndexes @>
+
+let isEven i = i % 2 = 0
+
+type IEnumerable<'v> with
+    member this.filter' predicate =
+        Seq.foldBack
+            (fun i a -> if predicate i then i :: a else a)
+            this
+            []  
+
+[<Fact>]
+let ``filter with fold`` () =
+    let xs = [1;2;3;4;5;6]
+    let even: int list = List.filter isEven xs
+    let myEven: int list = xs.filter' isEven
+    
+    test <@ even = myEven @>
+
+
+let (+++) xs ys = xs |> List.append ys
+
+let diamond (upTo: char) =
+    let asList x = x |> List.map (_.ToString())
+    let letters: string list = ['a' .. upTo] |> asList
+    let length = List.length letters
+    let spaces n = List.replicate n " " |> asList
+
+    let mirrored xs = xs @ (xs |> List.rev |> List.tail) 
+        
+    letters
+        |> List.mapi (fun i c ->
+            (spaces i) +++ [c] +++ (spaces (length - i - 1)))
+        |> List.map mirrored
+        |> mirrored
+        
+    
+[<Fact>]
+let ``diamond test`` () =
+    let d = diamond 'd'
+    let expected =
+        [
+            "   a   ";
+            "  b b  ";
+            " c   c ";
+            "d     d";
+            " c   c ";
+            "  b b  ";
+            "   a   ";]
+    test <@ expected = (d |> List.map (String.concat "")) @>

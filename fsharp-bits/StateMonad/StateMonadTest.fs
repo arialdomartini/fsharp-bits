@@ -26,7 +26,7 @@ type Tree<'a> = Leaf of 'a | Node of (Tree<'a>* Tree<'a>)
 //      Leaf one,1    Node
 //              /   \
 //         Leaf two,2  Leaf three,3
-
+ 
 
 let rec countLeaves = function
     | Leaf _ -> 1
@@ -85,7 +85,7 @@ let putCount newCount =
     WithCount (fun _ -> (() , newCount))
     
     
-let keepState = KeepState()    
+let keepState = KeepState()
 
 let rec index tree =
     match tree with
