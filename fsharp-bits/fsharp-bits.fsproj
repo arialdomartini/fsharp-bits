@@ -41,6 +41,8 @@
         <Compile Include="StateMonad\StateMonadTest.fs" />
         <Compile Include="StateMonad\StateMonadWithComputationExpressionTest.fs" />
         <Compile Include="BowlingKata\BowlingKataTest.fs" />
+        <Folder Include="BowlingKata\MonadTransformers\" />
+        <Compile Include="MonadTransformers\MonadTransformers.fs" />
         <Compile Include="ActivePatterns.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>
