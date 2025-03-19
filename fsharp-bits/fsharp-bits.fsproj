@@ -43,6 +43,9 @@
         <Compile Include="BowlingKata\BowlingKataTest.fs" />
         <Folder Include="BowlingKata\MonadTransformers\" />
         <Compile Include="MonadTransformers\MonadTransformers.fs" />
+        <Compile Include="MonadTransformers\Writer.fs" />
+        <Compile Include="MonadTransformers\Maybe.fs" />
+        <Compile Include="MonadTransformers\MaybeWriter.fs" />
         <Compile Include="ActivePatterns.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>
