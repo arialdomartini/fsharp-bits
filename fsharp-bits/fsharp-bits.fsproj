@@ -40,6 +40,7 @@
         <Compile Include="PropertyBasedTesting\WithHedgehog\BasicHedgehogTest.fs" />
         <Compile Include="StateMonad\StateMonadTest.fs" />
         <Compile Include="StateMonad\StateMonadWithComputationExpressionTest.fs" />
+        <Compile Include="StateMonad\TypeClasses.fs" />
         <Compile Include="BowlingKata\BowlingKataTest.fs" />
         <Folder Include="BowlingKata\MonadTransformers\" />
         <Compile Include="MonadTransformers\MonadTransformers.fs" />
