@@ -40,14 +40,28 @@
         <Compile Include="PropertyBasedTesting\WithHedgehog\BasicHedgehogTest.fs" />
         <Compile Include="StateMonad\StateMonadTest.fs" />
         <Compile Include="StateMonad\StateMonadWithComputationExpressionTest.fs" />
-        <Compile Include="StateMonad\TypeClasses.fs" />
         <Compile Include="BowlingKata\BowlingKataTest.fs" />
-        <Folder Include="BowlingKata\MonadTransformers\" />
         <Compile Include="MonadTransformers\MonadTransformers.fs" />
         <Compile Include="MonadTransformers\Writer.fs" />
         <Compile Include="MonadTransformers\Maybe.fs" />
         <Compile Include="MonadTransformers\MaybeWriter.fs" />
+        <Compile Include="FunctionOverloading\NoFunctionOverloading.fs" />
+        <Compile Include="FunctionOverloading\FunctionWithModules.fs" />
+        <Compile Include="FunctionOverloading\InlineFunctionsWithTypeConstraints.fs" />
+        <Compile Include="FunctionOverloading\InlineFunctionsWithTypeConstraintsCurried.fs" />
+        <Compile Include="FunctionOverloading\InlineFunctionsWithInterfaces.fs" />
+        <Compile Include="FunctionOverloading\InlineFunctionsWithStaticInterfaces.fs" />
+        <Compile Include="FunctionOverloading\SystemTypes\NoFunctionOverloading.fs" />
+        <Compile Include="FunctionOverloading\SystemTypes\FunctionWithModules.fs" />
+        <Compile Include="FunctionOverloading\SystemTypes\InlineFunctionsWithTypeConstraints.fs" />
+        <Compile Include="FunctionOverloading\SystemTypes\InlineFunctionsWithTypeConstraintsCurried.fs" />
+        <Compile Include="FunctionOverloading\SystemTypes\InlineFunctionsWithInterfaces.fs" />
+        <Compile Include="FunctionOverloading\SystemTypes\InlineFunctionsWithStaticInterfaces.fs" />
         <Compile Include="ActivePatterns.fs" />
+        <Compile Include="TypeClasses.fs" />
+        <Compile Include="TypeClassesCopy.fs" />
+        <Compile Include="TypeClassesCopyWithMethodNotOperator.fs" />
+        <Compile Include="TypeClassesCopyWithMethodNotOperatorInline.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>
     <ItemGroup>
