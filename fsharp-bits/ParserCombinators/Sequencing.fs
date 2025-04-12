@@ -3,17 +3,19 @@ module FSharpBits.ParserCombinators.Sequencing
 open FSharpBits.ParserCombinators.ParserCombinators
 
 
-let jsonStringParser : String Parser = failwith "Not yet implemented"
+type FieldName = String
+let jsonFieldNameParser : FieldName Parser = failwith "Not yet implemented"
 
 let colonParser : Char Parser = failwith "Not yet implemented"
 
-let jsonValueParser : String Parser = failwith "Not yet implemented"
+type FieldValue = String
+let jsonValueParser : FieldValue Parser = failwith "Not yet implemented"
 
 type JSONField = {Name: String; Value: String}
 
 let json : JSONField Parser =
     Parser (fun input ->
-        let rest, result = runParser jsonStringParser input
+        let rest, result = runParser jsonFieldNameParser input
         match result with
         | Error errorValue -> (rest, Error errorValue)
         | Ok fieldName ->
@@ -24,5 +26,4 @@ let json : JSONField Parser =
                 let rest, result = runParser jsonValueParser rest
                 match result with
                 | Error errorValue -> (rest, Error errorValue)
-                | Ok value -> rest, Ok {JSONField.Name = fieldName; Value = value }
-        )
+                | Ok value -> rest, Ok {JSONField.Name = fieldName; Value = value } )
