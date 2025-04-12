@@ -1,10 +1,5 @@
 module FSharpBits.ParserCombinators.ParserCombinators
 
-
-// newtype Parser a = Parser {
-//   runParser :: String -> (String, Either ParseError a)
-// }
-
 type String = string
 type Char = char
 type Unit = unit
