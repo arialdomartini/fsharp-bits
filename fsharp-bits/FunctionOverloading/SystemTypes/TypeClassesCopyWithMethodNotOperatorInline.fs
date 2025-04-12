@@ -9,16 +9,15 @@ type PoorBox = PoorBox of string
 let poorBoxPlus (PoorBox b1) (PoorBox b2) = PoorBox ($"{b1}, {b2}")
 
 type DefaultImplementations =
-    static member Plus(x: list<_>, y, _mthd: DefaultImplementations) = x @ y
-    static member Plus(x: PoorBox, y: PoorBox, _mthd: DefaultImplementations) = poorBoxPlus x y
-    static member Plus(x: string, y: string, _mthd: DefaultImplementations) = x + y
+    static member Plus(x: list<_>, y, [<Optional>] _mthd: DefaultImplementations) = x @ y
+    static member Plus(x: PoorBox, y: PoorBox, [<Optional>]_mthd: DefaultImplementations) = poorBoxPlus x y
+    static member Plus(x: string, y: string, [<Optional>]_mthd: DefaultImplementations) = x + y
 
-
-let inline plus< ^withPlus when (DefaultImplementations or ^withPlus): (static member Plus: ^withPlus * ^withPlus * DefaultImplementations -> ^withPlus)> (x: ^withPlus) (y: ^withPlus) : ^withPlus =
-    
+let inline plus< ^withPlus when (DefaultImplementations or ^withPlus): 
+        (static member Plus: ^withPlus * ^withPlus * DefaultImplementations -> ^withPlus)> 
+            (x: ^withPlus) (y: ^withPlus) : ^withPlus =
     let inline call (mthd: ^defaultImplementations, input1: ^customType, input2: ^customType) =
-        ((^customType or ^defaultImplementations): (static member Plus: _ * _ * _ -> _) input1, input2, mthd)
-
+        ((^customType or ^defaultImplementations): (static member Plus: _*_*_ -> _) input1, input2, mthd)
     call (Unchecked.defaultof<DefaultImplementations>, x, y)
 
 

@@ -45,6 +45,7 @@
         <Compile Include="MonadTransformers\Writer.fs" />
         <Compile Include="MonadTransformers\Maybe.fs" />
         <Compile Include="MonadTransformers\MaybeWriter.fs" />
+        <Compile Include="FunctionOverloading\WithInterface.fs" />
         <Compile Include="FunctionOverloading\NoFunctionOverloading.fs" />
         <Compile Include="FunctionOverloading\FunctionWithModules.fs" />
         <Compile Include="FunctionOverloading\InlineFunctionsWithTypeConstraints.fs" />
@@ -57,11 +58,11 @@
         <Compile Include="FunctionOverloading\SystemTypes\InlineFunctionsWithTypeConstraintsCurried.fs" />
         <Compile Include="FunctionOverloading\SystemTypes\InlineFunctionsWithInterfaces.fs" />
         <Compile Include="FunctionOverloading\SystemTypes\InlineFunctionsWithStaticInterfaces.fs" />
+        <Compile Include="FunctionOverloading\SystemTypes\TypeClassesCopy.fs" />
+        <Compile Include="FunctionOverloading\SystemTypes\TypeClassesCopyWithMethodNotOperator.fs" />
+        <Compile Include="FunctionOverloading\SystemTypes\TypeClassesCopyWithMethodNotOperatorInline.fs" />
         <Compile Include="ActivePatterns.fs" />
         <Compile Include="TypeClasses.fs" />
-        <Compile Include="TypeClassesCopy.fs" />
-        <Compile Include="TypeClassesCopyWithMethodNotOperator.fs" />
-        <Compile Include="TypeClassesCopyWithMethodNotOperatorInline.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>
     <ItemGroup>

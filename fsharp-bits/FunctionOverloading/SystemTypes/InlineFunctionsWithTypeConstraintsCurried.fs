@@ -6,25 +6,25 @@ open Swensen.Unquote
 module Tasks =
     type Task = { Title: string; Duration: int }
     
-    let private join (t1: Task) (t2: Task) =
+    let private combine (t1: Task) (t2: Task) =
         { Title = $"{t1.Title} and {t2.Title}"
           Duration = t1.Duration + t2.Duration }
 
     type Task with
-        static member Join (t1: Task)  (t2: Task) =
-            join t1 t2
+        static member Combine (t1: Task)  (t2: Task) =
+            combine t1 t2
 
 module Boxes =
     type Box = Box of (int * int * int)
 
-    let private joinBoxes (boxLeft: Box) (boxRight: Box) =
+    let private combineBoxes (boxLeft: Box) (boxRight: Box) =
         let (Box (x1, y1, z1)) = boxLeft
         let (Box (x2, y2, z2)) = boxRight
         Box (x1 + x2, max y1 y2, max z1 z2)
 
     type Box with
-        static member Join (t1: Box) (t2: Box) =
-            joinBoxes t1 t2
+        static member Combine (t1: Box) (t2: Box) =
+            combineBoxes t1 t2
 
 
 open Tasks
