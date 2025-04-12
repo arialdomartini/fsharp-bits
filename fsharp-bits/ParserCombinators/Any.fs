@@ -6,7 +6,7 @@ let private unexpectedEndOfFile =
     { Expected = "a char"
       Encountered = "the end of input" }
 
-let any: Parser<Char> =
+let any: Char Parser =
     Parser(fun input ->
         match Seq.toList input with
         | [] -> ("", Error unexpectedEndOfFile)

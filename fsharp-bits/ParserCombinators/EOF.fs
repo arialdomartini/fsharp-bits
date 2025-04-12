@@ -6,7 +6,7 @@ let private extraChars =
     { Expected = "the end of input"
       Encountered = "other chars" }
 
-let eof: Parser<Unit> =
+let eof: Unit Parser =
     Parser(fun input ->
         match Seq.toList input with
         | [] -> ("", Ok ())
