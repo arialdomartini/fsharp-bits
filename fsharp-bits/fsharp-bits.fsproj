@@ -63,6 +63,7 @@
         <Compile Include="FunctionOverloading\SystemTypes\TypeClassesCopyWithMethodNotOperatorInline.fs" />
         <Compile Include="ActivePatterns.fs" />
         <Compile Include="TypeClasses.fs" />
+        <Compile Include="ParserCombinators\ParserCombinators.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>
     <ItemGroup>
