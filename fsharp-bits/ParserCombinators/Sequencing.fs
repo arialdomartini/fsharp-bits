@@ -44,4 +44,4 @@ let closedTag : String Parser = failwith "Not yet implemented"
 let value : String Parser = failwith "Not yet implemented"
 
 
-let json'' = openTag .*> value <*. closedTag
+let valueInsideTags = openTag .*> value <*. closedTag
