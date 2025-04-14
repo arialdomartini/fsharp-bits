@@ -22,14 +22,14 @@ type ParserBuilder() =
 
 let parser = ParserBuilder()
 
-let (!*>) a b =
+let (.*>) (a: Parser<'a>) (b: Parser<'b>) : Parser<'b> =
     parser {
         let! _ = a
         let! b' = b
         return b'
     }
 
-let (<*!) a b =
+let (<*.) (a: Parser<'a>) (b: Parser<'b>) : Parser<'a> =
     parser {
         let! a' = a
         let! _ = b
@@ -37,7 +37,7 @@ let (<*!) a b =
     }
 
 // (<$) :: a -> Parser b -> Parser a
-let (!%>) a b =
+let (.%>) a b =
     parser {
         let! _ = b
         return a

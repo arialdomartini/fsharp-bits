@@ -33,7 +33,15 @@ let json : JSONField Parser =
 let json' : JSONField Parser =
     parser {
         let! fieldName = jsonFieldNameParser
-        let! colon = colonParser
+        let! _colon = colonParser
         let! value = jsonValueParser
         return {JSONField.Name = fieldName; Value = value }
     }
+
+
+let openTag : String Parser = failwith "Not yet implemented"
+let closedTag : String Parser = failwith "Not yet implemented"
+let value : String Parser = failwith "Not yet implemented"
+
+
+let json'' = openTag .*> value <*. closedTag
