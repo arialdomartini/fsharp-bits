@@ -1,5 +1,6 @@
 module FSharpBits.ParserCombinators.Sequencing
 
+open FSharpBits.ParserCombinators.Monad
 open FSharpBits.ParserCombinators.ParserCombinators
 
 
@@ -27,3 +28,12 @@ let json : JSONField Parser =
                 match result with
                 | Error errorValue -> (rest, Error errorValue)
                 | Ok value -> rest, Ok {JSONField.Name = fieldName; Value = value } )
+
+
+let json' : JSONField Parser =
+    parser {
+        let! fieldName = jsonFieldNameParser
+        let! colon = colonParser
+        let! value = jsonValueParser
+        return {JSONField.Name = fieldName; Value = value }
+    }
