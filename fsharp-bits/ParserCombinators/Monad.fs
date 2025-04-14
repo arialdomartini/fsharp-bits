@@ -21,3 +21,24 @@ type ParserBuilder() =
     member this.Bind(m, f) = andThen m f
 
 let parser = ParserBuilder()
+
+let (!*>) a b =
+    parser {
+        let! _ = a
+        let! b' = b
+        return b'
+    }
+
+let (<*!) a b =
+    parser {
+        let! a' = a
+        let! _ = b
+        return a'
+    }
+
+// (<$) :: a -> Parser b -> Parser a
+let (!%>) a b =
+    parser {
+        let! _ = b
+        return a
+    }
