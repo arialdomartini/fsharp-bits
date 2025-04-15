@@ -1,5 +1,10 @@
 module FSharpBits.ParserCombinators.Any
 
+open FsCheck
+open FsCheck.Xunit
+open global.Xunit
+open Swensen.Unquote
+
 open FSharpBits.ParserCombinators.ParserCombinators
 
 let private unexpectedEndOfFile =
@@ -11,3 +16,16 @@ let any: Char Parser =
         match Seq.toList input with
         | [] -> ("", Error unexpectedEndOfFile)
         | head :: tail -> (string tail, Ok(head)))
+
+
+[<Property>]
+let ``parses any char`` (s: NonEmptyString) =
+    let _, result = runParser any s.Get
+
+    test <@ result = Ok s.Get[0] @>
+
+[<Fact>]
+let ``error in case of empty input`` () =
+    let _, result = runParser any ""
+
+    test <@ result = Error { Expected = "a char"; Encountered = "the end of input" }  @>
