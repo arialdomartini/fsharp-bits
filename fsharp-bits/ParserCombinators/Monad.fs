@@ -14,11 +14,14 @@ let andThen (a: 'a Parser) (f: 'a -> 'b Parser) =
 let (>>=) = andThen
 
 let ``return`` a = Parser (fun input -> (input, Ok a))
+let parseError ex ob = Parser (fun input -> (input, Error {Expected= ex; Encountered = ob}))
 
 
 type ParserBuilder() =
     member this.Return(a) = ``return`` a
     member this.Bind(m, f) = andThen m f
+    member _.ReturnFrom(a) = a
+    member _.Zero() = failwith "Not yet implemented" // pfail "Empty branch"  // For empty else branches
 
 let parser = ParserBuilder()
 
