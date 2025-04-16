@@ -66,6 +66,8 @@
         <Compile Include="ParserCombinators\ParserCombinators.fs" />
         <Compile Include="ParserCombinators\Monad.fs" />
         <Compile Include="ParserCombinators\Sequencing.fs" />
+        <Compile Include="ParserCombinators\Try.fs" />
+        <Compile Include="ParserCombinators\Alternative.fs" />
         <Compile Include="ParserCombinators\Any.fs" />
         <Compile Include="ParserCombinators\EOF.fs" />
         <Compile Include="ParserCombinators\Satisfies.fs" />
