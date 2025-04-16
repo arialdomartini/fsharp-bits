@@ -13,8 +13,8 @@ let satisfies condition error =
         | Ok resultValue ->
             if condition resultValue
             then (rest, Ok resultValue)
-            else (rest, Error ({ Expected = error; Encountered = resultValue.ToString() }))
-        | Error error -> (rest, Error error))
+            else (input, Error ({ Expected = error; Encountered = resultValue.ToString() }))
+        | Error error -> (input, Error error))
 
 let satisfies' condition errorMessage =
     parser {
@@ -43,7 +43,29 @@ let ``parses a character satisfying a condition`` () =
     test <@ result = Error { Expected = "a character between a and c"; Encountered = "d" } @>
 
 [<Fact>]
-let ``parses a character satisfying a condition using Computation Expression`` () =
+let ``does not consume the input in case of failure`` () =
+    let condition c = c >= 'a' && c <= 'c'
+
+    let parsesABC = satisfies condition "a character between a and c"
+
+    let input = "d-fails"
+
+    let rest, _ = runParser parsesABC input
+    test <@ rest = input @>
+
+[<Fact>]
+let ``does not consume the input in case of failure, using Computation Expression`` () =
+    let condition c = c >= 'a' && c <= 'c'
+
+    let parsesABC = satisfies' condition "a character between a and c"
+
+    let input = "d-fails"
+
+    let rest, _ = runParser parsesABC input
+    test <@ rest = input @>
+
+[<Fact>]
+let ``parses a character satisfying a condition, using Computation Expression`` () =
     let condition c = c >= 'a' && c <= 'c'
 
     let parsesABC = satisfies' condition "a character between a and c"
