@@ -38,11 +38,17 @@ let mapP (f: 'a -> 'b) (parser: 'a Parser) : 'b Parser =
 
 let (<!>) = mapP
 
-let parse3Digits' =
+let parse3DigitsAsString =
     let f (((a, b), c)) = System.String [|a;b;c|]
 
     f <!> parse3Digits
 
 [<Fact>]
 let ``streamlines the parsed 3 digits as a single string`` () =
-    test <@ run parse3Digits' "123ZZ" = Success ("123", "ZZ") @>
+    test <@ run parse3DigitsAsString "123ZZ" = Success ("123", "ZZ") @>
+
+let parse3DigitsAsInt = int <!> parse3DigitsAsString
+
+[<Fact>]
+let ``streamlines the parsed 3 digits as an integer`` () =
+    test <@ run parse3DigitsAsInt "123ZZ" = Success (123, "ZZ") @>
