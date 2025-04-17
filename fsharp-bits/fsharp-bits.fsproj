@@ -73,6 +73,7 @@
         <Compile Include="ParserCombinators\ForTheRestOfUs\EOF.fs" />
         <Compile Include="ParserCombinators\ForTheRestOfUs\Satisfies.fs" />
         <Compile Include="ParserCombinators\ForFunAndProfit\ParseA.fs" />
+        <Compile Include="ParserCombinators\ForFunAndProfit\ParseChar.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>
     <ItemGroup>
