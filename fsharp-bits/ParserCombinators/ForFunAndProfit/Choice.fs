@@ -11,10 +11,13 @@ open Swensen.Unquote
 let choice (parsers: 'a Parser list) : 'a Parser =
     List.reduce (<|>) parsers
 
-let parseLowerCase =
-    ['a'..'z']
+let anyOf listOfChars =
+    listOfChars
     |> List.map parseChar
     |> choice
+
+let parseLowerCase =
+    anyOf ['a'..'z']
 
 [<Fact>]
 let success () =

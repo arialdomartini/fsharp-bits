@@ -79,6 +79,7 @@
         <Compile Include="ParserCombinators\ForFunAndProfit\AndThen.fs" />
         <Compile Include="ParserCombinators\ForFunAndProfit\OrElse.fs" />
         <Compile Include="ParserCombinators\ForFunAndProfit\Choice.fs" />
+        <Compile Include="ParserCombinators\ForFunAndProfit\Functor.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>
     <ItemGroup>
