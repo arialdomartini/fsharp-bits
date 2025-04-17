@@ -76,6 +76,7 @@
         <Compile Include="ParserCombinators\ForFunAndProfit\Parser.fs" />
         <Compile Include="ParserCombinators\ForFunAndProfit\ParseA.fs" />
         <Compile Include="ParserCombinators\ForFunAndProfit\ParseChar.fs" />
+        <Compile Include="ParserCombinators\ForFunAndProfit\AndThen.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>
     <ItemGroup>
