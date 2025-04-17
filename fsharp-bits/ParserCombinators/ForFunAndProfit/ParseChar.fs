@@ -2,11 +2,12 @@ module FSharpBits.ParserCombinators.ForFunAndProfit.ParseChar
 
 open System
 open FSharpBits.ParserCombinators.ForFunAndProfit
+open Parser
 open ParseResult
 open Xunit
 open Swensen.Unquote
 
-let parseChar (charToMatch: char) : string -> ParseResult<char * string> =
+let parseChar (charToMatch: char) : char Parser =
     let inner (input: string)  =
         if String.IsNullOrEmpty(input)
         then Failure "Expecting 'A'. No input"
@@ -18,18 +19,18 @@ let parseChar (charToMatch: char) : string -> ParseResult<char * string> =
                 Success (first, remaining)
             else Failure $"Expecting '{charToMatch}'. Got '{first}'"
 
-    inner
+    Parser inner
 
 let parseA = parseChar 'A'
 
 [<Fact>]
 let ``parses "A"`` () =
-    test <@ parseA "ABC" = Success ('A', "BC") @>
+    test <@ run parseA "ABC" = Success ('A', "BC") @>
 
 [<Fact>]
 let ``empty string -> error`` () =
-    test <@ parseA "" = Failure "Expecting 'A'. No input" @>
+    test <@ run parseA "" = Failure "Expecting 'A'. No input" @>
 
 [<Fact>]
 let ``not "A" -> error`` () =
-    test <@ parseA "ZBC" = Failure "Expecting 'A'. Got 'Z'" @>
+    test <@ run parseA "ZBC" = Failure "Expecting 'A'. Got 'Z'" @>
