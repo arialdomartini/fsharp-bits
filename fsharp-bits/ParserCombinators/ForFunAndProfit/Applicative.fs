@@ -4,17 +4,23 @@ open FSharpBits.ParserCombinators.ForFunAndProfit.Functor
 open FSharpBits.ParserCombinators.ForFunAndProfit.Monad
 open Parser
 open ParseResult
+open AndThen
 open Xunit
 open Swensen.Unquote
 
-let applyP (f: ('a -> 'b) Parser) (a: 'a Parser) : 'b Parser =
+let applyP' (fp: ('a -> 'b) Parser) (ap: 'a Parser) : 'b Parser =
     Parser (fun input ->
-        match run f input with
+        match run fp input with
         | Failure error -> Failure error
-        | Success (f', rest) ->
-            match run a rest with
+        | Success (f, rest) ->
+            match run ap rest with
             | Failure error -> Failure error
-            | Success (a', rest) -> Success (f' a', rest) )
+            | Success (a, rest) -> Success (f a, rest) )
+
+let applyP (fp: Parser<'a -> 'b>) (ap: Parser<'a>) : Parser<'b> =
+    let p = fp .>>. ap
+
+    mapP (fun (f, x) -> f x) p
 
 let (<*>) = applyP
 
