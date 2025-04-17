@@ -6,16 +6,19 @@ open ParseResult
 open Xunit
 open Swensen.Unquote
 
-let parseChar (charToMatch: char) (input: string) : ParseResult<char * string> =
-    if String.IsNullOrEmpty(input)
-    then Failure "Expecting 'A'. No input"
-    else
-        let first = input[0]
-        if first = charToMatch
-        then
-            let remaining = input[1..]
-            Success (first, remaining)
-        else Failure $"Expecting '{charToMatch}'. Got '{first}'"
+let parseChar (charToMatch: char) : string -> ParseResult<char * string> =
+    let inner (input: string)  =
+        if String.IsNullOrEmpty(input)
+        then Failure "Expecting 'A'. No input"
+        else
+            let first = input[0]
+            if first = charToMatch
+            then
+                let remaining = input[1..]
+                Success (first, remaining)
+            else Failure $"Expecting '{charToMatch}'. Got '{first}'"
+
+    inner
 
 let parseA = parseChar 'A'
 
