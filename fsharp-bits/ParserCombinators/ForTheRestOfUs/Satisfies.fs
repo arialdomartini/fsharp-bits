@@ -1,8 +1,9 @@
-module FSharpBits.ParserCombinators.Satisfies
+module FSharpBits.ParserCombinators.Satisfies.ForTheRestOfUs.ForTheRestOfUs
 
-open FSharpBits.ParserCombinators.Any
-open FSharpBits.ParserCombinators.Monad
-open FSharpBits.ParserCombinators.ParserCombinators
+open FSharpBits.ParserCombinators.ForTheRestOfUs
+open Any
+open Monad
+open ParserCombinators
 open Xunit
 open Swensen.Unquote
 

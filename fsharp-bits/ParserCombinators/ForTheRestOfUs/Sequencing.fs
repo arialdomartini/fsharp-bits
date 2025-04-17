@@ -1,7 +1,8 @@
-module FSharpBits.ParserCombinators.Sequencing
+module FSharpBits.ParserCombinators.ForTheRestOfUs.Sequencing
 
-open FSharpBits.ParserCombinators.Monad
-open FSharpBits.ParserCombinators.ParserCombinators
+open FSharpBits.ParserCombinators.ForTheRestOfUs
+open Monad
+open ParserCombinators
 
 
 type FieldName = String

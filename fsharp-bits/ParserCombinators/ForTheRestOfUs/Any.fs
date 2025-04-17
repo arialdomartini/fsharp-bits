@@ -1,11 +1,12 @@
-module FSharpBits.ParserCombinators.Any
+module FSharpBits.ParserCombinators.ForTheRestOfUs.Any
 
 open FsCheck
 open FsCheck.Xunit
 open global.Xunit
 open Swensen.Unquote
 
-open FSharpBits.ParserCombinators.ParserCombinators
+open FSharpBits.ParserCombinators.ForTheRestOfUs
+open ParserCombinators
 
 let private unexpectedEndOfFile =
     { Expected = "a char"

@@ -1,11 +1,12 @@
-module FSharpBits.ParserCombinators.EOF
+module FSharpBits.ParserCombinators.ForTheRestOfUs.EOF
 
 open FsCheck
 open FsCheck.Xunit
 open global.Xunit
 open Swensen.Unquote
 
-open FSharpBits.ParserCombinators.ParserCombinators
+open FSharpBits.ParserCombinators.ForTheRestOfUs
+open ParserCombinators
 
 let private extraChars =
     { Expected = "the end of input"
