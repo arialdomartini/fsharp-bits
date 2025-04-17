@@ -17,18 +17,15 @@ let applyP' (fp: ('a -> 'b) Parser) (ap: 'a Parser) : 'b Parser =
             | Failure error -> Failure error
             | Success (a, rest) -> Success (f a, rest) )
 
-let applyP (fp: Parser<'a -> 'b>) (ap: Parser<'a>) : Parser<'b> =
-    let p = fp .>>. ap
-
-    mapP (fun (f, x) -> f x) p
+let applyP fp ap =
+    (fun (f, x) -> f x) <!> (fp .>>. ap)
 
 let (<*>) = applyP
 
 let combines3Digits (a: char) (b: char) (c: char) : int = [| a; b; c |] |> System.String |> int
 
-let combines3Digits': Parser<char -> char -> char -> int> = returnP combines3Digits
-
-let parse3Digits: Parser<int> = combines3Digits' <*> parseDigit <*> parseDigit <*> parseDigit
+let parse3Digits: Parser<int> =
+    combines3Digits <!> parseDigit <*> parseDigit <*> parseDigit
 
 
 [<Fact>]
