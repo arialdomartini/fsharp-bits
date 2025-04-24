@@ -50,6 +50,8 @@ let ``list of parsers`` () =
 
     test <@ run parseList "one two three" = Success ([ One; Space; Two; Space; Three ], "") @>
 
+type Foo = Class
+
 [<Fact>]
 let ``string parser`` () =
 
@@ -65,14 +67,15 @@ let ``string parser`` () =
     let charListToString (cs: char list): string =
         System.String.Join("", cs)
 
-    let parseString (s: string) : string Parser  =
+    let parseString (s: string) factory: 'a Parser  =
         s
         |> Seq.map parseChar
         |> Seq.toList
         |> sequence
         |> mapP charListToString
+        |> mapP (fun _ -> factory)
 
 
-    let classParser = parseString "class"
+    let classParser = parseString "class" Class
 
-    test <@ run classParser "class Foo" = Success ("class", " Foo") @>
+    test <@ run classParser "class Foo" = Success (Class, " Foo") @>
