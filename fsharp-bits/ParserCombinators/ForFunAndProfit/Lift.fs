@@ -49,3 +49,30 @@ let ``list of parsers`` () =
     let parseList = sequence [parseOne; parseSpace; parseTwo; parseSpace; parseThree]
 
     test <@ run parseList "one two three" = Success ([ One; Space; Two; Space; Three ], "") @>
+
+[<Fact>]
+let ``string parser`` () =
+
+    let parseChar c = Parser(fun (input: string) ->
+        let failure = Failure $"Expecting {c}"
+
+        if input |> System.String.IsNullOrEmpty
+        then failure
+        else
+            if input[0] = c then Success (c, input[1..])
+            else failure)
+
+    let charListToString (cs: char list): string =
+        System.String.Join("", cs)
+
+    let parseString (s: string) : string Parser  =
+        s
+        |> Seq.map parseChar
+        |> Seq.toList
+        |> sequence
+        |> mapP charListToString
+
+
+    let classParser = parseString "class"
+
+    test <@ run classParser "class Foo" = Success ("class", " Foo") @>
