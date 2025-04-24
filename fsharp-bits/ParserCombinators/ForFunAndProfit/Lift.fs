@@ -23,13 +23,12 @@ type Parsed = One | Two | Three | Space
 
 
 let rec sequence (parsers: ('a Parser) list) : ('a list) Parser =
-    let cons (x: 'a) (xs: 'a list) : 'a list = x :: xs
+    let cons x xs = x :: xs
     let consP: Parser<'a> -> Parser<'a list> -> Parser<'a list> = lift2 cons
 
-    if parsers |> List.isEmpty
-    then returnP []
-    else
-        consP parsers.Head (sequence parsers.Tail)
+    match parsers with
+    | [] -> returnP []
+    | p::ps -> consP p (sequence ps)
 
 
 [<Fact>]
