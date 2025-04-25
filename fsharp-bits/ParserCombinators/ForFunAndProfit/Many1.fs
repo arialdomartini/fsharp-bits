@@ -50,20 +50,20 @@ let ``fails if there is not at least 1 space`` () =
 
     test <@ run spacesParser "foo" = Failure "Expecting ' '" @>
 
-let parseInt : int Parser=
+let parseNat : uint Parser=
 
-    let buildInteger (cs: char list) : int =
+    let buildNat (cs: char list) : uint =
         System.String.Join("", cs)
-        |> System.Int32.Parse
+        |> System.UInt32.Parse
 
     let parseDigit = anyOf ['0'..'9']
 
-    lift buildInteger (many1 parseDigit)
+    lift buildNat (many1 parseDigit)
 
 
 
 [<Fact>]
-let ``parse an int`` () =
-    let result = run parseInt "1234 something else"
+let ``parses a natural number`` () =
+    let result = run parseNat "1234 something else"
 
-    test <@ result = Success (1234, " something else") @>
+    test <@ result = Success (1234u, " something else") @>
