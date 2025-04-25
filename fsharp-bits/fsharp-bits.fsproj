@@ -83,6 +83,7 @@
         <Compile Include="ParserCombinators\ForFunAndProfit\Monad.fs" />
         <Compile Include="ParserCombinators\ForFunAndProfit\Applicative.fs" />
         <Compile Include="ParserCombinators\ForFunAndProfit\Lift.fs" />
+        <Compile Include="ParserCombinators\ForFunAndProfit\Many.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>
     <ItemGroup>

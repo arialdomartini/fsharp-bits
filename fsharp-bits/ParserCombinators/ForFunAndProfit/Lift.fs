@@ -52,17 +52,18 @@ let ``list of parsers`` () =
 
 type Foo = Class
 
+let parseChar c = Parser(fun (input: string) ->
+    let failure = Failure $"Expecting {c}"
+
+    if input |> System.String.IsNullOrEmpty
+    then failure
+    else
+        if input[0] = c then Success (c, input[1..])
+        else failure)
+
+
 [<Fact>]
 let ``string parser`` () =
-
-    let parseChar c = Parser(fun (input: string) ->
-        let failure = Failure $"Expecting {c}"
-
-        if input |> System.String.IsNullOrEmpty
-        then failure
-        else
-            if input[0] = c then Success (c, input[1..])
-            else failure)
 
     let charListToString (cs: char list): string =
         System.String.Join("", cs)
