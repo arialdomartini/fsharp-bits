@@ -85,7 +85,9 @@
         <Compile Include="ParserCombinators\ForFunAndProfit\Lift.fs" />
         <Compile Include="ParserCombinators\ForFunAndProfit\Many.fs" />
         <Compile Include="ParserCombinators\ForFunAndProfit\Many1.fs" />
+        <Compile Include="ParserCombinators\ForFunAndProfit\Pipe.fs" />
         <Compile Include="ParserCombinators\ForFunAndProfit\ZeroOrOneTime.fs" />
+        <Compile Include="ParserCombinators\ForFunAndProfit\ThrowingResultsAway.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>
     <ItemGroup>

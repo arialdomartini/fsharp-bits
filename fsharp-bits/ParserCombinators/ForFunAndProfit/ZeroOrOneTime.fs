@@ -7,12 +7,10 @@ open Xunit
 open Swensen.Unquote
 open Parser
 open ParseResult
-open Functor
 open OrElse
 open ParseChar
 open Applicative
-
-let ( |>> ) x f = mapP f x
+open Pipe
 
 let opt (parser: 'a Parser) : 'a option Parser=
     let some = parser |>> Some
