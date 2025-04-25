@@ -88,6 +88,7 @@
         <Compile Include="ParserCombinators\ForFunAndProfit\Pipe.fs" />
         <Compile Include="ParserCombinators\ForFunAndProfit\ZeroOrOneTime.fs" />
         <Compile Include="ParserCombinators\ForFunAndProfit\ThrowingResultsAway.fs" />
+        <Compile Include="ParserCombinators\ForFunAndProfit\Between.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>
     <ItemGroup>
