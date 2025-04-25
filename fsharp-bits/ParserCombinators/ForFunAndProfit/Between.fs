@@ -10,7 +10,6 @@ open Lift
 open ParseResult
 open ThrowingResultsAway
 open Pipe
-open Applicative
 open AndThen
 open OrElse
 
@@ -56,5 +55,33 @@ let ``parsing a list with separators`` () =
          parseNat .>>. (many ((parseChar '/') >>. parseNat)) |>> (fun (p,l) -> p :: l)
 
     let parser = between opening parseNats closing
+
+    test <@ run parser "{1/2/3/4} |> print" = Success ([1u;2u;3u;4u], " |> print") @>
+
+[<Fact>]
+let ``parsing a list with separators with Computation Expression`` () =
+
+    let surroundedWith opening closing p = parse {
+        let! _ = parseChar opening
+        let! inner = p
+        let! _ = parseChar closing
+        return inner
+    }
+
+    let slashNat = parse {
+        let! _ = parseChar '/'
+        let! n = parseNat
+        return n
+    }
+
+    let numbers = parse {
+        let! first = parseNat
+        let! others = many slashNat
+        return first :: others
+    }
+
+    let parser = parse {
+        return! (numbers |> surroundedWith '{' '}')
+    }
 
     test <@ run parser "{1/2/3/4} |> print" = Success ([1u;2u;3u;4u], " |> print") @>
