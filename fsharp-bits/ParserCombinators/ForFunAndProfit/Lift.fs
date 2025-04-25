@@ -8,6 +8,7 @@ open ParseResult
 open Xunit
 open Swensen.Unquote
 
+let lift = mapP
 
 let lift2 (f: 'f -> 'a -> 'b) : 'f Parser -> 'a Parser -> 'b Parser = fun a b -> f <!> a <*> b
 
@@ -53,7 +54,7 @@ let ``list of parsers`` () =
 type Foo = Class
 
 let parseChar c = Parser(fun (input: string) ->
-    let failure = Failure $"Expecting {c}"
+    let failure = Failure $"Expecting '{c}'"
 
     if input |> System.String.IsNullOrEmpty
     then failure

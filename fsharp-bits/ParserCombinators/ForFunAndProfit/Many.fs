@@ -22,7 +22,7 @@ let many (parser: Parser<'a>) : Parser<'a list> = Parser (fun input ->
 
 
 [<Fact>]
-let ``parses 0 or many spaces`` () =
+let ``parses 0 or more spaces`` () =
     let spaceParser = Lift.parseChar ' '
 
     let spacesParser = many spaceParser
@@ -32,7 +32,7 @@ let ``parses 0 or many spaces`` () =
 let toSpace _ = Space
 
 [<Fact>]
-let ``parses 0 or many spaces as a symbol`` () =
+let ``parses 0 or more spaces as a symbol`` () =
     let spaceParser = toSpace <!> (Lift.parseChar ' ')
 
     let spacesParser = toSpace <!> (many spaceParser)
