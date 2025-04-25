@@ -1,5 +1,6 @@
 module FSharpBits.ParserCombinators.ForFunAndProfit.Many
 
+open FSharpBits.ParserCombinators.ForFunAndProfit.Functor
 open Parser
 open ParseResult
 open Xunit
@@ -27,3 +28,13 @@ let ``parses 0 or many spaces`` () =
     let spacesParser = many spaceParser
 
     test <@ run spacesParser "     foo" = Success ("     " |> Seq.toList, "foo") @>
+
+let toSpace _ = Space
+
+[<Fact>]
+let ``parses 0 or many spaces as a symbol`` () =
+    let spaceParser = toSpace <!> (Lift.parseChar ' ')
+
+    let spacesParser = toSpace <!> (many spaceParser)
+
+    test <@ run spacesParser "     foo" = Success (Space, "foo") @>
