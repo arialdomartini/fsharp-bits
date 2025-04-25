@@ -52,6 +52,9 @@ let ``parsing a list with separators`` () =
          let nonEmpty = (lift2 concat) (many natSlash) parseNat
          nonEmpty <|> empty
 
+    let parseNats: uint list Parser =
+         parseNat .>>. (many ((parseChar '/') >>. parseNat)) |>> (fun (p,l) -> p :: l)
+
     let parser = between opening parseNats closing
 
     test <@ run parser "{1/2/3/4} |> print" = Success ([1u;2u;3u;4u], " |> print") @>
