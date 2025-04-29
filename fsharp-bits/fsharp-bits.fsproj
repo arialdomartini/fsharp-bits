@@ -89,6 +89,9 @@
         <Compile Include="ParserCombinators\ForFunAndProfit\ZeroOrOneTime.fs" />
         <Compile Include="ParserCombinators\ForFunAndProfit\ThrowingResultsAway.fs" />
         <Compile Include="ParserCombinators\ForFunAndProfit\Between.fs" />
+        <Compile Include="ParserCombinators\ForFunAndProfit\DeadLock.fs" />
+        <Compile Include="ParserCombinators\ForFunAndProfit\DeadLockInt.fs" />
+        <Compile Include="ParserCombinators\ForFunAndProfit\NoDeadLock.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>
     <ItemGroup>
