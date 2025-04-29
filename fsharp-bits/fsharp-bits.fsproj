@@ -10,7 +10,7 @@
 
     </PropertyGroup>
     <ItemGroup>
-                <None Include="101\Script.fsx" />
+        <None Include="101\Script.fsx" />
         <None Include="101\Recursion.fsx"/>
         <None Include="101\UnionTypes.fsx"/>
         <None Include="101\CommonFunctionalities.fsx"/>
@@ -73,6 +73,9 @@
         <Compile Include="ParserCombinators\ForTheRestOfUs\EOF.fs" />
         <Compile Include="ParserCombinators\ForTheRestOfUs\Satisfies.fs" />
         <Compile Include="ParserCombinators\ForTheRestOfUs\Chapter1.fs" />
+        <Compile Include="ParserCombinators\ForTheRestOfUs\Chapter3\Chapter3.fs" />
+        <Compile Include="ParserCombinators\ForTheRestOfUs\Chapter3\Choice.fs" />
+        <Compile Include="ParserCombinators\ForTheRestOfUs\Chapter3\ParseMultiple.fs" />
         <Compile Include="ParserCombinators\ForFunAndProfit\ParseResult.fs" />
         <Compile Include="ParserCombinators\ForFunAndProfit\Parser.fs" />
         <Compile Include="ParserCombinators\ForFunAndProfit\ParseA.fs" />
@@ -106,5 +109,6 @@
         <PackageReference Include="YoloDev.Expecto.TestSdk" Version="0.14.1"/>
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.7.0"/>
         <PackageReference Include="xunit.extensibility.core" Version="2.5.0"/>
+        <PackageReference Include="FSharp.Core" Version="9.0.100" />
     </ItemGroup>
 </Project>

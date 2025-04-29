@@ -4,7 +4,6 @@ open System
 open Xunit
 open Swensen.Unquote
 
-
 type Person =
     { Id: Guid
       Name: string
