@@ -1,6 +1,5 @@
-module FSharpBits.ParserCombinators.ForTheRestOfUs.Try
+module FSharpBits.ParserCombinators.ForTheRestOfUs.First5.Try
 
-open FSharpBits.ParserCombinators.ForTheRestOfUs
 open ParserCombinators
 open Xunit
 open Swensen.Unquote

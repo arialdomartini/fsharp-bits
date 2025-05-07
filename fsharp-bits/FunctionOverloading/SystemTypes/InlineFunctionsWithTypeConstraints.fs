@@ -1,6 +1,5 @@
 module FSharpBits.MonadTransformers.FunctionOverloading.SystemTypes.InlineFunctionsWithTypeConstraints
 
-open FSharpBits.MonadTransformers.FunctionOverloading.InlineFunctionsWithStaticInterfaces.Boxes
 open Xunit
 open Swensen.Unquote
 

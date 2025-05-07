@@ -1,6 +1,5 @@
-module FSharpBits.ParserCombinators.ForTheRestOfUs.Sequencing
+module FSharpBits.ParserCombinators.ForTheRestOfUs.First5.Sequencing
 
-open FSharpBits.ParserCombinators.ForTheRestOfUs
 open Monad
 open ParserCombinators
 

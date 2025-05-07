@@ -1,11 +1,10 @@
-module FSharpBits.ParserCombinators.ForTheRestOfUs.Any
+module FSharpBits.ParserCombinators.ForTheRestOfUs.First5.Any
 
 open FsCheck
 open FsCheck.Xunit
 open global.Xunit
 open Swensen.Unquote
 
-open FSharpBits.ParserCombinators.ForTheRestOfUs
 open ParserCombinators
 
 let private unexpectedEndOfFile =

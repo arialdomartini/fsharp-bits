@@ -1,16 +1,17 @@
-module FSharpBits.ParserCombinators.ForTheRestOfUs.Chapter3.ParseMultiple
+module FSharpBits.ParserCombinators.ForTheRestOfUs.First5.Chapter3.Sequence
 
+open FSharpBits.ParserCombinators.ForTheRestOfUs.First5.Parser
 open global.Xunit
 open Swensen.Unquote
 
 exception ParseException of string
 
-let rec parseSequence<'a> (parsers: (string -> (string * 'a)) list) (input: string) : (string * ('a list)) =
+let rec sequence<'a> (parsers: 'a Parser list) : 'a list Parser = fun input ->
     let rec parseRec remainingInput parsers acc =
         match parsers with
         | [] -> (remainingInput, List.rev acc)
         | currentParser::remainingParsers ->
-            let (newRemaining, parsedValue) = currentParser remainingInput
+            let newRemaining, parsedValue = currentParser remainingInput
             parseRec newRemaining remainingParsers (parsedValue::acc)
 
     parseRec input parsers []
@@ -28,7 +29,7 @@ let ``applies all the parsers consuming 1 character for parser`` () =
         |> Seq.map mockParser
         |> Seq.toList
 
-    let parser = fiveParsers |> parseSequence
+    let parser = fiveParsers |> sequence
 
     let parsedValues = [
         Something 1

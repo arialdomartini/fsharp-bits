@@ -1,4 +1,4 @@
-module FSharpBits.ParserCombinators.ForTheRestOfUs.Chapter1
+module FSharpBits.ParserCombinators.ForTheRestOfUs.First5.Chapter1
 
 open System
 open Xunit

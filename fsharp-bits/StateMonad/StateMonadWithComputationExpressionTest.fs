@@ -1,7 +1,6 @@
 ﻿module FSharpBits.StateMonad.StateMonadWithParserCombinatorTest
 
 open System.Collections.Generic
-open System.Runtime.CompilerServices
 open Xunit
 open Swensen.Unquote
 

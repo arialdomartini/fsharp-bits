@@ -1,7 +1,5 @@
 module FSharpBits.MonadTransformers.FunctionOverloading.SystemTypes.InlineFunctionsWithTypeConstraintsCurried
 
-open Xunit
-open Swensen.Unquote
 
 module Tasks =
     type Task = { Title: string; Duration: int }
@@ -27,8 +25,6 @@ module Boxes =
             combineBoxes t1 t2
 
 
-open Tasks
-open Boxes
     
 let inline genericJoin<'a when (^a) : (static member Join : ^a -> ^a -> ^a)> (a: ^a) (b: ^a) =
     (^a : (static member Join : ^a -> ^a -> ^a) (a, b)) 

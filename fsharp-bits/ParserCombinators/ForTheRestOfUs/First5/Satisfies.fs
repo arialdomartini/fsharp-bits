@@ -1,6 +1,6 @@
-module FSharpBits.ParserCombinators.Satisfies.ForTheRestOfUs.ForTheRestOfUs
+module FSharpBits.ParserCombinators.Satisfies.ForTheRestOfUs.ForTheRestOfUs.First5.Satisfies
 
-open FSharpBits.ParserCombinators.ForTheRestOfUs
+open FSharpBits.ParserCombinators.ForTheRestOfUs.First5
 open Any
 open Monad
 open ParserCombinators

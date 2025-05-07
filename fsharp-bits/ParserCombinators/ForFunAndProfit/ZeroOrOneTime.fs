@@ -9,7 +9,6 @@ open Parser
 open ParseResult
 open OrElse
 open ParseChar
-open Applicative
 open Pipe
 
 let opt (parser: 'a Parser) : 'a option Parser=

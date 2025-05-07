@@ -1,6 +1,6 @@
-module FSharpBits.ParserCombinators.ForTheRestOfUs.Monad
+module FSharpBits.ParserCombinators.ForTheRestOfUs.First5.Monad
 
-open FSharpBits.ParserCombinators.ForTheRestOfUs
+open FSharpBits.ParserCombinators.ForTheRestOfUs.First5
 open ParserCombinators
 
 // let andThen : 'a Parser -> ('a -> 'b Parser) -> 'b Parser =

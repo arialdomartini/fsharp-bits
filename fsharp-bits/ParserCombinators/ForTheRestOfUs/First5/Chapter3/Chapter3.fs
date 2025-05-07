@@ -1,4 +1,4 @@
-module FSharpBits.ParserCombinators.ForTheRestOfUs.Chapter3.Chapter3
+module FSharpBits.ParserCombinators.ForTheRestOfUs.First5.Chapter3.Chapter3
 
 open System
 open FsCheck.Xunit

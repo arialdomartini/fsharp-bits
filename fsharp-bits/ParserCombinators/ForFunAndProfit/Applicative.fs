@@ -1,7 +1,6 @@
 module FSharpBits.ParserCombinators.ForFunAndProfit.Applicative
 
 open FSharpBits.ParserCombinators.ForFunAndProfit.Functor
-open FSharpBits.ParserCombinators.ForFunAndProfit.Monad
 open Parser
 open ParseResult
 open AndThen

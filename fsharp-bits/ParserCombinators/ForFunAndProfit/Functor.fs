@@ -3,7 +3,6 @@ module FSharpBits.ParserCombinators.ForFunAndProfit.Functor
 open FSharpBits.ParserCombinators.ForFunAndProfit
 open FSharpBits.ParserCombinators.ForFunAndProfit.ParseResult
 open Parser
-open ParseChar
 open AndThen
 open Choice
 open Xunit

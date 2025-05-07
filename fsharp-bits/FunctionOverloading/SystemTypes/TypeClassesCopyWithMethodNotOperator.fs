@@ -3,7 +3,6 @@ module FSharpBits.StateMonad.TypeClassesCopyWithMethodNotOperator
 open Xunit
 open Swensen.Unquote
 open System.Runtime.InteropServices
-open System.Text
 
 type Default6 = class end
 type Default5 = class inherit Default6 end

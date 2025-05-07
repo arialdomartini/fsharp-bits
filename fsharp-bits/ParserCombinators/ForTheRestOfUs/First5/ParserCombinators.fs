@@ -1,4 +1,4 @@
-module FSharpBits.ParserCombinators.ForTheRestOfUs.ParserCombinators
+module FSharpBits.ParserCombinators.ForTheRestOfUs.First5.ParserCombinators
 
 type String = string
 type Char = char

@@ -1,6 +1,5 @@
-module FSharpBits.ParserCombinators.ForTheRestOfUs.Alternative
+module FSharpBits.ParserCombinators.ForTheRestOfUs.First5.Alternative
 
-open FSharpBits.ParserCombinators.ForTheRestOfUs
 open ParserCombinators
 open Try
 open Xunit

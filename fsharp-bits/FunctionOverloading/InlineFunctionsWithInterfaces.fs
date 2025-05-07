@@ -1,6 +1,5 @@
 module FSharpBits.MonadTransformers.FunctionOverloading.InlineFunctionsWithInterfaces
 
-open System.Threading.Tasks.Dataflow
 open Xunit
 open Swensen.Unquote
 
