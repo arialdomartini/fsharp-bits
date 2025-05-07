@@ -83,6 +83,7 @@
         <Compile Include="ParserCombinators\ForTheRestOfUs\First5\WithResult\Choice.fs" />
         <Compile Include="ParserCombinators\ForTheRestOfUs\First5\WithResult\Sequence.fs" />
         <Compile Include="ParserCombinators\ForTheRestOfUs\First5\WithResult\ParsePerson.fs" />
+        <Compile Include="ParserCombinators\ForTheRestOfUs\From5\Monad.fs" />
         <Compile Include="ParserCombinators\ForFunAndProfit\ParseResult.fs" />
         <Compile Include="ParserCombinators\ForFunAndProfit\Parser.fs" />
         <Compile Include="ParserCombinators\ForFunAndProfit\ParseA.fs" />
