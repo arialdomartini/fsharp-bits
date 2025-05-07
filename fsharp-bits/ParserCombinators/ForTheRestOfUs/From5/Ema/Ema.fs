@@ -1,4 +1,4 @@
-module FSharpBits.ParserCombinators.ForTheRestOfUs.From5.Monad
+module FSharpBits.ParserCombinators.ForTheRestOfUs.From5.Ema.Ema
 
 open System
 open System.Net
@@ -145,7 +145,7 @@ let ``parses many1`` () =
     test <@ run (many1 (anyOf ['a'..'z'])) "" = Failure "Expecting 'A'. No input" @>
 
 
-let parseNat: uint Parser =
+let nat: uint Parser =
 
     let buildNat (cs: char list) : uint =
         System.String.Join("", cs) |> UInt32.Parse
@@ -157,7 +157,7 @@ let parseNat: uint Parser =
 
 [<Fact>]
 let ``parses a number`` () =
-    test <@ run parseNat "124 ciao" = Success (" ciao", 124u) @>
+    test <@ run nat "124 ciao" = Success (" ciao", 124u) @>
 
 //
 // let parseId'': int Parser =
@@ -219,7 +219,7 @@ let (>>.) p1 p2 =
         return v2 }
 
 
-let sep<'sep, 'el> (separator: 'sep Parser) (el: 'el Parser) : 'el list Parser =
+let separatedBy<'sep, 'el> (separator: 'sep Parser) (el: 'el Parser) : 'el list Parser =
     // el >>= (fun first ->
     //     many (el .>> separator )
     //     >>= (fun x -> returnp (first :: x)))
@@ -231,7 +231,7 @@ let sep<'sep, 'el> (separator: 'sep Parser) (el: 'el Parser) : 'el list Parser =
 
 [<Fact>]
 let ``test sep`` () =
-    test <@ run (parseNat |> sep (parseChar '/') ) "1/2/3/4" = Success ("", [1u;2u;3u;4u]) @>
+    test <@ run (nat |> separatedBy (parseChar '/') ) "1/2/3/4" = Success ("", [1u;2u;3u;4u]) @>
 
 
 let months: string list =
@@ -263,10 +263,11 @@ let monthParser = choice monthParsers
 let ``parses a month`` () =
     test <@ run monthParser "Oct" = Success ("", 10) @>
 
+let colon = parseChar ':'
 
 let parseTime: TimeOnly Parser =
     parse {
-        let! numbers = sep (parseChar ':') parseNat
+        let! numbers = nat |> separatedBy colon
         return TimeOnly(int numbers[0], int numbers[1], int numbers[2])
     }
 
@@ -282,7 +283,7 @@ let parseDateTime: DateTime Parser =
     parse {
         let! month = choice monthParsers
         let! _ = many1 space
-        let! day = parseNat
+        let! day = nat
         let! _ = space
         let! time = parseTime
 
@@ -292,7 +293,6 @@ let parseDateTime: DateTime Parser =
 [<Fact>]
 let ``parses a datetime`` () =
     test <@ run parseDateTime "Oct 3 18:12:24 ciao" = Success(" ciao", DateTime(2025, 10, 3, 18, 12, 24)) @>
-
 
 
 let anyChar = anyOf (['a'..'z'] |> List.append ['A'..'Z'])
@@ -339,7 +339,7 @@ let parseMessage: string Parser =
 
 let parseIP: IPAddress Parser =
     parse {
-        let! elements = sep (parseChar '.') parseNat
+        let! elements = separatedBy (parseChar '.') nat
         let bytes = elements |> List.toArray |> Array.map byte
         return IPAddress(bytes)
     }
@@ -349,11 +349,6 @@ let ``parse IP`` () =
     test <@ run parseIP "127.0.0.1 zo" =  Success (" zo", IPAddress([|127uy; 0uy; 0uy; 1uy|]))@>
 
 
-let parseId: uint Parser = between (parseChar '<') (parseChar '>') parseNat
-
-[<Fact>]
-let ``parses an id`` () =
-    test <@ run parseId "<124> ciao" = Success (" ciao", 124u) @>
 
 
 type LogItem =
@@ -362,6 +357,12 @@ type LogItem =
       ip: IPAddress
       message: string }
 
+
+let parseId: uint Parser = between (parseChar '<') (parseChar '>') nat
+
+[<Fact>]
+let ``parses an id`` () =
+    test <@ run parseId "<124> ciao" = Success (" ciao", 124u) @>
 
 let parseLog = parse {
     let! id = parseId
