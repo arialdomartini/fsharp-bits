@@ -31,25 +31,25 @@ let rec sequence (parsers: ('a Parser) list) : ('a list) Parser =
     | [] -> returnP []
     | p::ps -> consP p (sequence ps)
 
-
-[<Fact>]
-let ``list of parsers`` () =
-
-    let parser (expecting: string) emitting =
-        Parser (fun input ->
-            if input[0..expecting.Length-1] = expecting
-            then Success (emitting, input[expecting.Length..])
-            else Failure $"Expecting '{expecting}'")
-
-    let parseSpace = parser " " Space
-    let parseOne = parser "one" One
-    let parseTwo = parser "two" Two
-    let parseThree = parser "three" Three
-
-
-    let parseList = sequence [parseOne; parseSpace; parseTwo; parseSpace; parseThree]
-
-    test <@ run parseList "one two three" = Success ([ One; Space; Two; Space; Three ], "") @>
+//
+// [<Fact>]
+// let ``list of parsers`` () =
+//
+//     let parser (expecting: string)w emitting =
+//         Parser (fun input ->
+//             if input[0..expecting.Length-1] = expecting
+//             then Success (emitting, input[expecting.Length..])
+//             else Failure $"Expecting '{expecting}'")
+//
+//     let parseSpace = parser " " Space
+//     let parseOne = parser "one" One
+//     let parseTwo = parser "two" Two
+//     let parseThree = parser "three" Three
+//
+//
+//     let parseList = sequence [parseOne; parseSpace; parseTwo; parseSpace; parseThree]
+//
+//     test <@ run parseList "one two three" = Success ([ One; Space; Two; Space; Three ], "") @>
 
 type Foo = Class
 

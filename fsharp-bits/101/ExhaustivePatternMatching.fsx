@@ -56,11 +56,10 @@ let topLayerDo action filePath =
     fileResult
 
 let entryPoint =
-    let result = topLayerDo (fun fr -> fr.ReadToEnd) "foo.txt"
+    let result: Result<(unit -> string),FileErrorReason> = topLayerDo (fun fr -> fr.ReadToEnd) "foo.txt"
     match result with
     | Success filePath -> "%A Success"
     | Failure reason  -> 
         match reason with
         | FileNotFound file -> "File not found"
         | UnauthorizedAccess (file, ex) -> "Unauthorized exception"
-
