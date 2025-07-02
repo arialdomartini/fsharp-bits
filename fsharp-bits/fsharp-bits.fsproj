@@ -106,6 +106,8 @@
         <Compile Include="ParserCombinators\ForTheRestOfUs\First5\Any.fs" />
         <Compile Include="ParserCombinators\ForTheRestOfUs\First5\Alternative.fs" />
         <Compile Include="FreeMonads\FreeMonad.fs" />
+        <Compile Include="FreeMonads\SimpleFreeMonad.fs" />
+        <Compile Include="FreeMonads\SimplerFreeMonad.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>
     <ItemGroup>
