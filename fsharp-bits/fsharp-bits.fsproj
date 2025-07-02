@@ -83,6 +83,30 @@
         <Compile Include="ParserCombinators\ForFunAndProfit\DeadLock.fs" />
         <Compile Include="ParserCombinators\ForFunAndProfit\DeadLockInt.fs" />
         <Compile Include="ParserCombinators\ForFunAndProfit\NoDeadLock.fs" />
+        <Compile Include="ParserCombinators\ForTheRestOfUs\From5\Ema\EmaShort.fs" />
+        <Compile Include="ParserCombinators\ForTheRestOfUs\From5\Ema\Ema.fs" />
+        <Compile Include="ParserCombinators\ForTheRestOfUs\First5\WithResult\Sequence.fs" />
+        <Compile Include="ParserCombinators\ForTheRestOfUs\First5\WithResult\Parser.fs" />
+        <Compile Include="ParserCombinators\ForTheRestOfUs\First5\WithResult\ParsePerson.fs" />
+        <Compile Include="ParserCombinators\ForTheRestOfUs\First5\WithResult\Choice.fsi" />
+        <Compile Include="ParserCombinators\ForTheRestOfUs\First5\WithResult\Choice.fs" />
+        <Compile Include="ParserCombinators\ForTheRestOfUs\First5\Chapter3\Sequence.fs" />
+        <Compile Include="ParserCombinators\ForTheRestOfUs\First5\Chapter3\Choice.fsi" />
+        <Compile Include="ParserCombinators\ForTheRestOfUs\First5\Chapter3\Choice.fs" />
+        <Compile Include="ParserCombinators\ForTheRestOfUs\First5\Chapter3\Chapter3.fs" />
+        <Compile Include="ParserCombinators\ForTheRestOfUs\First5\Try.fs" />
+        <Compile Include="ParserCombinators\ForTheRestOfUs\First5\Sequencing.fs" />
+        <Compile Include="ParserCombinators\ForTheRestOfUs\First5\Satisfies.fs" />
+        <Compile Include="ParserCombinators\ForTheRestOfUs\First5\ParserCombinators.fs" />
+        <Compile Include="ParserCombinators\ForTheRestOfUs\First5\Parser.fs" />
+        <Compile Include="ParserCombinators\ForTheRestOfUs\First5\Monad.fs" />
+        <Compile Include="ParserCombinators\ForTheRestOfUs\First5\EOF.fs" />
+        <Compile Include="ParserCombinators\ForTheRestOfUs\First5\Choice.fs" />
+        <Compile Include="ParserCombinators\ForTheRestOfUs\First5\Chapter1.fs" />
+        <Compile Include="ParserCombinators\ForTheRestOfUs\First5\Any.fs" />
+        <Compile Include="ParserCombinators\ForTheRestOfUs\First5\Alternative.fs" />
+        <Compile Include="FreeMonads\FreeMonad.fs" />
+        <Compile Include="Program.fs" />
     </ItemGroup>
     <ItemGroup>
         <PackageReference Include="Expecto" Version="10.1.0"/>
@@ -96,9 +120,5 @@
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.7.0"/>
         <PackageReference Include="xunit.extensibility.core" Version="2.5.0"/>
         <PackageReference Include="FSharp.Core" Version="9.0.100" />
-    </ItemGroup>
-    <ItemGroup>
-      <Compile Include="FreeMonad.fs" />
-      <Compile Include="Program.fs" />
     </ItemGroup>
 </Project>
