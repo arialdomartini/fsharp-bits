@@ -101,7 +101,6 @@ module WithComputationExpression =
         return line.Length
     }
 
-
 let rec execute (step: Command<'a>) =
     match step with
     | Finally value -> value

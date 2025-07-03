@@ -108,6 +108,7 @@
         <Compile Include="FreeMonads\FreeMonad.fs" />
         <Compile Include="FreeMonads\SimpleFreeMonad.fs" />
         <Compile Include="FreeMonads\SimplerFreeMonad.fs" />
+        <Compile Include="FreeMonads\FromTheBottomUp.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>
     <ItemGroup>
