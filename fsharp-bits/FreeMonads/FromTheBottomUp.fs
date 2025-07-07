@@ -18,8 +18,8 @@ module BottomUp =
         else items |> Seq.sumBy _.Price
 
     let program' =
-        GetOffer (let id = 42
-                  id , (fun items ->
+        let id = 42
+        GetOffer (id , (fun items ->
             JustAValue
                 (if items |> Seq.length > 10
                 then WriteLine ("Too many, I am sorry", (fun () -> JustAValue 0m))
