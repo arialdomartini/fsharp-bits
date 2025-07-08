@@ -5,7 +5,6 @@ type Product = { Name: string; Price: decimal }
 module BottomUp =
     let getOfferApi (id: 'a) : Product list = failwith "Not yet implemented"
 
-
     let program: decimal =
         let id = 42
         let items = getOfferApi id  // side effect

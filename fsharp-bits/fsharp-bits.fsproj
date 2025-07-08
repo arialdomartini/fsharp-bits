@@ -110,6 +110,7 @@
         <Compile Include="FreeMonads\SimplerFreeMonad.fs" />
         <Compile Include="FreeMonads\FromTheBottomUp.fs" />
         <Compile Include="FreeMonads\FromTheBottomUpAgain.fs" />
+        <Compile Include="FreeMonads\PiccioEGian.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>
     <ItemGroup>
