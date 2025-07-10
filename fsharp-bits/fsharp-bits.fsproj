@@ -87,6 +87,7 @@
         <Compile Include="ParserCombinators\ForTheRestOfUs\From5\Ema\Ema.fs" />
         <Compile Include="ParserCombinators\ForTheRestOfUs\From5\Monad.fs" />
         <Compile Include="ParserCombinators\ForTheRestOfUs\From5\Chapter12.fs" />
+        <Compile Include="ParserCombinators\ForTheRestOfUs\From5\Chapter13.fs" />
         <Compile Include="FreeMonads\FreeMonad.fs" />
         <Compile Include="FreeMonads\SimpleFreeMonad.fs" />
         <Compile Include="FreeMonads\SimplerFreeMonad.fs" />
