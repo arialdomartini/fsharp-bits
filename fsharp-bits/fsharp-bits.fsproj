@@ -94,7 +94,8 @@
         <Compile Include="FreeMonads\FromTheBottomUp.fs" />
         <Compile Include="FreeMonads\FromTheBottomUpAgain.fs" />
         <Compile Include="FreeMonads\PiccioEGian.fs" />
-        <Compile Include="Program.fs" />
+        <Compile Include="DependencyInversion\StaticallyTypedDependencyInjection.fs" />
+        <Compile Include="LeetCode\Triangle.fs" />
     </ItemGroup>
     <ItemGroup>
         <PackageReference Include="Expecto" Version="10.1.0"/>
