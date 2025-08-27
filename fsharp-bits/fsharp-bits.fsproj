@@ -96,6 +96,8 @@
         <Compile Include="FreeMonads\PiccioEGian.fs" />
         <Compile Include="DependencyInversion\StaticallyTypedDependencyInjection.fs" />
         <Compile Include="LeetCode\Triangle.fs" />
+        <Compile Include="ForFunAndProfit\Turtle\Common.fs" />
+        <Compile Include="ForFunAndProfit\Turtle\BasicOO.fs" />
     </ItemGroup>
     <ItemGroup>
         <PackageReference Include="Expecto" Version="10.1.0"/>
