@@ -1,14 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-                <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <Nullable>enable</Nullable>
         <AssemblyName>FSharpBits</AssemblyName>
         <RootNamespace>FSharpBits</RootNamespace>
         <GenerateProgramFile>false</GenerateProgramFile>
         <OutputType>Exe</OutputType>
         <TargetFramework>net8.0</TargetFramework>
-
     </PropertyGroup>
+    
     <ItemGroup>
         <None Include="101\Script.fsx" />
         <None Include="101\Recursion.fsx"/>
@@ -101,7 +101,9 @@
         <Compile Include="ForFunAndProfit\Turtle\BasicFP.fs" />
         <Compile Include="ForFunAndProfit\Turtle\ApiWithOOCore.fs" />
         <Compile Include="ForFunAndProfit\Catamorphism\RecursiveType.fs" />
-    </ItemGroup>
+        <Compile Include="ForFunAndProfit\Catamorphism\SampleValues.fs" />
+      </ItemGroup>
+      
     <ItemGroup>
         <PackageReference Include="Expecto" Version="10.1.0"/>
         <PackageReference Include="Expecto.FsCheck" Version="10.1.0" />
