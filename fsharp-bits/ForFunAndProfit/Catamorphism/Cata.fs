@@ -3,14 +3,22 @@ module FSharpBits.ForFunAndProfit.Catamorphism.Cata
 open FSharpBits.ForFunAndProfit.Catamorphism.RecursiveType
 open SampleValues
 
-let rec cataGift fBook fChocolate fWrapped fBoxed fWithACard (gift: Gift) =
-    let cataRec = cataGift fBook fChocolate fWrapped fBoxed fWithACard
+let rec cataGift
+    (fBook: Book -> 'r)
+    (fChocolate: Chocolate -> 'r)
+    (fWrapped: 'r -> WrappingPaperStyle -> 'r)
+    (fBoxed: 'r -> 'r)
+    (fWithACard: 'r -> string -> 'r)
+    (gift: Gift) : 'r =
+
+    let recurse = cataGift fBook fChocolate fWrapped fBoxed fWithACard
+
     match gift with
     | Book book -> fBook book
     | Chocolate chocolate -> fChocolate chocolate
-    | Wrapped(innerGift, wrappingPaperStyle) -> fWrapped (cataRec innerGift) wrappingPaperStyle
-    | Boxed innerGift -> fBoxed (cataRec innerGift)
-    | WithACard(innerGift, message) -> fWithACard (cataRec innerGift) message
+    | Wrapped(gift, wrappingPaperStyle) -> fWrapped (recurse gift) wrappingPaperStyle
+    | Boxed gift -> fBoxed (recurse gift)
+    | WithACard(gift, message) -> fWithACard (recurse gift) message
 
 let description (gift: Gift) =
     let fBook (book: Book) = $"Book titled '{book.title}'"
