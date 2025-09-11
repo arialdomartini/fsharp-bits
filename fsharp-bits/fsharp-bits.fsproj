@@ -102,6 +102,7 @@
         <Compile Include="ForFunAndProfit\Turtle\ApiWithOOCore.fs" />
         <Compile Include="ForFunAndProfit\Catamorphism\RecursiveType.fs" />
         <Compile Include="ForFunAndProfit\Catamorphism\SampleValues.fs" />
+        <Compile Include="ForFunAndProfit\Catamorphism\ManualRecursion.fs" />
       </ItemGroup>
       
     <ItemGroup>
