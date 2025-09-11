@@ -2,7 +2,6 @@ module FSharpBits.ForFunAndProfit.Catamorphism.RecursiveType
 
 type Book = { title: string; price: decimal }
 
-
 type ChocolateType =
     | Black
     | Milk
