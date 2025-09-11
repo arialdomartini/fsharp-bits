@@ -103,6 +103,7 @@
         <Compile Include="ForFunAndProfit\Catamorphism\RecursiveType.fs" />
         <Compile Include="ForFunAndProfit\Catamorphism\SampleValues.fs" />
         <Compile Include="ForFunAndProfit\Catamorphism\ManualRecursion.fs" />
+        <Compile Include="ForFunAndProfit\Catamorphism\Cata.fs" />
       </ItemGroup>
       
     <ItemGroup>
