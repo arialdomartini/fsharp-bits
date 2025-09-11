@@ -105,6 +105,7 @@
         <Compile Include="ForFunAndProfit\Catamorphism\ManualRecursion.fs" />
         <Compile Include="ForFunAndProfit\Catamorphism\Cata.fs" />
         <Compile Include="ForFunAndProfit\Catamorphism\HidingStructure.fs" />
+        <Compile Include="ForFunAndProfit\Catamorphism\ActivePatternToHideStructure.fs" />
       </ItemGroup>
       
     <ItemGroup>
