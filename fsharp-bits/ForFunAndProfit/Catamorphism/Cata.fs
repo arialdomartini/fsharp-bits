@@ -1,7 +1,7 @@
 module FSharpBits.ForFunAndProfit.Catamorphism.Cata
 
-open FSharpBits.ForFunAndProfit.Catamorphism.RecursiveType
-
+open RecursiveType
+open SampleValues
 
 // The relationship between the case constructors and the handlers
 // Wrapped of Gift * WrappingPaperStyle
@@ -33,22 +33,6 @@ let description (gift: Gift) =
 
     cataGift fBook fChocolate fWrapped fBoxed fWithACard gift
 
-
-let book = Book { title = "Wolf Hall"; price = 20m }
-
-let chocolate =
-    Chocolate
-        { Chocolate.chocolateType = SeventyPercent
-          price = 5m }
-
-let gift1 =
-    WithACard(
-        gift = Wrapped(
-            gift = book,
-            wrappingPaperStyle = HappyBirthday),
-        message = "Happy Birthday")
-
-let gift2 = Wrapped(Boxed(chocolate), HappyHolidays)
 
 
 open Xunit
