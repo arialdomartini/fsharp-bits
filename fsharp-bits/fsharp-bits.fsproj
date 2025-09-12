@@ -108,6 +108,7 @@
         <Compile Include="ForFunAndProfit\Catamorphism\ActivePatternToHideStructure.fs" />
         <Compile Include="ForFunAndProfit\Catamorphism\CatamorphismsForMapping.fs" />
         <Compile Include="ForFunAndProfit\Catamorphism\DeepCopying.fs" />
+        <Compile Include="ForFunAndProfit\Catamorphism\UpgradingChocolate.fs" />
       </ItemGroup>
       
     <ItemGroup>
