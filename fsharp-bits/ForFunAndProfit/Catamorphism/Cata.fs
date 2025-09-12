@@ -10,9 +10,9 @@ open SampleValues
 let rec cataGift
     (fBook: Book -> 'r)
     (fChocolate: Chocolate -> 'r)
-    (fWrapped: 'r -> WrappingPaperStyle -> 'r)
+    (fWrapped: 'r * WrappingPaperStyle -> 'r)
     (fBoxed: 'r -> 'r)
-    (fWithACard: 'r -> string -> 'r)
+    (fWithACard: 'r * string -> 'r)
     (gift: Gift) : 'r =
 
     let recurse = cataGift fBook fChocolate fWrapped fBoxed fWithACard
@@ -20,16 +20,16 @@ let rec cataGift
     match gift with
     | Book book -> fBook book
     | Chocolate chocolate -> fChocolate chocolate
-    | Wrapped(gift, wrappingPaperStyle) -> fWrapped (recurse gift) wrappingPaperStyle
+    | Wrapped(gift, wrappingPaperStyle) -> fWrapped ((recurse gift), wrappingPaperStyle)
     | Boxed gift -> fBoxed (recurse gift)
-    | WithACard(gift, message) -> fWithACard (recurse gift) message
+    | WithACard(gift, message) -> fWithACard ((recurse gift), message)
 
 let description (gift: Gift) =
     let fBook (book: Book) = $"Book titled '{book.title}'"
     let fChocolate chocolate = $"{chocolate.chocolateType} chocolate"
-    let fWrapped innerDescription wrappingPaperStyle = $"{innerDescription} wrapped in {wrappingPaperStyle} paper"
+    let fWrapped (innerDescription, wrappingPaperStyle) = $"{innerDescription} wrapped in {wrappingPaperStyle} paper"
     let fBoxed innerDescription = $"{innerDescription} in a box"
-    let fWithACard innerDescription message = $"{innerDescription} with a card saying {message}"
+    let fWithACard (innerDescription, message) = $"{innerDescription} with a card saying {message}"
 
     cataGift fBook fChocolate fWrapped fBoxed fWithACard gift
 
@@ -49,9 +49,9 @@ let totalCost (gift: Gift) =
 
     let fBook (book: Book) = book.price
     let fChocolate chocolate = chocolate.price
-    let fWrapped innerCost _ = innerCost + 0.5m
+    let fWrapped (innerCost, _) = innerCost + 0.5m
     let fBoxed innerCost = innerCost + 1.0m
-    let fWithACard innerCost _ = innerCost + 2.0m
+    let fWithACard (innerCost, _) = innerCost + 2.0m
 
     cataGift fBook fChocolate fWrapped fBoxed fWithACard gift
 
@@ -68,9 +68,9 @@ let rec whatsInside (gift: Gift) =
 
     let fBook _ = "a book"
     let fChocolate _ = "chocolate"
-    let fWrapped innerGift _ = innerGift
+    let fWrapped (innerGift, _) = innerGift
     let fBoxed innerGift = innerGift
-    let fWithACard innerGift _ = innerGift
+    let fWithACard (innerGift, _) = innerGift
 
     cataGift fBook fChocolate fWrapped fBoxed fWithACard gift
 

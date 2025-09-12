@@ -13,9 +13,9 @@ let removeChocolate (gift: Gift) : GiftMinusChocolate =
 
     let fBook (book: Book) = Book book
     let fChocolate _ = Apology "The apology 'Sorry I ate your chocolate'"
-    let fWrapped gift wrappingPaperStyle = Wrapped(gift, wrappingPaperStyle)
+    let fWrapped (gift, wrappingPaperStyle) = Wrapped(gift, wrappingPaperStyle)
     let fBoxed gift = gift
-    let fWithACard gift _ = gift
+    let fWithACard (gift, _) = gift
 
     cataGift fBook fChocolate fWrapped fBoxed fWithACard gift
 
