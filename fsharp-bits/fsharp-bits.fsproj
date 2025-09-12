@@ -109,6 +109,10 @@
         <Compile Include="ForFunAndProfit\Catamorphism\CatamorphismsForMapping.fs" />
         <Compile Include="ForFunAndProfit\Catamorphism\DeepCopying.fs" />
         <Compile Include="ForFunAndProfit\Catamorphism\UpgradingChocolate.fs" />
+        <Compile Include="ForFunAndProfit\Catamorphism\FileSystem\FileSystem.fs" />
+        <Compile Include="ForFunAndProfit\Catamorphism\FileSystem\SampleValues.fs" />
+        <Compile Include="ForFunAndProfit\Catamorphism\FileSystem\Cata.fs" />
+        <Compile Include="ForFunAndProfit\Catamorphism\FileSystem\CataUsage.fs" />
       </ItemGroup>
       
     <ItemGroup>
