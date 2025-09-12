@@ -40,3 +40,36 @@ let ``description of sample values`` () =
     test <@ description book = "Book titled 'Wolf Hall'" @>
     test <@ description gift1 = "Book titled 'Wolf Hall' wrapped in HappyBirthday paper" @> // no output about WithACard
     test <@ description gift2 = "SeventyPercent chocolate in a box wrapped in HappyHolidays paper" @>
+
+
+let rec handleContentOnly
+    (fBook: Book -> 'r)
+    (fChocolate: Chocolate -> 'r)
+    // (fWrapped: 'r -> WrappingPaperStyle -> 'r)
+    // (fBoxed: 'r -> 'r)
+    // (fWithACard: 'r -> string -> 'r)
+    (gift: Gift) : 'r =
+
+    let recurse = handleContentOnly fBook fChocolate
+
+    match gift with
+    | Book book -> fBook book
+    | Chocolate chocolate -> fChocolate chocolate
+    | Wrapped(gift, _) -> recurse gift
+    | Boxed gift -> recurse gift
+    | WithACard(gift, _) -> recurse gift  // default implementation
+
+
+let contentOf (gift: Gift) =
+    let fBook (book: Book) = $"Book titled '{book.title}'"
+    let fChocolate chocolate = $"{chocolate.chocolateType} chocolate"
+
+    handleContentOnly fBook fChocolate gift
+
+
+[<Fact>]
+let ``description of content`` () =
+    test <@ contentOf chocolate = "SeventyPercent chocolate" @>
+    test <@ contentOf book = "Book titled 'Wolf Hall'" @>
+    test <@ contentOf gift1 = "Book titled 'Wolf Hall'" @>
+    test <@ contentOf gift2 = "SeventyPercent chocolate" @>
