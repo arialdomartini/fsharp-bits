@@ -6,10 +6,10 @@ open SampleValues
 
 
 let deepCopy gift =
-    let fBook (book: Book) = Book book
-    let fChocolate (chocolate: Chocolate) = Chocolate chocolate
+    let fBook = Book
+    let fChocolate = Chocolate
     let fWrapped gift wrappingPaperStyle = Wrapped(gift, wrappingPaperStyle)
-    let fBoxed (boxed: Gift) = Boxed boxed
+    let fBoxed = Boxed
     let fWithACard gift message = WithACard(gift, message)
 
     cataGift
