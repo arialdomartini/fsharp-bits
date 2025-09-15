@@ -117,6 +117,7 @@
         <Compile Include="ForFunAndProfit\Catamorphism\Products\SampleValues.fs" />
         <Compile Include="ForFunAndProfit\Catamorphism\Products\Cata.fs" />
         <Compile Include="ForFunAndProfit\Catamorphism\Products\Weight.fs" />
+        <Compile Include="ForFunAndProfit\Catamorphism\Products\MostUsedVendor.fs" />
     </ItemGroup>
       
     <ItemGroup>

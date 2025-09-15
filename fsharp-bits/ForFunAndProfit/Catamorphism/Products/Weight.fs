@@ -1,5 +1,6 @@
 module FSharpBits.ForFunAndProfit.Catamorphism.Products.Weight
 
+open FSharpBits.ForFunAndProfit.Catamorphism.Products.MutuallyRecursiveType
 open FSharpBits.ForFunAndProfit.Catamorphism.Products.SampleValues
 open MutuallyRecursiveType
 open Cata
