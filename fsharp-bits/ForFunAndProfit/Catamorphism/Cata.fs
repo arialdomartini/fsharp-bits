@@ -49,9 +49,9 @@ let totalCost (gift: Gift) =
 
     let fBook (book: Book) = book.price
     let fChocolate chocolate = chocolate.price
-    let fWrapped (innerCost, _) = innerCost + 0.5m
-    let fBoxed innerCost = innerCost + 1.0m
-    let fWithACard (innerCost, _) = innerCost + 2.0m
+    let fWrapped (innerCost, _) = innerCost + wrappedPrice
+    let fBoxed innerCost = innerCost + boxedPrice
+    let fWithACard (innerCost, _) = innerCost + withACardPrice
 
     cataGift fBook fChocolate fWrapped fBoxed fWithACard gift
 
@@ -64,7 +64,7 @@ let ``total cost of sample values`` () =
     test <@ totalCost gift2 = 6.5m @>
 
 
-let rec whatsInside (gift: Gift) =
+let whatsInside (gift: Gift) =
 
     let fBook _ = "a book"
     let fChocolate _ = "chocolate"

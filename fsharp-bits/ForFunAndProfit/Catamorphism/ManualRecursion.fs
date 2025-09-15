@@ -26,9 +26,9 @@ let rec totalCost (gift: Gift) =
     match gift with
     | Book book -> book.price
     | Chocolate chocolate -> chocolate.price
-    | Wrapped(innerGift, _) -> 0.5m + (totalCost innerGift)
-    | Boxed innerGift -> 1.0m + (totalCost innerGift)
-    | WithACard(innerGift, _) -> 2.0m + (totalCost innerGift)
+    | Wrapped(innerGift, _) -> wrappedPrice + (totalCost innerGift)
+    | Boxed innerGift -> boxedPrice + (totalCost innerGift)
+    | WithACard(innerGift, _) -> withACardPrice + (totalCost innerGift)
 
 
 [<Fact>]

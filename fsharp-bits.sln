@@ -14,9 +14,9 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{153D41DB-6415-4000-B110-FC74F1C265A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{153D41DB-6415-4000-B110-FC74F1C265A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{153D41DB-6415-4000-B110-FC74F1C265A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{153D41DB-6415-4000-B110-FC74F1C265A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{153D41DB-6415-4000-B110-FC74F1C265A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{153D41DB-6415-4000-B110-FC74F1C265A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 EndGlobal

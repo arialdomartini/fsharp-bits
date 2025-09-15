@@ -2,7 +2,7 @@ module FSharpBits.ForFunAndProfit.Catamorphism.Folds.NestedBoxes
 
 open FSharpBits.ForFunAndProfit.Catamorphism.RecursiveType
 
-let deeplyNestedBox gift depth =
+let deeplyNestedBox' gift depth =
 
     let rec loop v =
         function
@@ -11,6 +11,12 @@ let deeplyNestedBox gift depth =
 
     loop gift depth
 
+let deeplyNestedBox gift depth =
+    let rec loop depth boxSoFar =
+        match depth with
+        | 0 -> boxSoFar
+        | n -> loop (n-1) (Boxed boxSoFar)
+    loop depth gift
 
 open Xunit
 open Swensen.Unquote
@@ -31,6 +37,10 @@ let ``a book in 10 boxes`` () =
                                         Boxed(
                                             Boxed(
                                                 Book book)))))))))) @>
+
+[<Fact>]
+let ``a book in 10000 boxes does not throw`` () =
+    Assert.NotNull(deeplyNestedBox (Book wolfHall) 10000)
 
 open FSharpBits.ForFunAndProfit.Catamorphism.Cata
 

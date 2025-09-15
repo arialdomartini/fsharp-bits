@@ -20,3 +20,8 @@ type Gift =
     | Wrapped of gift: Gift * wrappingPaperStyle: WrappingPaperStyle
     | Boxed of Gift
     | WithACard of gift: Gift * message: string
+
+
+let wrappedPrice = 0.5m
+let boxedPrice = 1m
+let withACardPrice = 2m

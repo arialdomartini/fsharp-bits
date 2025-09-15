@@ -121,6 +121,9 @@
         <Compile Include="ForFunAndProfit\Catamorphism\Folds\SampleValues.fs" />
         <Compile Include="ForFunAndProfit\Catamorphism\Folds\NestedBoxes.fs" />
         <Compile Include="ForFunAndProfit\Catamorphism\Folds\Raises.fs" />
+        <Compile Include="ForFunAndProfit\Catamorphism\Folds\WithAccumulatorSimple.fs" />
+        <Compile Include="ForFunAndProfit\Catamorphism\Folds\WeirdRecursion.fs" />
+        <Compile Include="ForFunAndProfit\Catamorphism\Folds\TotalCostWithAccumulator.fs" />
     </ItemGroup>
       
     <ItemGroup>
