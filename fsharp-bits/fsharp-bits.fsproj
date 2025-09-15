@@ -120,6 +120,7 @@
         <Compile Include="ForFunAndProfit\Catamorphism\Products\MostUsedVendor.fs" />
         <Compile Include="ForFunAndProfit\Catamorphism\Folds\SampleValues.fs" />
         <Compile Include="ForFunAndProfit\Catamorphism\Folds\NestedBoxes.fs" />
+        <Compile Include="ForFunAndProfit\Catamorphism\Folds\Raises.fs" />
     </ItemGroup>
       
     <ItemGroup>

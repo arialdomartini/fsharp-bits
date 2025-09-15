@@ -2,14 +2,14 @@ module FSharpBits.ForFunAndProfit.Catamorphism.Folds.NestedBoxes
 
 open FSharpBits.ForFunAndProfit.Catamorphism.RecursiveType
 
-let deeplyNestedBox depth gift =
+let deeplyNestedBox gift depth =
 
     let rec loop v =
         function
         | 0 -> v
         | n -> (loop (Boxed v) (n - 1))
 
-    loop depth gift
+    loop gift depth
 
 
 open Xunit
@@ -17,7 +17,7 @@ open Swensen.Unquote
 open SampleValues
 
 [<Fact>]
-let ``a book in nested boxes`` () =
+let ``a book in 10 boxes`` () =
     let book = wolfHall
     test <@ deeplyNestedBox (Book book) 10 =
         Boxed(
@@ -31,3 +31,9 @@ let ``a book in nested boxes`` () =
                                         Boxed(
                                             Boxed(
                                                 Book book)))))))))) @>
+
+open FSharpBits.ForFunAndProfit.Catamorphism.Cata
+
+[<Fact(Skip = "Throws")>]
+let ``raises a stackoverflow exception`` () =
+    whatsInside (deeplyNestedBox (Book wolfHall) 10000) |> ignore
