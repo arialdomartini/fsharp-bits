@@ -113,7 +113,11 @@
         <Compile Include="ForFunAndProfit\Catamorphism\FileSystem\SampleValues.fs" />
         <Compile Include="ForFunAndProfit\Catamorphism\FileSystem\Cata.fs" />
         <Compile Include="ForFunAndProfit\Catamorphism\FileSystem\CataUsage.fs" />
-      </ItemGroup>
+        <Compile Include="ForFunAndProfit\Catamorphism\Products\MutuallyRecursiveType.fs" />
+        <Compile Include="ForFunAndProfit\Catamorphism\Products\SampleValues.fs" />
+        <Compile Include="ForFunAndProfit\Catamorphism\Products\Cata.fs" />
+        <Compile Include="ForFunAndProfit\Catamorphism\Products\Weight.fs" />
+    </ItemGroup>
       
     <ItemGroup>
         <PackageReference Include="Expecto" Version="10.1.0"/>
