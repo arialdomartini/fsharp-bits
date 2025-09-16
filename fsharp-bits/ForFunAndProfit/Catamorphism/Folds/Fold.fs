@@ -5,7 +5,7 @@ open FSharpBits.ForFunAndProfit.Catamorphism.Folds.SampleValues
 open FSharpBits.ForFunAndProfit.Catamorphism.RecursiveType
 
 
-let rec foldGift
+let rec foldLeftGift
     (fBook: 'a -> Book -> 'r)
     (fChocolate: 'a -> Chocolate -> 'r)
     (fWrapped: 'a -> WrappingPaperStyle -> 'a)
@@ -15,7 +15,7 @@ let rec foldGift
     (gift: Gift) :
     'r =
 
-    let recurse = foldGift fBook fChocolate fWrapped fBoxed fWithACard
+    let recurse = foldLeftGift fBook fChocolate fWrapped fBoxed fWithACard
 
     match gift with
     | Book book ->
@@ -38,7 +38,7 @@ let totalCost (gift: Gift) : decimal =
     let fBoxed acc = acc + boxedPrice
     let fWithACard acc _message = acc + withACardPrice
 
-    foldGift fBook fChocolate fWrapped fBoxed fWithACard 0m gift
+    foldLeftGift fBook fChocolate fWrapped fBoxed fWithACard 0m gift
 
 
 open Xunit
