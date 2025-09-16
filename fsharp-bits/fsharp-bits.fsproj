@@ -124,7 +124,7 @@
         <Compile Include="ForFunAndProfit\Catamorphism\Folds\WithAccumulatorSimple.fs"/>
         <Compile Include="ForFunAndProfit\Catamorphism\Folds\WeirdRecursion.fs"/>
         <Compile Include="ForFunAndProfit\Catamorphism\Folds\TotalCostWithAccumulator.fs"/>
-        <Compile Include="ForFunAndProfit\Catamorphism\Folds\CataWithAccumulator.fs"/>
+        <Compile Include="ForFunAndProfit\Catamorphism\Folds\Fold.fs" />
     </ItemGroup>
 
     <ItemGroup>

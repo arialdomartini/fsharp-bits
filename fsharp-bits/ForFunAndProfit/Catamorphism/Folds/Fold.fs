@@ -1,11 +1,19 @@
-module FSharpBits.ForFunAndProfit.Catamorphism.Folds.CataWithAccumulator
+module FSharpBits.ForFunAndProfit.Catamorphism.Folds.Fold
 
 open FSharpBits.ForFunAndProfit.Catamorphism.Folds.NestedBoxes
 open FSharpBits.ForFunAndProfit.Catamorphism.Folds.SampleValues
 open FSharpBits.ForFunAndProfit.Catamorphism.RecursiveType
 
 
-let rec foldGift fBook fChocolate fWrapped fBoxed fWithACard acc gift =
+let rec foldGift
+    (fBook: 'a -> Book -> 'r)
+    (fChocolate: 'a -> Chocolate -> 'r)
+    (fWrapped: 'a -> WrappingPaperStyle -> 'a)
+    (fBoxed: 'a -> 'a)
+    (fWithACard: 'a -> string -> 'a)
+    (acc: 'a)
+    (gift: Gift) :
+    'r =
 
     let recurse = foldGift fBook fChocolate fWrapped fBoxed fWithACard
 
