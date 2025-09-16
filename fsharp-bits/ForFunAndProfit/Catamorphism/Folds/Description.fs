@@ -4,7 +4,6 @@ open FSharpBits.ForFunAndProfit.Catamorphism.RecursiveType
 open FSharpBits.ForFunAndProfit.Catamorphism.SampleValues
 open Fold
 
-
 let description (gift: Gift) =
     let fBook acc (book: Book) = $"Book titled '{book.title}'{acc}"
     let fChocolate acc chocolate = $"{chocolate.chocolateType} chocolate{acc}"

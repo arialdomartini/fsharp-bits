@@ -126,6 +126,7 @@
         <Compile Include="ForFunAndProfit\Catamorphism\Folds\TotalCostWithAccumulator.fs"/>
         <Compile Include="ForFunAndProfit\Catamorphism\Folds\Fold.fs" />
         <Compile Include="ForFunAndProfit\Catamorphism\Folds\Description.fs" />
+        <Compile Include="ForFunAndProfit\Catamorphism\Folds\QuasiFoldRight.fs" />
     </ItemGroup>
 
     <ItemGroup>
