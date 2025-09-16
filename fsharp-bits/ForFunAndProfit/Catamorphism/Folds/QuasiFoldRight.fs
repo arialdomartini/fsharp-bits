@@ -34,7 +34,6 @@ let description (gift: Gift) =
     let fWrapped wrappingPaperStyle acc =
         let newAcc a =
             acc $"{a} wrapped in {wrappingPaperStyle} paper"
-
         newAcc
     let fBoxed acc =
         let newAcc a =

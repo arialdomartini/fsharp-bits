@@ -127,6 +127,7 @@
         <Compile Include="ForFunAndProfit\Catamorphism\Folds\Fold.fs" />
         <Compile Include="ForFunAndProfit\Catamorphism\Folds\Description.fs" />
         <Compile Include="ForFunAndProfit\Catamorphism\Folds\QuasiFoldRight.fs" />
+        <Compile Include="ForFunAndProfit\Catamorphism\Folds\FoldRight.fs" />
     </ItemGroup>
 
     <ItemGroup>
