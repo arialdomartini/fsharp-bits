@@ -8,9 +8,9 @@
         <OutputType>Exe</OutputType>
         <TargetFramework>net8.0</TargetFramework>
     </PropertyGroup>
-    
+
     <ItemGroup>
-        <None Include="101\Script.fsx" />
+        <None Include="101\Script.fsx"/>
         <None Include="101\Recursion.fsx"/>
         <None Include="101\UnionTypes.fsx"/>
         <None Include="101\CommonFunctionalities.fsx"/>
@@ -32,111 +32,112 @@
         <Compile Include="ReinventingReaderMonad\ReaderMonad.fs"/>
         <Compile Include="ReinventingReaderMonad\Reader.fs"/>
         <Compile Include="ReinventingReaderMonad\HandMadeReaderMonad.fs"/>
-        <Compile Include="PropertyBasedTesting\WithFsCheck\BasicFsCheckTest.fs" />
-        <Compile Include="PropertyBasedTesting\WithFsCheck\PlayingWithGenerators.fs" />
-        <Compile Include="PropertyBasedTesting\WithFsCheck\FizzBuzzTests.fs" />
-        <Compile Include="PropertyBasedTesting\WithFsCheck\BirthdayGreetings.fs" />
-        <Compile Include="PropertyBasedTesting\WithFsCheck\StringDeduplicatorTest.fs" />
-        <Compile Include="PropertyBasedTesting\WithHedgehog\BasicHedgehogTest.fs" />
-        <Compile Include="StateMonad\StateMonadTest.fs" />
-        <Compile Include="StateMonad\StateMonadWithComputationExpressionTest.fs" />
-        <Compile Include="BowlingKata\BowlingKataTest.fs" />
-        <Compile Include="MonadTransformers\MonadTransformers.fs" />
-        <Compile Include="MonadTransformers\Writer.fs" />
-        <Compile Include="MonadTransformers\Maybe.fs" />
-        <Compile Include="MonadTransformers\MaybeWriter.fs" />
-        <Compile Include="FunctionOverloading\WithInterface.fs" />
-        <Compile Include="FunctionOverloading\NoFunctionOverloading.fs" />
-        <Compile Include="FunctionOverloading\FunctionWithModules.fs" />
-        <Compile Include="FunctionOverloading\InlineFunctionsWithTypeConstraints.fs" />
-        <Compile Include="FunctionOverloading\InlineFunctionsWithTypeConstraintsCurried.fs" />
-        <Compile Include="FunctionOverloading\InlineFunctionsWithInterfaces.fs" />
-        <Compile Include="FunctionOverloading\InlineFunctionsWithStaticInterfaces.fs" />
-        <Compile Include="FunctionOverloading\SystemTypes\NoFunctionOverloading.fs" />
-        <Compile Include="FunctionOverloading\SystemTypes\FunctionWithModules.fs" />
-        <Compile Include="FunctionOverloading\SystemTypes\InlineFunctionsWithTypeConstraints.fs" />
-        <Compile Include="FunctionOverloading\SystemTypes\InlineFunctionsWithTypeConstraintsCurried.fs" />
-        <Compile Include="FunctionOverloading\SystemTypes\InlineFunctionsWithInterfaces.fs" />
-        <Compile Include="FunctionOverloading\SystemTypes\InlineFunctionsWithStaticInterfaces.fs" />
-        <Compile Include="FunctionOverloading\SystemTypes\TypeClassesCopy.fs" />
-        <Compile Include="FunctionOverloading\SystemTypes\TypeClassesCopyWithMethodNotOperator.fs" />
-        <Compile Include="FunctionOverloading\SystemTypes\TypeClassesCopyWithMethodNotOperatorInline.fs" />
-        <Compile Include="ActivePatterns.fs" />
-        <Compile Include="TypeClasses.fs" />
-        <Compile Include="ParserCombinators\ForFunAndProfit\ParseResult.fs" />
-        <Compile Include="ParserCombinators\ForFunAndProfit\Parser.fs" />
-        <Compile Include="ParserCombinators\ForFunAndProfit\ParseA.fs" />
-        <Compile Include="ParserCombinators\ForFunAndProfit\ParseChar.fs" />
-        <Compile Include="ParserCombinators\ForFunAndProfit\AndThen.fs" />
-        <Compile Include="ParserCombinators\ForFunAndProfit\OrElse.fs" />
-        <Compile Include="ParserCombinators\ForFunAndProfit\Choice.fs" />
-        <Compile Include="ParserCombinators\ForFunAndProfit\Functor.fs" />
-        <Compile Include="ParserCombinators\ForFunAndProfit\Monad.fs" />
-        <Compile Include="ParserCombinators\ForFunAndProfit\Applicative.fs" />
-        <Compile Include="ParserCombinators\ForFunAndProfit\Lift.fs" />
-        <Compile Include="ParserCombinators\ForFunAndProfit\Many.fs" />
-        <Compile Include="ParserCombinators\ForFunAndProfit\Many1.fs" />
-        <Compile Include="ParserCombinators\ForFunAndProfit\Pipe.fs" />
-        <Compile Include="ParserCombinators\ForFunAndProfit\ZeroOrOneTime.fs" />
-        <Compile Include="ParserCombinators\ForFunAndProfit\ThrowingResultsAway.fs" />
-        <Compile Include="ParserCombinators\ForFunAndProfit\Between.fs" />
-        <Compile Include="ParserCombinators\ForFunAndProfit\DeadLock.fs" />
-        <Compile Include="ParserCombinators\ForFunAndProfit\DeadLockInt.fs" />
-        <Compile Include="ParserCombinators\ForFunAndProfit\NoDeadLock.fs" />
-        <Compile Include="ParserCombinators\ForTheRestOfUs\From5\Ema\EmaShort.fs" />
-        <Compile Include="ParserCombinators\ForTheRestOfUs\From5\Ema\Ema.fs" />
-        <Compile Include="ParserCombinators\ForTheRestOfUs\From5\Monad.fs" />
-        <Compile Include="ParserCombinators\ForTheRestOfUs\From5\Chapter12.fs" />
-        <Compile Include="ParserCombinators\ForTheRestOfUs\From5\Chapter13.fs" />
-        <Compile Include="FreeMonads\FreeMonad.fs" />
-        <Compile Include="FreeMonads\SimpleFreeMonad.fs" />
-        <Compile Include="FreeMonads\SimplerFreeMonad.fs" />
-        <Compile Include="FreeMonads\FromTheBottomUp.fs" />
-        <Compile Include="FreeMonads\FromTheBottomUpAgain.fs" />
-        <Compile Include="FreeMonads\PiccioEGian.fs" />
-        <Compile Include="DependencyInversion\StaticallyTypedDependencyInjection.fs" />
-        <Compile Include="LeetCode\Triangle.fs" />
-        <Compile Include="ForFunAndProfit\Turtle\Common.fs" />
-        <Compile Include="ForFunAndProfit\Turtle\BasicOO.fs" />
-        <Compile Include="ForFunAndProfit\Turtle\BasicFP.fs" />
-        <Compile Include="ForFunAndProfit\Turtle\ApiWithOOCore.fs" />
-        <Compile Include="ForFunAndProfit\Catamorphism\RecursiveType.fs" />
-        <Compile Include="ForFunAndProfit\Catamorphism\SampleValues.fs" />
-        <Compile Include="ForFunAndProfit\Catamorphism\ManualRecursion.fs" />
-        <Compile Include="ForFunAndProfit\Catamorphism\Cata.fs" />
-        <Compile Include="ForFunAndProfit\Catamorphism\HidingStructure.fs" />
-        <Compile Include="ForFunAndProfit\Catamorphism\ActivePatternToHideStructure.fs" />
-        <Compile Include="ForFunAndProfit\Catamorphism\CatamorphismsForMapping.fs" />
-        <Compile Include="ForFunAndProfit\Catamorphism\DeepCopying.fs" />
-        <Compile Include="ForFunAndProfit\Catamorphism\UpgradingChocolate.fs" />
-        <Compile Include="ForFunAndProfit\Catamorphism\FileSystem\FileSystem.fs" />
-        <Compile Include="ForFunAndProfit\Catamorphism\FileSystem\SampleValues.fs" />
-        <Compile Include="ForFunAndProfit\Catamorphism\FileSystem\Cata.fs" />
-        <Compile Include="ForFunAndProfit\Catamorphism\FileSystem\CataUsage.fs" />
-        <Compile Include="ForFunAndProfit\Catamorphism\Products\MutuallyRecursiveType.fs" />
-        <Compile Include="ForFunAndProfit\Catamorphism\Products\SampleValues.fs" />
-        <Compile Include="ForFunAndProfit\Catamorphism\Products\Cata.fs" />
-        <Compile Include="ForFunAndProfit\Catamorphism\Products\Weight.fs" />
-        <Compile Include="ForFunAndProfit\Catamorphism\Products\MostUsedVendor.fs" />
-        <Compile Include="ForFunAndProfit\Catamorphism\Folds\SampleValues.fs" />
-        <Compile Include="ForFunAndProfit\Catamorphism\Folds\NestedBoxes.fs" />
-        <Compile Include="ForFunAndProfit\Catamorphism\Folds\Raises.fs" />
-        <Compile Include="ForFunAndProfit\Catamorphism\Folds\WithAccumulatorSimple.fs" />
-        <Compile Include="ForFunAndProfit\Catamorphism\Folds\WeirdRecursion.fs" />
-        <Compile Include="ForFunAndProfit\Catamorphism\Folds\TotalCostWithAccumulator.fs" />
+        <Compile Include="PropertyBasedTesting\WithFsCheck\BasicFsCheckTest.fs"/>
+        <Compile Include="PropertyBasedTesting\WithFsCheck\PlayingWithGenerators.fs"/>
+        <Compile Include="PropertyBasedTesting\WithFsCheck\FizzBuzzTests.fs"/>
+        <Compile Include="PropertyBasedTesting\WithFsCheck\BirthdayGreetings.fs"/>
+        <Compile Include="PropertyBasedTesting\WithFsCheck\StringDeduplicatorTest.fs"/>
+        <Compile Include="PropertyBasedTesting\WithHedgehog\BasicHedgehogTest.fs"/>
+        <Compile Include="StateMonad\StateMonadTest.fs"/>
+        <Compile Include="StateMonad\StateMonadWithComputationExpressionTest.fs"/>
+        <Compile Include="BowlingKata\BowlingKataTest.fs"/>
+        <Compile Include="MonadTransformers\MonadTransformers.fs"/>
+        <Compile Include="MonadTransformers\Writer.fs"/>
+        <Compile Include="MonadTransformers\Maybe.fs"/>
+        <Compile Include="MonadTransformers\MaybeWriter.fs"/>
+        <Compile Include="FunctionOverloading\WithInterface.fs"/>
+        <Compile Include="FunctionOverloading\NoFunctionOverloading.fs"/>
+        <Compile Include="FunctionOverloading\FunctionWithModules.fs"/>
+        <Compile Include="FunctionOverloading\InlineFunctionsWithTypeConstraints.fs"/>
+        <Compile Include="FunctionOverloading\InlineFunctionsWithTypeConstraintsCurried.fs"/>
+        <Compile Include="FunctionOverloading\InlineFunctionsWithInterfaces.fs"/>
+        <Compile Include="FunctionOverloading\InlineFunctionsWithStaticInterfaces.fs"/>
+        <Compile Include="FunctionOverloading\SystemTypes\NoFunctionOverloading.fs"/>
+        <Compile Include="FunctionOverloading\SystemTypes\FunctionWithModules.fs"/>
+        <Compile Include="FunctionOverloading\SystemTypes\InlineFunctionsWithTypeConstraints.fs"/>
+        <Compile Include="FunctionOverloading\SystemTypes\InlineFunctionsWithTypeConstraintsCurried.fs"/>
+        <Compile Include="FunctionOverloading\SystemTypes\InlineFunctionsWithInterfaces.fs"/>
+        <Compile Include="FunctionOverloading\SystemTypes\InlineFunctionsWithStaticInterfaces.fs"/>
+        <Compile Include="FunctionOverloading\SystemTypes\TypeClassesCopy.fs"/>
+        <Compile Include="FunctionOverloading\SystemTypes\TypeClassesCopyWithMethodNotOperator.fs"/>
+        <Compile Include="FunctionOverloading\SystemTypes\TypeClassesCopyWithMethodNotOperatorInline.fs"/>
+        <Compile Include="ActivePatterns.fs"/>
+        <Compile Include="TypeClasses.fs"/>
+        <Compile Include="ParserCombinators\ForFunAndProfit\ParseResult.fs"/>
+        <Compile Include="ParserCombinators\ForFunAndProfit\Parser.fs"/>
+        <Compile Include="ParserCombinators\ForFunAndProfit\ParseA.fs"/>
+        <Compile Include="ParserCombinators\ForFunAndProfit\ParseChar.fs"/>
+        <Compile Include="ParserCombinators\ForFunAndProfit\AndThen.fs"/>
+        <Compile Include="ParserCombinators\ForFunAndProfit\OrElse.fs"/>
+        <Compile Include="ParserCombinators\ForFunAndProfit\Choice.fs"/>
+        <Compile Include="ParserCombinators\ForFunAndProfit\Functor.fs"/>
+        <Compile Include="ParserCombinators\ForFunAndProfit\Monad.fs"/>
+        <Compile Include="ParserCombinators\ForFunAndProfit\Applicative.fs"/>
+        <Compile Include="ParserCombinators\ForFunAndProfit\Lift.fs"/>
+        <Compile Include="ParserCombinators\ForFunAndProfit\Many.fs"/>
+        <Compile Include="ParserCombinators\ForFunAndProfit\Many1.fs"/>
+        <Compile Include="ParserCombinators\ForFunAndProfit\Pipe.fs"/>
+        <Compile Include="ParserCombinators\ForFunAndProfit\ZeroOrOneTime.fs"/>
+        <Compile Include="ParserCombinators\ForFunAndProfit\ThrowingResultsAway.fs"/>
+        <Compile Include="ParserCombinators\ForFunAndProfit\Between.fs"/>
+        <Compile Include="ParserCombinators\ForFunAndProfit\DeadLock.fs"/>
+        <Compile Include="ParserCombinators\ForFunAndProfit\DeadLockInt.fs"/>
+        <Compile Include="ParserCombinators\ForFunAndProfit\NoDeadLock.fs"/>
+        <Compile Include="ParserCombinators\ForTheRestOfUs\From5\Ema\EmaShort.fs"/>
+        <Compile Include="ParserCombinators\ForTheRestOfUs\From5\Ema\Ema.fs"/>
+        <Compile Include="ParserCombinators\ForTheRestOfUs\From5\Monad.fs"/>
+        <Compile Include="ParserCombinators\ForTheRestOfUs\From5\Chapter12.fs"/>
+        <Compile Include="ParserCombinators\ForTheRestOfUs\From5\Chapter13.fs"/>
+        <Compile Include="FreeMonads\FreeMonad.fs"/>
+        <Compile Include="FreeMonads\SimpleFreeMonad.fs"/>
+        <Compile Include="FreeMonads\SimplerFreeMonad.fs"/>
+        <Compile Include="FreeMonads\FromTheBottomUp.fs"/>
+        <Compile Include="FreeMonads\FromTheBottomUpAgain.fs"/>
+        <Compile Include="FreeMonads\PiccioEGian.fs"/>
+        <Compile Include="DependencyInversion\StaticallyTypedDependencyInjection.fs"/>
+        <Compile Include="LeetCode\Triangle.fs"/>
+        <Compile Include="ForFunAndProfit\Turtle\Common.fs"/>
+        <Compile Include="ForFunAndProfit\Turtle\BasicOO.fs"/>
+        <Compile Include="ForFunAndProfit\Turtle\BasicFP.fs"/>
+        <Compile Include="ForFunAndProfit\Turtle\ApiWithOOCore.fs"/>
+        <Compile Include="ForFunAndProfit\Catamorphism\RecursiveType.fs"/>
+        <Compile Include="ForFunAndProfit\Catamorphism\SampleValues.fs"/>
+        <Compile Include="ForFunAndProfit\Catamorphism\ManualRecursion.fs"/>
+        <Compile Include="ForFunAndProfit\Catamorphism\Cata.fs"/>
+        <Compile Include="ForFunAndProfit\Catamorphism\HidingStructure.fs"/>
+        <Compile Include="ForFunAndProfit\Catamorphism\ActivePatternToHideStructure.fs"/>
+        <Compile Include="ForFunAndProfit\Catamorphism\CatamorphismsForMapping.fs"/>
+        <Compile Include="ForFunAndProfit\Catamorphism\DeepCopying.fs"/>
+        <Compile Include="ForFunAndProfit\Catamorphism\UpgradingChocolate.fs"/>
+        <Compile Include="ForFunAndProfit\Catamorphism\FileSystem\FileSystem.fs"/>
+        <Compile Include="ForFunAndProfit\Catamorphism\FileSystem\SampleValues.fs"/>
+        <Compile Include="ForFunAndProfit\Catamorphism\FileSystem\Cata.fs"/>
+        <Compile Include="ForFunAndProfit\Catamorphism\FileSystem\CataUsage.fs"/>
+        <Compile Include="ForFunAndProfit\Catamorphism\Products\MutuallyRecursiveType.fs"/>
+        <Compile Include="ForFunAndProfit\Catamorphism\Products\SampleValues.fs"/>
+        <Compile Include="ForFunAndProfit\Catamorphism\Products\Cata.fs"/>
+        <Compile Include="ForFunAndProfit\Catamorphism\Products\Weight.fs"/>
+        <Compile Include="ForFunAndProfit\Catamorphism\Products\MostUsedVendor.fs"/>
+        <Compile Include="ForFunAndProfit\Catamorphism\Folds\SampleValues.fs"/>
+        <Compile Include="ForFunAndProfit\Catamorphism\Folds\NestedBoxes.fs"/>
+        <Compile Include="ForFunAndProfit\Catamorphism\Folds\Raises.fs"/>
+        <Compile Include="ForFunAndProfit\Catamorphism\Folds\WithAccumulatorSimple.fs"/>
+        <Compile Include="ForFunAndProfit\Catamorphism\Folds\WeirdRecursion.fs"/>
+        <Compile Include="ForFunAndProfit\Catamorphism\Folds\TotalCostWithAccumulator.fs"/>
+        <Compile Include="ForFunAndProfit\Catamorphism\Folds\CataWithAccumulator.fs"/>
     </ItemGroup>
-      
+
     <ItemGroup>
         <PackageReference Include="Expecto" Version="10.1.0"/>
-        <PackageReference Include="Expecto.FsCheck" Version="10.1.0" />
-        <PackageReference Include="FsCheck" Version="2.16.6" />
-        <PackageReference Include="FsCheck.Xunit" Version="2.16.6" />
+        <PackageReference Include="Expecto.FsCheck" Version="10.1.0"/>
+        <PackageReference Include="FsCheck" Version="2.16.6"/>
+        <PackageReference Include="FsCheck.Xunit" Version="2.16.6"/>
         <PackageReference Include="FsUnit.xUnit" Version="5.4.0"/>
         <PackageReference Include="Hedgehog" Version="0.13.0"/>
-        <PackageReference Include="Unquote" Version="7.0.0" />
+        <PackageReference Include="Unquote" Version="7.0.0"/>
         <PackageReference Include="YoloDev.Expecto.TestSdk" Version="0.14.1"/>
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.7.0"/>
         <PackageReference Include="xunit.extensibility.core" Version="2.5.0"/>
-        <PackageReference Include="FSharp.Core" Version="9.0.100" />
+        <PackageReference Include="FSharp.Core" Version="9.0.100"/>
     </ItemGroup>
 </Project>
