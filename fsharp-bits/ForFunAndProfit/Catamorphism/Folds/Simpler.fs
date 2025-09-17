@@ -70,9 +70,27 @@ type SampleValues() =
             descriptionAccumulator newAcc innerValue
 
         | WithAttribute(attribute, innerValue) ->
-            let newAcc = $"WithAttribute({attribute})"
+            let newAcc = $"WithAttribute({attribute}) with initial {acc}"
             descriptionAccumulator newAcc innerValue
 
+    let rec foldLeft fFinal fRecursive fWithAttribute acc value=
+        let recurse = foldLeft fFinal fRecursive fWithAttribute
+        match value with
+        | Final s -> fFinal acc s
+        | Recursive innerValue ->
+            let newAcc = fRecursive acc
+            recurse newAcc innerValue
+
+        | WithAttribute(attribute, innerValue) ->
+            let newAcc = fWithAttribute acc attribute
+            recurse newAcc innerValue
+
+    let rec descriptionFoldLeft acc (value: Value) =
+        let fFinal acc s = $"Final({s}) in {acc}"
+        let fRecursive acc = $"Recursive in {acc}"
+        let fWithAttribute acc attribute = $"WithAttribute({attribute}) with initial {acc}"
+
+        foldLeft fFinal fRecursive fWithAttribute acc value
 
     [<Fact>]
     member this.``with plain recursion`` () =
@@ -88,4 +106,8 @@ type SampleValues() =
 
     [<Fact>]
     member this.``with plain recursion, using an accumulator: result it reversed!`` () =
-        test <@ descriptionAccumulator "" withAttribute = "Final(final) in Recursive in WithAttribute(attribute)" @>
+        test <@ descriptionAccumulator "let's start" withAttribute = "Final(final) in Recursive in WithAttribute(attribute) with initial let's start" @>
+
+    [<Fact>]
+    member this.``with foldLeft`` () =
+        test <@ descriptionFoldLeft "let's start" withAttribute = "Final(final) in Recursive in WithAttribute(attribute) with initial let's start" @>
