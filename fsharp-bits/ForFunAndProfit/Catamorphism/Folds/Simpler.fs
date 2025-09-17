@@ -15,23 +15,23 @@ type SampleValues() =
     let recursive = Recursive final
     let withAttribute = WithAttribute ("attribute", recursive)
 
-    let expectedDescription = "WithAttribute(attribute, Recursive(Final(final)))"
+    let expectedDescription = "WithAttribute of attribute + Recursive of Final(final)"
 
-    let rec descriptionRecursion (value: Value) =
+    let rec descriptionRecursive (value: Value) =
         match value with
         | Final s -> $"Final({s})"
         | Recursive innerValue ->
-            let innerDescription = descriptionRecursion innerValue
-            $"Recursive({innerDescription})"
+            let innerDescription = descriptionRecursive innerValue
+            $"Recursive of {innerDescription}"
         | WithAttribute(attribute, innerValue) ->
-            let innerDescription = descriptionRecursion innerValue
-            $"WithAttribute({attribute}, {innerDescription})"
+            let innerDescription = descriptionRecursive innerValue
+            $"WithAttribute of {attribute} + {innerDescription}"
 
     let rec descriptionQuasiCata (value: Value) =
 
         let fFinal s = $"Final({s})"
-        let fRecursive innerDescription = $"Recursive({innerDescription})"
-        let fWithAttribute innerDescription attribute = $"WithAttribute({attribute}, {innerDescription})"
+        let fRecursive innerDescription = $"Recursive of {innerDescription}"
+        let fWithAttribute innerDescription attribute = $"WithAttribute of {attribute} + {innerDescription}"
 
         match value with
         | Final s -> fFinal s
@@ -57,20 +57,35 @@ type SampleValues() =
     let descriptionCata (value: Value) =
 
         let fFinal s = $"Final({s})"
-        let fRecursive innerDescription = $"Recursive({innerDescription})"
-        let fWithAttribute innerDescription attribute = $"WithAttribute({attribute}, {innerDescription})"
+        let fRecursive innerDescription = $"Recursive of {innerDescription}"
+        let fWithAttribute innerDescription attribute = $"WithAttribute of {attribute} + {innerDescription}"
 
         cata fFinal fRecursive fWithAttribute value
 
+    let rec descriptionAccumulator acc (value: Value) =
+        match value with
+        | Final s -> $"Final({s}) in {acc}"
+        | Recursive innerValue ->
+            let newAcc = $"Recursive in {acc}"
+            descriptionAccumulator newAcc innerValue
+
+        | WithAttribute(attribute, innerValue) ->
+            let newAcc = $"WithAttribute({attribute})"
+            descriptionAccumulator newAcc innerValue
+
 
     [<Fact>]
-    member this.``description of sample values with plain recursion`` () =
-        test <@ descriptionRecursion withAttribute = expectedDescription @>
+    member this.``with plain recursion`` () =
+        test <@ descriptionRecursive withAttribute = expectedDescription @>
 
     [<Fact>]
-    member this.``description of sample values with quasi-catamorphism`` () =
+    member this.``with quasi-catamorphism`` () =
         test <@ descriptionQuasiCata withAttribute = expectedDescription @>
 
     [<Fact>]
-    member this.``description of sample values with catamorphism`` () =
+    member this.``with catamorphism`` () =
         test <@ descriptionCata withAttribute = expectedDescription @>
+
+    [<Fact>]
+    member this.``with plain recursion, using an accumulator: result it reversed!`` () =
+        test <@ descriptionAccumulator "" withAttribute = "Final(final) in Recursive in WithAttribute(attribute)" @>
