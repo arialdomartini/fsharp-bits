@@ -92,6 +92,47 @@ type SampleValues() =
 
         foldLeft fFinal fRecursive fWithAttribute acc value
 
+    let rec descriptionPassingFunction acc (value: Value) =
+        let fFinal generate s = generate $"Final({s})"
+        let fRecursive generate =
+            let newGenerator description =
+                let newDescription = $"Recursive of {description}"
+                generate newDescription
+            newGenerator
+
+        let fWithAttribute generate attribute =
+            let newGenerator description =
+                let newDescription = $"WithAttribute of {attribute} + {description}"
+                generate newDescription
+            newGenerator
+
+        foldLeft fFinal fRecursive fWithAttribute acc value
+
+    let rec foldRight fFinal fRecursive fWithAttribute value generator =
+        let recurse = foldRight fFinal fRecursive fWithAttribute
+
+        match value with
+        | Final s -> generator (fFinal s)
+        | Recursive innerValue ->
+            let newGenerator description =
+                let newDescription = fRecursive description
+                generator newDescription
+            recurse innerValue newGenerator
+
+        | WithAttribute(attribute, innerValue) ->
+            let newGenerator description =
+                let newDescription = fWithAttribute attribute description
+                generator newDescription
+            recurse innerValue newGenerator
+
+    let rec descriptionFoldRight (value: Value) acc =
+
+        let fFinal s = $"Final({s})"
+        let fRecursive description = $"Recursive of {description}"
+        let fWithAttribute attribute description = $"WithAttribute of {attribute} + {description}"
+
+        foldRight fFinal fRecursive fWithAttribute value acc
+
     [<Fact>]
     member this.``with plain recursion`` () =
         test <@ descriptionRecursive withAttribute = expectedDescription @>
@@ -111,3 +152,11 @@ type SampleValues() =
     [<Fact>]
     member this.``with foldLeft`` () =
         test <@ descriptionFoldLeft "let's start" withAttribute = "Final(final) in Recursive in WithAttribute(attribute) with initial let's start" @>
+
+    [<Fact>]
+    member this.``with passing a function`` () =
+        test <@ descriptionPassingFunction id withAttribute = expectedDescription @>
+
+    [<Fact>]
+    member this.``with foldRight`` () =
+        test <@ descriptionFoldRight withAttribute id = expectedDescription @>
