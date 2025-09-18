@@ -129,6 +129,7 @@
         <Compile Include="ForFunAndProfit\Catamorphism\Folds\QuasiFoldRight.fs" />
         <Compile Include="ForFunAndProfit\Catamorphism\Folds\FoldRight.fs" />
         <Compile Include="ForFunAndProfit\Catamorphism\Folds\Simpler.fs" />
+        <Compile Include="ForFunAndProfit\CapabilityBasedSecurity\SharingFileName.fs" />
     </ItemGroup>
 
     <ItemGroup>
