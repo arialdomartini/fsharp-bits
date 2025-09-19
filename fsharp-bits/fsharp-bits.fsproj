@@ -131,6 +131,7 @@
         <Compile Include="ForFunAndProfit\Catamorphism\Folds\Simpler.fs" />
         <Compile Include="ForFunAndProfit\CapabilityBasedSecurity\SharingFileName.fs" />
         <Compile Include="ForFunAndProfit\CapabilityBasedSecurity\KeyValueInterface.fs" />
+        <Compile Include="ForFunAndProfit\CapabilityBasedSecurity\DomainSpecificInterface.fs" />
     </ItemGroup>
 
     <ItemGroup>
