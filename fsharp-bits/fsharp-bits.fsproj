@@ -133,6 +133,7 @@
         <Compile Include="ForFunAndProfit\CapabilityBasedSecurity\KeyValueInterface.fs" />
         <Compile Include="ForFunAndProfit\CapabilityBasedSecurity\DomainSpecificInterface.fs" />
         <Compile Include="ForFunAndProfit\CapabilityBasedSecurity\InterfaceSegregation.fs" />
+        <Compile Include="ForFunAndProfit\CapabilityBasedSecurity\Cababilities\Configuration.fs" />
     </ItemGroup>
 
     <ItemGroup>
