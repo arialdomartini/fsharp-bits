@@ -132,6 +132,7 @@
         <Compile Include="ForFunAndProfit\CapabilityBasedSecurity\SharingFileName.fs" />
         <Compile Include="ForFunAndProfit\CapabilityBasedSecurity\KeyValueInterface.fs" />
         <Compile Include="ForFunAndProfit\CapabilityBasedSecurity\DomainSpecificInterface.fs" />
+        <Compile Include="ForFunAndProfit\CapabilityBasedSecurity\InterfaceSegregation.fs" />
     </ItemGroup>
 
     <ItemGroup>
