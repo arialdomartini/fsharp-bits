@@ -136,6 +136,7 @@
         <Compile Include="ForFunAndProfit\CapabilityBasedSecurity\Cababilities\Configuration.fs" />
         <Compile Include="ForFunAndProfit\CapabilityBasedSecurity\Cababilities\ConfigExample\Config.fs" />
         <Compile Include="ForFunAndProfit\CapabilityBasedSecurity\Cababilities\ConfigExample\AnnoyingPopupMessage.fs" />
+        <Compile Include="ForFunAndProfit\CapabilityBasedSecurity\Cababilities\DataBaseCapabilities\WithoutCapability.fs" />
     </ItemGroup>
 
     <ItemGroup>
