@@ -7,7 +7,7 @@ type Turtle(log) =
     let initialColor = Black
     let initialPenState = Down
 
-
+    // member private val currentPosition = initialPosition with get, set
     let mutable currentPosition = initialPosition
     let mutable currentAngle = 0.0<Degrees>
     let mutable currentColor = initialColor
